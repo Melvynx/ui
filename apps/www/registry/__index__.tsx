@@ -586,4 +586,130 @@ export const Index: Record<string, any> = {
     categories: undefined,
     meta: undefined,
   },
+  "better-auth-signin-demo": {
+    name: "better-auth-signin-demo",
+    description: "",
+    type: "registry:example",
+    registryDependencies: ["https://ui.nowts.app/r/better-auth-signin.json","sonner"],
+    files: [{
+      path: "registry/nowts/examples/better-auth-signin-demo.tsx",
+      type: "registry:example",
+      target: ""
+    }],
+    component: React.lazy(async () => {
+      const mod = await import("@/registry/nowts/examples/better-auth-signin-demo.tsx")
+      const exportName = Object.keys(mod).find(key => typeof mod[key] === 'function' || typeof mod[key] === 'object') || item.name
+      return { default: mod.default || mod[exportName] }
+    }),
+    categories: undefined,
+    meta: undefined,
+  },
+  "better-auth-signup-demo": {
+    name: "better-auth-signup-demo",
+    description: "",
+    type: "registry:example",
+    registryDependencies: ["https://ui.nowts.app/r/better-auth-signup.json","sonner"],
+    files: [{
+      path: "registry/nowts/examples/better-auth-signup-demo.tsx",
+      type: "registry:example",
+      target: ""
+    }],
+    component: React.lazy(async () => {
+      const mod = await import("@/registry/nowts/examples/better-auth-signup-demo.tsx")
+      const exportName = Object.keys(mod).find(key => typeof mod[key] === 'function' || typeof mod[key] === 'object') || item.name
+      return { default: mod.default || mod[exportName] }
+    }),
+    categories: undefined,
+    meta: undefined,
+  },
+  "better-auth-otp-demo": {
+    name: "better-auth-otp-demo",
+    description: "",
+    type: "registry:example",
+    registryDependencies: ["https://ui.nowts.app/r/better-auth-otp.json","card","button"],
+    files: [{
+      path: "registry/nowts/examples/better-auth-otp-demo.tsx",
+      type: "registry:example",
+      target: ""
+    }],
+    component: React.lazy(async () => {
+      const mod = await import("@/registry/nowts/examples/better-auth-otp-demo.tsx")
+      const exportName = Object.keys(mod).find(key => typeof mod[key] === 'function' || typeof mod[key] === 'object') || item.name
+      return { default: mod.default || mod[exportName] }
+    }),
+    categories: undefined,
+    meta: undefined,
+  },
+  "use-debounce-fn-demo": {
+    name: "use-debounce-fn-demo",
+    description: "",
+    type: "registry:example",
+    registryDependencies: ["https://ui.nowts.app/r/use-debounce-fn.json","input","label"],
+    files: [{
+      path: "registry/nowts/examples/use-debounce-fn-demo.tsx",
+      type: "registry:example",
+      target: ""
+    }],
+    component: React.lazy(async () => {
+      const mod = await import("@/registry/nowts/examples/use-debounce-fn-demo.tsx")
+      const exportName = Object.keys(mod).find(key => typeof mod[key] === 'function' || typeof mod[key] === 'object') || item.name
+      return { default: mod.default || mod[exportName] }
+    }),
+    categories: undefined,
+    meta: undefined,
+  },
+  "use-is-client-demo": {
+    name: "use-is-client-demo",
+    description: "",
+    type: "registry:example",
+    registryDependencies: ["https://ui.nowts.app/r/use-is-client.json","card"],
+    files: [{
+      path: "registry/nowts/examples/use-is-client-demo.tsx",
+      type: "registry:example",
+      target: ""
+    }],
+    component: React.lazy(async () => {
+      const mod = await import("@/registry/nowts/examples/use-is-client-demo.tsx")
+      const exportName = Object.keys(mod).find(key => typeof mod[key] === 'function' || typeof mod[key] === 'object') || item.name
+      return { default: mod.default || mod[exportName] }
+    }),
+    categories: undefined,
+    meta: undefined,
+  },
+  "use-warn-if-unsaved-changes-demo": {
+    name: "use-warn-if-unsaved-changes-demo",
+    description: "",
+    type: "registry:example",
+    registryDependencies: ["https://ui.nowts.app/r/use-warn-if-unsaved-changes.json","card","input","label","button","textarea"],
+    files: [{
+      path: "registry/nowts/examples/use-warn-if-unsaved-changes-demo.tsx",
+      type: "registry:example",
+      target: ""
+    }],
+    component: React.lazy(async () => {
+      const mod = await import("@/registry/nowts/examples/use-warn-if-unsaved-changes-demo.tsx")
+      const exportName = Object.keys(mod).find(key => typeof mod[key] === 'function' || typeof mod[key] === 'object') || item.name
+      return { default: mod.default || mod[exportName] }
+    }),
+    categories: undefined,
+    meta: undefined,
+  },
+  "use-copy-to-clipboard-demo": {
+    name: "use-copy-to-clipboard-demo",
+    description: "",
+    type: "registry:example",
+    registryDependencies: ["https://ui.nowts.app/r/use-copy-to-clipboard.json","card","button","input"],
+    files: [{
+      path: "registry/nowts/examples/use-copy-to-clipboard-demo.tsx",
+      type: "registry:example",
+      target: ""
+    }],
+    component: React.lazy(async () => {
+      const mod = await import("@/registry/nowts/examples/use-copy-to-clipboard-demo.tsx")
+      const exportName = Object.keys(mod).find(key => typeof mod[key] === 'function' || typeof mod[key] === 'object') || item.name
+      return { default: mod.default || mod[exportName] }
+    }),
+    categories: undefined,
+    meta: undefined,
+  },
   }

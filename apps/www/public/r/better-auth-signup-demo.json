@@ -1,0 +1,19 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "better-auth-signup-demo",
+  "type": "registry:example",
+  "dependencies": [
+    "lucide-react"
+  ],
+  "registryDependencies": [
+    "https://ui.nowts.app/r/better-auth-signup.json",
+    "sonner"
+  ],
+  "files": [
+    {
+      "path": "examples/better-auth-signup-demo.tsx",
+      "content": "\"use client\";\n\nimport { BetterAuthSignUp } from \"@/registry/nowts/blocks/better-auth-signup/better-auth-signup\";\nimport { toast } from \"sonner\";\n\nexport function BetterAuthSignupDemo() {\n  const handleSignUp = async (data: {\n    name: string;\n    email: string;\n    password: string;\n  }) => {\n    await new Promise((resolve) => setTimeout(resolve, 1000));\n    // eslint-disable-next-line no-console\n    console.info(\"Sign up data:\", data);\n  };\n\n  return (\n    <BetterAuthSignUp\n      onSignUp={handleSignUp}\n      onSuccess={() => {\n        toast.success(\"Account created successfully!\");\n      }}\n      onError={(error) => {\n        toast.error(error);\n      }}\n      signInLink={\n        <>\n          Already have an account?{\" \"}\n          <a href=\"#\" className=\"underline hover:text-foreground\">\n            Sign in\n          </a>\n        </>\n      }\n    />\n  );\n}\n",
+      "type": "registry:example"
+    }
+  ]
+}

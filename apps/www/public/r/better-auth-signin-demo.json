@@ -1,0 +1,19 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "better-auth-signin-demo",
+  "type": "registry:example",
+  "dependencies": [
+    "lucide-react"
+  ],
+  "registryDependencies": [
+    "https://ui.nowts.app/r/better-auth-signin.json",
+    "sonner"
+  ],
+  "files": [
+    {
+      "path": "examples/better-auth-signin-demo.tsx",
+      "content": "\"use client\";\n\nimport { SignInPage } from \"@/registry/nowts/blocks/better-auth-signin/sign-in-page\";\nimport { Github } from \"lucide-react\";\nimport { toast } from \"sonner\";\n\nexport function BetterAuthSigninDemo() {\n  const handleSendOtp = async (email: string) => {\n    await new Promise((resolve) => setTimeout(resolve, 1000));\n    toast.success(`OTP sent to ${email}`);\n  };\n\n  const handleVerifyOtp = async (email: string, otp: string) => {\n    await new Promise((resolve) => setTimeout(resolve, 1000));\n\n    if (otp === \"123456\") {\n      toast.success(\"Successfully signed in!\");\n    } else {\n      throw new Error(\"Invalid OTP code\");\n    }\n  };\n\n  const handlePasswordSignIn = async (credentials: {\n    email: string;\n    password: string;\n  }) => {\n    await new Promise((resolve) => setTimeout(resolve, 1000));\n\n    if (credentials.password === \"password\") {\n      toast.success(\"Successfully signed in!\");\n    } else {\n      throw new Error(\"Invalid credentials\");\n    }\n  };\n\n  const handleProviderSignIn = async (provider: string) => {\n    await new Promise((resolve) => setTimeout(resolve, 1000));\n    toast.success(`Signing in with ${provider}`);\n  };\n\n  return (\n    <SignInPage\n      appName=\"Acme Inc\"\n      description=\"Sign in to your account to continue\"\n      onSendOtp={handleSendOtp}\n      onVerifyOtp={handleVerifyOtp}\n      onPasswordSignIn={handlePasswordSignIn}\n      onProviderSignIn={handleProviderSignIn}\n      providers={[\n        {\n          id: \"github\",\n          name: \"GitHub\",\n          icon: <Github className=\"size-4\" />,\n          buttonClassName: \"bg-black text-white hover:bg-gray-900\",\n        },\n      ]}\n      signUpUrl=\"#\"\n      forgotPasswordUrl=\"#\"\n      onError={(error) => toast.error(error)}\n    />\n  );\n}\n",
+      "type": "registry:example"
+    }
+  ]
+}
