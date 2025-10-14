@@ -1,0 +1,38 @@
+---
+title: Hooks
+description: Custom React hooks for common patterns and functionality.
+---
+
+Collection of reusable React hooks that solve common problems in modern web applications.
+
+## Available Hooks
+
+### [useDebounceFn](/docs/hooks/use-debounce-fn)
+
+Debounce function calls to improve performance and prevent excessive API calls.
+
+### [useIsClient](/docs/hooks/use-is-client)
+
+Check if the component is rendered on the client side, useful for SSR/hydration scenarios.
+
+### [useWarnIfUnsavedChanges](/docs/hooks/use-warn-if-unsaved-changes)
+
+Warn users before leaving the page when there are unsaved changes.
+
+### [useCopyToClipboard](/docs/hooks/use-copy-to-clipboard)
+
+Copy text to the clipboard with fallback support and feedback state management.
+
+## Installation
+
+All hooks can be installed using the shadcn CLI:
+
+```bash
+npx shadcn@latest add https://ui.nowts.app/r/<hook-name>.json
+```
+
+For example:
+
+```bash
+npx shadcn@latest add https://ui.nowts.app/r/use-debounce-fn.json
+```

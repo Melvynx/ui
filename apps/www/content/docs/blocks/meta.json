@@ -1,0 +1,12 @@
+{
+  "title": "Blocks",
+  "pages": [
+    "index",
+    "better-auth-signin",
+    "better-auth-signup",
+    "better-auth-otp",
+    "server-toast",
+    "dialog-manager",
+    "form-management"
+  ]
+}

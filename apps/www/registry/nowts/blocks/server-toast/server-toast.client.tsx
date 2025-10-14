@@ -7,11 +7,16 @@ import type { ServerToastType } from "./server-toast.type"
 
 type Toast = {
   id: string
-  dismiss: () => Promise<void>
 } & ServerToastType
 
 // Source : https://buildui.com/posts/toast-messages-in-react-server-components
-export function ClientToasts({ toasts }: { toasts: Toast[] }) {
+export function ClientToasts({
+  toasts,
+  dismissToast,
+}: {
+  toasts: Toast[]
+  dismissToast: (id: string) => Promise<void>
+}) {
   const [optimisticToasts, remove] = useOptimistic(toasts, (current, id) =>
     current.filter((toast) => toast.id !== id)
   )
@@ -20,7 +25,7 @@ export function ClientToasts({ toasts }: { toasts: Toast[] }) {
     ...toast,
     dismiss: async () => {
       remove(toast.id)
-      await toast.dismiss()
+      await dismissToast(toast.id)
     },
   }))
 

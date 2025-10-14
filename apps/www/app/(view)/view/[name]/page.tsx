@@ -9,8 +9,8 @@ import { getRegistryComponent, getRegistryItem } from "@/lib/registry"
 import { absoluteUrl, cn } from "@/lib/utils"
 
 export const revalidate = false
-export const dynamic = "force-static"
-export const dynamicParams = false
+export const dynamic = "error"
+export const dynamicParams = true
 
 const getCachedRegistryItem = React.cache(async (name: string) => {
   return await getRegistryItem(name)
@@ -73,6 +73,12 @@ export async function generateStaticParams() {
         "registry:internal",
       ].includes(block.type)
     )
+    .filter((block) => {
+      const hasOnlyLibFiles = block.files?.every(
+        (file: { type: string }) => file.type === "registry:lib" || file.type === "registry:hook"
+      )
+      return !hasOnlyLibFiles
+    })
     .map((block) => ({
       name: block.name,
     }))

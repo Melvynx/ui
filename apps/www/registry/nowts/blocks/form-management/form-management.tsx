@@ -8,6 +8,7 @@ import type { FormProps } from "@/registry/nowts/ui/extended-form"
 import { ExtendedForm } from "@/registry/nowts/ui/extended-form"
 
 import { useDebounceFn } from "../../hooks/use-debounce-fn"
+import { useIsClient } from "../../hooks/use-is-client"
 import { useWarnIfUnsavedChanges } from "../../hooks/use-warn-if-unsaved-changes"
 
 const FormAutoSaveContext = createContext<{
@@ -72,11 +73,13 @@ export const FormManagement = <T extends FieldValues>({
 export const FormAutoSaveWatch = <T extends FieldValues>(
   props: Pick<FormProps<T>, "form"> & { autoSaveMs?: number }
 ) => {
+  const isClient = useIsClient()
   const lastFormStateRef = useRef<string | null>(null)
-  const watchedField = props.form.watch()
+  const watchedField = isClient ? props.form.watch() : {}
   const ctx = useFormAutoSave()
 
   const debounce = useDebounceFn(() => {
+    if (!isClient) return
     const json = JSON.stringify(watchedField)
     if (json === lastFormStateRef.current) return
     lastFormStateRef.current = json
@@ -85,8 +88,9 @@ export const FormAutoSaveWatch = <T extends FieldValues>(
   }, props.autoSaveMs)
 
   useEffect(() => {
+    if (!isClient) return
     debounce()
-  }, [debounce, watchedField])
+  }, [debounce, isClient])
 
   return null
 }

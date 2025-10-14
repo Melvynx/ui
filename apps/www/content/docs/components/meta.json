@@ -1,0 +1,12 @@
+{
+  "title": "Components",
+  "pages": [
+    "index",
+    "submit-button",
+    "spinner",
+    "next-top-loader",
+    "extended-form",
+    "tanstack-form",
+    "typography"
+  ]
+}
