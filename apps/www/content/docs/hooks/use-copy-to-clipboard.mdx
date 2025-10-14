@@ -20,18 +20,13 @@ The **useCopyToClipboard** hook provides a simple and reliable way to copy text 
 
 ## Installation
 
-<CommandBlock
-  npmCommand="npx shadcn@latest add https://ui.nowts.app/r/use-copy-to-clipboard.json"
-  pnpmCommand="pnpm dlx shadcn@latest add https://ui.nowts.app/r/use-copy-to-clipboard.json"
-  yarnCommand="npx shadcn@latest add https://ui.nowts.app/r/use-copy-to-clipboard.json"
-  bunCommand="bunx --bun shadcn@latest add https://ui.nowts.app/r/use-copy-to-clipboard.json"
-/>
+```bash
+npx shadcn@latest add https://ui.nowts.app/r/use-copy-to-clipboard.json
+```
 
 ## Usage
 
 ### Basic copy button
-
-<CodeBlock contentClassName="h-fit">
 
 ```tsx
 import { useCopyToClipboard } from "@/hooks/use-copy-to-clipboard";
@@ -51,11 +46,7 @@ export function BasicCopyButton() {
 }
 ```
 
-</CodeBlock>
-
 ### Copy with custom delay
-
-<CodeBlock contentClassName="h-fit">
 
 ```tsx
 import { useCopyToClipboard } from "@/hooks/use-copy-to-clipboard";
@@ -73,11 +64,7 @@ export function CustomDelayExample() {
 }
 ```
 
-</CodeBlock>
-
 ### Copy code block with icon
-
-<CodeBlock contentClassName="h-fit">
 
 ```tsx
 import { useCopyToClipboard } from "@/hooks/use-copy-to-clipboard";
@@ -112,11 +99,7 @@ console.log(greeting);`;
 }
 ```
 
-</CodeBlock>
-
 ### Copy URL or sharing
-
-<CodeBlock contentClassName="h-fit">
 
 ```tsx
 import { useCopyToClipboard } from "@/hooks/use-copy-to-clipboard";
@@ -149,11 +132,7 @@ export function ShareButton() {
 }
 ```
 
-</CodeBlock>
-
 ### Copy form data
-
-<CodeBlock contentClassName="h-fit">
 
 ```tsx
 import { useCopyToClipboard } from "@/hooks/use-copy-to-clipboard";
@@ -205,11 +184,7 @@ Environment: Production`;
 }
 ```
 
-</CodeBlock>
-
 ### Copy with toast notification
-
-<CodeBlock contentClassName="h-fit">
 
 ```tsx
 import { useCopyToClipboard } from "@/hooks/use-copy-to-clipboard";
@@ -233,8 +208,6 @@ export function CopyWithToast() {
   return <Button onClick={handleCopy}>Copy with Toast</Button>;
 }
 ```
-
-</CodeBlock>
 
 ## API
 
@@ -263,8 +236,6 @@ The hook automatically handles browser compatibility:
 
 The hook is fully typed and provides excellent IntelliSense support:
 
-<CodeBlock contentClassName="h-fit">
-
 ```tsx
 // The hook is typed like this:
 declare const useCopyToClipboard: (delay?: number) => {
@@ -278,5 +249,3 @@ const { isCopied, copyToClipboard } = useCopyToClipboard(3000);
 // isCopied is inferred as boolean
 // copyToClipboard is inferred as (text: string) => void
 ```
-
-</CodeBlock>

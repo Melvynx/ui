@@ -19,18 +19,13 @@ The **useWarnIfUnsavedChanges** hook provides a simple way to warn users before 
 
 ## Installation
 
-<CommandBlock
-  npmCommand="npx shadcn@latest add https://ui.nowts.app/r/use-warn-if-unsaved-changes.json"
-  pnpmCommand="pnpm dlx shadcn@latest add https://ui.nowts.app/r/use-warn-if-unsaved-changes.json"
-  yarnCommand="npx shadcn@latest add https://ui.nowts.app/r/use-warn-if-unsaved-changes.json"
-  bunCommand="bunx --bun shadcn@latest add https://ui.nowts.app/r/use-warn-if-unsaved-changes.json"
-/>
+```bash
+npx shadcn@latest add https://ui.nowts.app/r/use-warn-if-unsaved-changes.json
+```
 
 ## Usage
 
 ### Basic usage with form
-
-<CodeBlock contentClassName="h-fit">
 
 ```tsx
 import { useWarnIfUnsavedChanges } from "@/hooks/use-warn-if-unsaved-changes";
@@ -60,11 +55,7 @@ export function MyForm() {
 }
 ```
 
-</CodeBlock>
-
 ### Custom warning message
-
-<CodeBlock contentClassName="h-fit">
 
 ```tsx
 useWarnIfUnsavedChanges(
@@ -73,11 +64,7 @@ useWarnIfUnsavedChanges(
 );
 ```
 
-</CodeBlock>
-
 ### With complex form state
-
-<CodeBlock contentClassName="h-fit">
 
 ```tsx
 import { useWarnIfUnsavedChanges } from "@/hooks/use-warn-if-unsaved-changes";
@@ -132,11 +119,7 @@ export function UserProfileForm() {
 }
 ```
 
-</CodeBlock>
-
 ### With auto-save functionality
-
-<CodeBlock contentClassName="h-fit">
 
 ```tsx
 import { useWarnIfUnsavedChanges } from "@/hooks/use-warn-if-unsaved-changes";
@@ -189,8 +172,6 @@ export function AutoSaveForm() {
   );
 }
 ```
-
-</CodeBlock>
 
 ## API Reference
 

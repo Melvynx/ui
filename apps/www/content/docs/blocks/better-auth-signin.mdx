@@ -24,24 +24,17 @@ The **Better Auth Sign In** component provides a complete authentication experie
 
 ## Installation
 
-<div className="space-y-4">
-
 ### 1. Install the component
 
-<CommandBlock
-  npmCommand="npx shadcn@latest add https://ui.nowts.app/r/better-auth-signin.json"
-  pnpmCommand="pnpm dlx shadcn@latest add https://ui.nowts.app/r/better-auth-signin.json"
-  yarnCommand="npx shadcn@latest add https://ui.nowts.app/r/better-auth-signin.json"
-  bunCommand="bunx --bun shadcn@latest add https://ui.nowts.app/r/better-auth-signin.json"
-/>
+```bash
+npx shadcn@latest add https://ui.nowts.app/r/better-auth-signin.json
+```
 
 This will also install the `better-auth-otp` component and all required dependencies.
 
 ### 2. Set up Better Auth
 
-<CodeBlock contentClassName="h-fit" fileName="lib/auth.ts">
-
-```tsx
+```tsx title="lib/auth.ts"
 import { betterAuth } from "better-auth";
 
 export const auth = betterAuth({
@@ -60,17 +53,11 @@ export const auth = betterAuth({
 });
 ```
 
-</CodeBlock>
-
-</div>
-
 ## Usage
 
 ### Basic usage with Better Auth
 
-<CodeBlock contentClassName="h-fit" fileName="app/signin/page.tsx">
-
-```tsx
+```tsx title="app/signin/page.tsx"
 import { SignInPage } from "@/components/sign-in-page";
 import { auth } from "@/lib/auth";
 import { Github } from "lucide-react";
@@ -136,13 +123,9 @@ export default function SignIn() {
 }
 ```
 
-</CodeBlock>
-
 ### OTP only
 
-<CodeBlock contentClassName="h-fit" fileName="app/signin/page.tsx">
-
-```tsx
+```tsx title="app/signin/page.tsx"
 import { SignInPage } from "@/components/sign-in-page";
 
 export default function SignIn() {
@@ -164,13 +147,9 @@ export default function SignIn() {
 }
 ```
 
-</CodeBlock>
-
 ### With multiple OAuth providers
 
-<CodeBlock contentClassName="h-fit" fileName="app/signin/page.tsx">
-
-```tsx
+```tsx title="app/signin/page.tsx"
 import { SignInPage } from "@/components/sign-in-page";
 import { Github, Mail } from "lucide-react";
 
@@ -204,13 +183,9 @@ export default function SignIn() {
 }
 ```
 
-</CodeBlock>
-
 ### Custom styling
 
-<CodeBlock contentClassName="h-fit" fileName="app/signin/page.tsx">
-
-```tsx
+```tsx title="app/signin/page.tsx"
 import { SignInPage } from "@/components/sign-in-page";
 
 export default function SignIn() {
@@ -228,8 +203,6 @@ export default function SignIn() {
   );
 }
 ```
-
-</CodeBlock>
 
 ## API
 
@@ -314,8 +287,6 @@ The Better Auth Sign In component is structured as:
 
 ### Error handling
 
-<CodeBlock contentClassName="h-fit">
-
 ```tsx
 import { SignInPage } from "@/components/sign-in-page";
 import { toast } from "sonner";
@@ -336,15 +307,11 @@ export default function SignIn() {
 }
 ```
 
-</CodeBlock>
-
 ### Loading states
 
 The component handles loading states internally for all auth methods.
 
 ### Redirects
-
-<CodeBlock contentClassName="h-fit">
 
 ```tsx
 import { SignInPage } from "@/components/sign-in-page";
@@ -370,8 +337,6 @@ export default function SignIn() {
   );
 }
 ```
-
-</CodeBlock>
 
 ## Troubleshooting
 

@@ -22,24 +22,17 @@ The **Better Auth OTP** component is a modern and animated user interface for em
 
 ## Installation
 
-<div className="space-y-4">
-
 ### 1. Install the component
 
-<CommandBlock
-  npmCommand="npx shadcn@latest add https://ui.nowts.app/r/better-auth-otp.json"
-  pnpmCommand="pnpm dlx shadcn@latest add https://ui.nowts.app/r/better-auth-otp.json"
-  yarnCommand="npx shadcn@latest add https://ui.nowts.app/r/better-auth-otp.json"
-  bunCommand="bunx --bun shadcn@latest add https://ui.nowts.app/r/better-auth-otp.json"
-/>
+```bash
+npx shadcn@latest add https://ui.nowts.app/r/better-auth-otp.json
+```
 
 ### 2. Configure Better Auth
 
 First, configure Better Auth with the Email OTP plugin:
 
-<CodeBlock contentClassName="h-fit" fileName="auth.ts">
-
-```ts
+```ts title="auth.ts"
 import { betterAuth } from "better-auth";
 import { emailOTP } from "better-auth/plugins";
 
@@ -64,13 +57,9 @@ export const auth = betterAuth({
 });
 ```
 
-</CodeBlock>
-
 ### 3. Configure the client
 
-<CodeBlock contentClassName="h-fit" fileName="auth-client.ts">
-
-```ts
+```ts title="auth-client.ts"
 import { createAuthClient } from "better-auth/client";
 import { emailOTPClient } from "better-auth/client/plugins";
 
@@ -80,15 +69,9 @@ export const authClient = createAuthClient({
 });
 ```
 
-</CodeBlock>
-
-</div>
-
 ## Usage
 
 ### Basic usage
-
-<CodeBlock contentClassName="h-fit">
 
 ```tsx
 import { OtpForm } from "@/components/better-auth-otp";
@@ -119,11 +102,7 @@ export function SignInForm() {
 }
 ```
 
-</CodeBlock>
-
 ### Email verification
-
-<CodeBlock contentClassName="h-fit">
 
 ```tsx
 <OtpForm
@@ -148,11 +127,7 @@ export function SignInForm() {
 />
 ```
 
-</CodeBlock>
-
 ### Password reset
-
-<CodeBlock contentClassName="h-fit">
 
 ```tsx
 <OtpForm
@@ -177,8 +152,6 @@ export function SignInForm() {
   onError={(error) => toast.error(error)}
 />
 ```
-
-</CodeBlock>
 
 ## API
 
@@ -215,8 +188,6 @@ This component is specially designed for [Better Auth's Email OTP plugin](https:
 
 ### With custom router
 
-<CodeBlock contentClassName="h-fit">
-
 ```tsx
 import { useRouter } from "next/navigation"
 
@@ -240,11 +211,7 @@ export function SignInForm() {
 }
 ```
 
-</CodeBlock>
-
 ### With state management
-
-<CodeBlock contentClassName="h-fit">
 
 ```tsx
 import { useAuthStore } from "@/store/auth"
@@ -270,13 +237,9 @@ export function SignInForm() {
 }
 ```
 
-</CodeBlock>
-
 ## Customization
 
 The component uses shadcn/ui CSS classes and can be styled via CSS or Tailwind:
-
-<CodeBlock contentClassName="h-fit">
 
 ```css
 /* Customize animation */
@@ -289,5 +252,3 @@ The component uses shadcn/ui CSS classes and can be styled via CSS or Tailwind:
   --border-color: hsl(var(--primary));
 }
 ```
-
-</CodeBlock>

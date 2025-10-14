@@ -25,22 +25,15 @@ The **Better Auth Sign Up** component is a fully-featured sign-up form designed 
 
 ## Installation
 
-<div className="space-y-4">
-
 ### 1. Install the component
 
-<CommandBlock
-  npmCommand="npx shadcn@latest add https://ui.nowts.app/r/better-auth-signup.json"
-  pnpmCommand="pnpm dlx shadcn@latest add https://ui.nowts.app/r/better-auth-signup.json"
-  yarnCommand="npx shadcn@latest add https://ui.nowts.app/r/better-auth-signup.json"
-  bunCommand="bunx --bun shadcn@latest add https://ui.nowts.app/r/better-auth-signup.json"
-/>
+```bash
+npx shadcn@latest add https://ui.nowts.app/r/better-auth-signup.json
+```
 
 ### 2. Configure Better Auth
 
-<CodeBlock contentClassName="h-fit" fileName="lib/auth-client.ts">
-
-```tsx
+```tsx title="lib/auth-client.ts"
 import { createAuthClient } from "better-auth/react";
 
 export const authClient = createAuthClient({
@@ -48,17 +41,11 @@ export const authClient = createAuthClient({
 });
 ```
 
-</CodeBlock>
-
-</div>
-
 ## Usage
 
 ### Basic Implementation
 
-<CodeBlock contentClassName="h-fit" fileName="app/signup/page.tsx">
-
-```tsx
+```tsx title="app/signup/page.tsx"
 "use client";
 
 import { BetterAuthSignUp } from "@/components/better-auth-signup";
@@ -88,13 +75,9 @@ export default function SignUpPage() {
 }
 ```
 
-</CodeBlock>
-
 ### With Custom Messages
 
-<CodeBlock contentClassName="h-fit" fileName="app/signup/page.tsx">
-
-```tsx
+```tsx title="app/signup/page.tsx"
 <BetterAuthSignUp
   onSignUp={handleSignUp}
   title="Join our platform"
@@ -109,13 +92,9 @@ export default function SignUpPage() {
 />
 ```
 
-</CodeBlock>
-
 ### With Sign In Link
 
-<CodeBlock contentClassName="h-fit" fileName="app/signup/page.tsx">
-
-```tsx
+```tsx title="app/signup/page.tsx"
 import Link from "next/link";
 
 <BetterAuthSignUp
@@ -131,13 +110,9 @@ import Link from "next/link";
 />;
 ```
 
-</CodeBlock>
-
 ### Server Action Pattern
 
-<CodeBlock contentClassName="h-fit" fileName="app/signup/page.tsx">
-
-```tsx
+```tsx title="app/signup/page.tsx"
 import { BetterAuthSignUp } from "@/components/better-auth-signup";
 import { signUpAction } from "./actions";
 
@@ -158,11 +133,7 @@ export default function SignUpPage() {
 }
 ```
 
-</CodeBlock>
-
-<CodeBlock contentClassName="h-fit" fileName="app/signup/actions.ts">
-
-```tsx
+```tsx title="app/signup/actions.ts"
 "use server";
 
 import { auth } from "@/lib/auth";
@@ -190,8 +161,6 @@ export async function signUpAction(data: {
   }
 }
 ```
-
-</CodeBlock>
 
 ## API
 
@@ -230,9 +199,7 @@ const signUpSchema = z
 
 To use custom validation, you can create your own component based on this one:
 
-<CodeBlock contentClassName="h-fit" fileName="components/custom-signup.tsx">
-
-```tsx
+```tsx title="components/custom-signup.tsx"
 "use client";
 
 import { BetterAuthSignUp } from "@/components/better-auth-signup";
@@ -258,8 +225,6 @@ const customSchema = z
   });
 ```
 
-</CodeBlock>
-
 ### Styling
 
 The component uses Tailwind CSS and shadcn/ui styling. You can customize it by:
@@ -281,9 +246,7 @@ The component uses Tailwind CSS and shadcn/ui styling. You can customize it by:
 
 ### With Better Auth
 
-<CodeBlock contentClassName="h-fit" fileName="app/signup/page.tsx">
-
-```tsx
+```tsx title="app/signup/page.tsx"
 "use client";
 
 import { BetterAuthSignUp } from "@/components/better-auth-signup";
@@ -324,8 +287,6 @@ export default function SignUpPage() {
   );
 }
 ```
-
-</CodeBlock>
 
 ## Troubleshooting
 

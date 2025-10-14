@@ -25,18 +25,13 @@ The **useIsClient** hook is a simple utility that helps you determine if your Re
 
 ## Installation
 
-<CommandBlock
-  npmCommand="npx shadcn@latest add https://ui.nowts.app/r/use-is-client.json"
-  pnpmCommand="pnpm dlx shadcn@latest add https://ui.nowts.app/r/use-is-client.json"
-  yarnCommand="npx shadcn@latest add https://ui.nowts.app/r/use-is-client.json"
-  bunCommand="bunx --bun shadcn@latest add https://ui.nowts.app/r/use-is-client.json"
-/>
+```bash
+npx shadcn@latest add https://ui.nowts.app/r/use-is-client.json
+```
 
 ## Usage
 
 ### Basic usage
-
-<CodeBlock contentClassName="h-fit">
 
 ```tsx
 import { useIsClient } from "@/hooks/use-is-client";
@@ -57,11 +52,7 @@ export function ClientOnlyComponent() {
 }
 ```
 
-</CodeBlock>
-
 ### Conditional rendering with browser APIs
-
-<CodeBlock contentClassName="h-fit">
 
 ```tsx
 import { useIsClient } from "@/hooks/use-is-client";
@@ -98,11 +89,7 @@ export function GeolocationComponent() {
 }
 ```
 
-</CodeBlock>
-
 ### Progressive enhancement
-
-<CodeBlock contentClassName="h-fit">
 
 ```tsx
 import { useIsClient } from "@/hooks/use-is-client";
@@ -139,11 +126,7 @@ export function EnhancedButton() {
 }
 ```
 
-</CodeBlock>
-
 ### Preventing hydration mismatches
-
-<CodeBlock contentClassName="h-fit">
 
 ```tsx
 import { useIsClient } from "@/hooks/use-is-client";
@@ -163,11 +146,7 @@ export function DynamicContent() {
 }
 ```
 
-</CodeBlock>
-
 ### Working with local storage
-
-<CodeBlock contentClassName="h-fit">
 
 ```tsx
 import { useIsClient } from "@/hooks/use-is-client";
@@ -208,5 +187,3 @@ export function UserPreferences() {
   );
 }
 ```
-
-</CodeBlock>

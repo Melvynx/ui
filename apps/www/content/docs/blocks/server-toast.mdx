@@ -24,22 +24,15 @@ The **Server Toast** component is a complete notification system for React Serve
 
 ## Installation
 
-<div className="space-y-4">
-
 ### 1. Install the component
 
-<CommandBlock
-  npmCommand="npx shadcn@latest add https://ui.nowts.app/r/server-toast.json"
-  pnpmCommand="pnpm dlx shadcn@latest add https://ui.nowts.app/r/server-toast.json"
-  yarnCommand="npx shadcn@latest add https://ui.nowts.app/r/server-toast.json"
-  bunCommand="bunx --bun shadcn@latest add https://ui.nowts.app/r/server-toast.json"
-/>
+```bash
+npx shadcn@latest add https://ui.nowts.app/r/server-toast.json
+```
 
 ### 2. Add the Toaster to your layout
 
-<CodeBlock contentClassName="h-fit" fileName="app/layout.tsx">
-
-```tsx
+```tsx title="app/layout.tsx"
 import { ServerToaster } from "@/components/server-toast/server-toast.server";
 import { Suspense } from "react";
 
@@ -62,17 +55,11 @@ export default function RootLayout({
 }
 ```
 
-</CodeBlock>
-
-</div>
-
 ## Usage
 
 ### Basic usage
 
-<CodeBlock contentClassName="h-fit" fileName="actions.ts">
-
-```tsx
+```tsx title="actions.ts"
 import { serverToast } from "@/components/server-toast";
 
 export async function saveUserAction(formData: FormData) {
@@ -89,13 +76,9 @@ export async function saveUserAction(formData: FormData) {
 }
 ```
 
-</CodeBlock>
-
 ### All toast types
 
-<CodeBlock contentClassName="h-fit" fileName="actions.ts">
-
-```tsx
+```tsx title="actions.ts"
 import { serverToast } from "@/components/server-toast";
 
 // Success toast
@@ -113,13 +96,9 @@ await serverToast("Here's some information", "info");
 await serverToast("Here's some information");
 ```
 
-</CodeBlock>
-
 ### With forms
 
-<CodeBlock contentClassName="h-fit" fileName="components/CreatePostForm.tsx">
-
-```tsx
+```tsx title="components/CreatePostForm.tsx"
 import { serverToast } from "@/components/server-toast";
 import { redirect } from "next/navigation";
 
@@ -154,13 +133,9 @@ export function CreatePostForm() {
 }
 ```
 
-</CodeBlock>
-
 ### With API Routes
 
-<CodeBlock contentClassName="h-fit" fileName="app/api/data/route.ts">
-
-```tsx
+```tsx title="app/api/data/route.ts"
 import { serverToast } from "@/components/server-toast";
 import { NextRequest } from "next/server";
 
@@ -180,8 +155,6 @@ export async function POST(request: NextRequest) {
   }
 }
 ```
-
-</CodeBlock>
 
 ## API
 
@@ -258,9 +231,7 @@ Toasts survive:
 
 ### With custom middleware
 
-<CodeBlock contentClassName="h-fit" fileName="actions.ts">
-
-```tsx
+```tsx title="actions.ts"
 import { serverToast } from "@/components/server-toast";
 import { auth } from "@/lib/auth";
 
@@ -280,13 +251,9 @@ export async function authenticatedAction(formData: FormData) {
 }
 ```
 
-</CodeBlock>
-
 ### Conditional toast
 
-<CodeBlock contentClassName="h-fit" fileName="actions.ts">
-
-```tsx
+```tsx title="actions.ts"
 import { serverToast } from "@/components/server-toast";
 
 export async function updateUserAction(formData: FormData) {
@@ -312,13 +279,9 @@ export async function updateUserAction(formData: FormData) {
 }
 ```
 
-</CodeBlock>
-
 ### Complex notification system
 
-<CodeBlock contentClassName="h-fit" fileName="actions.ts">
-
-```tsx
+```tsx title="actions.ts"
 import { serverToast } from "@/components/server-toast";
 
 export async function bulkImportAction(formData: FormData) {
@@ -348,8 +311,6 @@ export async function bulkImportAction(formData: FormData) {
   );
 }
 ```
-
-</CodeBlock>
 
 ## Troubleshooting
 

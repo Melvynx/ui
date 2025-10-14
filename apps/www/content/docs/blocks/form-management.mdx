@@ -23,29 +23,21 @@ The **Form Management** system provides a comprehensive solution for handling fo
 
 ### 1. Install the component
 
-<CommandBlock
-  npmCommand="npx shadcn@latest add https://ui.nowts.app/r/form-management.json"
-  pnpmCommand="pnpm dlx shadcn@latest add https://ui.nowts.app/r/form-management.json"
-  yarnCommand="npx shadcn@latest add https://ui.nowts.app/r/form-management.json"
-  bunCommand="bunx --bun shadcn@latest add https://ui.nowts.app/r/form-management.json"
-/>
+```bash
+npx shadcn@latest add https://ui.nowts.app/r/form-management.json
+```
 
 ### 2. Install additional dependencies
 
 The form management system requires some additional components:
 
-<CommandBlock
-  npmCommand="npx shadcn@latest add https://ui.nowts.app/r/use-debounce-fn.json https://ui.nowts.app/r/use-warn-if-unsaved-changes.json https://ui.nowts.app/r/use-is-client.json https://ui.nowts.app/r/submit-button.json"
-  pnpmCommand="pnpm dlx shadcn@latest add https://ui.nowts.app/r/use-debounce-fn.json https://ui.nowts.app/r/use-warn-if-unsaved-changes.json https://ui.nowts.app/r/use-is-client.json https://ui.nowts.app/r/submit-button.json"
-  yarnCommand="npx shadcn@latest add https://ui.nowts.app/r/use-debounce-fn.json https://ui.nowts.app/r/use-warn-if-unsaved-changes.json https://ui.nowts.app/r/use-is-client.json https://ui.nowts.app/r/submit-button.json"
-  bunCommand="bunx --bun shadcn@latest add https://ui.nowts.app/r/use-debounce-fn.json https://ui.nowts.app/r/use-warn-if-unsaved-changes.json https://ui.nowts.app/r/use-is-client.json https://ui.nowts.app/r/submit-button.json"
-/>
+```bash
+npx shadcn@latest add https://ui.nowts.app/r/use-debounce-fn.json https://ui.nowts.app/r/use-warn-if-unsaved-changes.json https://ui.nowts.app/r/use-is-client.json https://ui.nowts.app/r/submit-button.json
+```
 
 ## Usage
 
 ### Basic form with sticky bar
-
-<CodeBlock contentClassName="h-fit">
 
 ```tsx
 import {
@@ -76,11 +68,7 @@ export function BasicForm() {
 }
 ```
 
-</CodeBlock>
-
 ### Form with auto-save
-
-<CodeBlock contentClassName="h-fit">
 
 ```tsx
 import {
@@ -112,21 +100,13 @@ export function AutoSaveForm() {
 }
 ```
 
-</CodeBlock>
-
 ### Custom sticky bar labels
-
-<CodeBlock contentClassName="h-fit">
 
 ```tsx
 <FormAutoSaveStickyBar actionLabel="Publish Changes" cancelLabel="Discard" />
 ```
 
-</CodeBlock>
-
 ### Form with validation
-
-<CodeBlock contentClassName="h-fit">
 
 ```tsx
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -174,13 +154,9 @@ export function ValidatedForm() {
 }
 ```
 
-</CodeBlock>
-
 ### Manual form actions
 
 You can access form actions using the context:
-
-<CodeBlock contentClassName="h-fit">
 
 ```tsx
 import { useFormAutoSave } from "@/lib/form-management/form-management";
@@ -206,8 +182,6 @@ function CustomActions() {
   <CustomActions />
 </FormAutoSave>;
 ```
-
-</CodeBlock>
 
 ## API Reference
 
