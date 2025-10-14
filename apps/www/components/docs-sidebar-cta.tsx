@@ -15,14 +15,14 @@ export function DocsSidebarCta({ className }: React.ComponentProps<"div">) {
       <div className="bg-surface/80 absolute inset-0" />
 
       <div className="relative z-10 text-base leading-tight font-semibold text-balance group-hover:underline">
-        Deploy and Scale Agents with ElevenLabs
+        Build Your SaaS in Days, Not Months
       </div>
       <div className="text-muted-foreground relative z-10">
-        ElevenLabs delivers the infrastructure and developer experience you need
-        to ship reliable audio & agent applications at scale.
+        NOW.TS is the Next.js 15 boilerplate with everything you need to launch
+        your SaaS—auth, payments, database, and AI-ready infrastructure.
       </div>
       <Button size="sm" className="relative z-10 mt-2 w-fit">
-        Deploy Now
+        Get Started
       </Button>
       <Link
         href={siteConfig.utm.agents}
@@ -30,7 +30,7 @@ export function DocsSidebarCta({ className }: React.ComponentProps<"div">) {
         rel="noreferrer"
         className="absolute inset-0 z-20"
       >
-        <span className="sr-only">Talk to an expert</span>
+        <span className="sr-only">Learn more about NOW.TS</span>
       </Link>
     </div>
   )

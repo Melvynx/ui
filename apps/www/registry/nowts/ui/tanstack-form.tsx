@@ -2,11 +2,22 @@
 "use client"
 
 import * as React from "react"
-import { Label } from "@radix-ui/react-label"
 import { useForm as useTanstackFormBase } from "@tanstack/react-form"
 import type { z } from "zod"
 
 import { cn } from "@/lib/utils"
+import {
+  Field,
+  FieldContent,
+  FieldDescription as BaseFieldDescription,
+  FieldError as BaseFieldError,
+  FieldGroup,
+  FieldLabel as BaseFieldLabel,
+  FieldLegend,
+  FieldSeparator,
+  FieldSet,
+  FieldTitle,
+} from "@/components/ui/field"
 
 /**
  * Type helper to extract all possible deep keys from an object type
@@ -240,6 +251,7 @@ const useFormItem = () => {
 
 /**
  * Container for form field with error state and accessibility
+ * Uses Field component from @/components/ui/field with TanStack Form integration
  *
  * @example
  * <FormItem field={field} form={form}>
@@ -255,6 +267,7 @@ export function FormItem({
   field,
   form,
   className,
+  orientation,
   children,
   ...props
 }: {
@@ -262,7 +275,8 @@ export function FormItem({
   form: FormApi
   children: React.ReactNode
   className?: string
-} & React.ComponentProps<"div">) {
+  orientation?: "vertical" | "horizontal" | "responsive"
+} & Omit<React.ComponentProps<typeof Field>, "orientation">) {
   const id = React.useId()
   const hasSubmitted = form.state.submissionAttempts > 0
   const isInvalid =
@@ -272,25 +286,25 @@ export function FormItem({
 
   return (
     <FormItemContext.Provider value={{ field, form, id }}>
-      <div
-        data-slot="form-item"
+      <Field
         data-invalid={isInvalid}
-        className={cn("grid gap-2", className)}
+        orientation={orientation}
+        className={className}
         {...props}
       >
         {children}
-      </div>
+      </Field>
     </FormItemContext.Provider>
   )
 }
 
 /**
- * Label for form field
+ * Label for form field - uses FieldLabel with TanStack Form integration
  */
 export function FormLabel({
   className,
   ...props
-}: React.ComponentProps<typeof Label>) {
+}: React.ComponentProps<typeof BaseFieldLabel>) {
   const { field, form, id } = useFormItem()
   const hasSubmitted = form.state.submissionAttempts > 0
   const isInvalid =
@@ -299,8 +313,7 @@ export function FormLabel({
     field.state.meta.errors.length > 0
 
   return (
-    <Label
-      data-slot="form-label"
+    <BaseFieldLabel
       data-error={!!isInvalid}
       className={cn("data-[error=true]:text-destructive", className)}
       htmlFor={`${id}-form-item`}
@@ -318,31 +331,31 @@ export function FormControl({ children }: { children: React.ReactNode }) {
 }
 
 /**
- * Description text for form field
+ * Description text for form field - uses FieldDescription with TanStack Form integration
  */
 export function FormDescription({
   className,
   ...props
-}: React.ComponentProps<"p">) {
+}: React.ComponentProps<typeof BaseFieldDescription>) {
   const { id } = useFormItem()
 
   return (
-    <p
-      data-slot="form-description"
+    <BaseFieldDescription
       id={`${id}-form-item-description`}
-      className={cn("text-muted-foreground text-sm", className)}
+      className={className}
       {...props}
     />
   )
 }
 
 /**
- * Error message for form field
+ * Error message for form field - uses FieldError with TanStack Form integration
  */
 export function FormMessage({
   className,
+  children,
   ...props
-}: React.ComponentProps<"p">) {
+}: React.ComponentProps<typeof BaseFieldError>) {
   const { field, form, id } = useFormItem()
   const hasSubmitted = form.state.submissionAttempts > 0
   const shouldShowError =
@@ -350,32 +363,29 @@ export function FormMessage({
     field.state.meta.isTouched &&
     field.state.meta.errors.length > 0
 
-  if (!shouldShowError && !props.children) {
+  if (!shouldShowError && !children) {
     return null
   }
 
-  const error = shouldShowError ? field.state.meta.errors?.[0] : null
-
-  // Handle both string errors and Zod error objects
-  const body = error
-    ? typeof error === "string"
-      ? error
-      : (error?.message ?? JSON.stringify(error))
-    : props.children
-
-  if (!body) {
-    return null
-  }
+  // Convert TanStack Form errors to the format expected by FieldError
+  const errors = shouldShowError
+    ? field.state.meta.errors.map((error: any) => {
+        if (typeof error === "string") {
+          return { message: error }
+        }
+        return error
+      })
+    : undefined
 
   return (
-    <p
-      data-slot="form-message"
+    <BaseFieldError
       id={`${id}-form-item-message`}
-      className={cn("text-destructive text-sm", className)}
+      errors={errors}
+      className={className}
       {...props}
     >
-      {body}
-    </p>
+      {children}
+    </BaseFieldError>
   )
 }
 
@@ -513,4 +523,37 @@ export function getRadioGroupFieldProps(field: any) {
     },
     "aria-invalid": isInvalid,
   }
+}
+
+/**
+ * Re-export Field components for direct use in custom layouts
+ * These can be used when you need more control over the form layout
+ * and don't need the TanStack Form context integration
+ *
+ * @example
+ * // Direct usage without context
+ * <FormField form={form} name="email">
+ *   {(field) => {
+ *     const { isInvalid } = getFieldState(field, form)
+ *     return (
+ *       <Field data-invalid={isInvalid} orientation="horizontal">
+ *         <FieldLabel htmlFor="email">Email</FieldLabel>
+ *         <FieldContent>
+ *           <Input {...getInputFieldProps(field)} id="email" />
+ *           <FieldDescription>Enter your email address</FieldDescription>
+ *           <FieldError errors={field.state.meta.errors} />
+ *         </FieldContent>
+ *       </Field>
+ *     )
+ *   }}
+ * </FormField>
+ */
+export {
+  Field,
+  FieldContent,
+  FieldGroup,
+  FieldLegend,
+  FieldSeparator,
+  FieldSet,
+  FieldTitle,
 }
