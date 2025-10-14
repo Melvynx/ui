@@ -2,154 +2,185 @@ import { type Registry } from "shadcn/schema"
 
 export const examples: Registry["items"] = [
   {
-    name: "audio-player-demo",
+    name: "spinner-demo",
+    type: "registry:example",
+    registryDependencies: ["https://ui.nowts.app/r/spinner.json", "card"],
+    files: [
+      {
+        path: "examples/spinner-demo.tsx",
+        type: "registry:example",
+      },
+    ],
+  },
+  {
+    name: "submit-button-demo",
     type: "registry:example",
     registryDependencies: [
-      "https://ui.elevenlabs.io/r/audio-player.json",
-      "button",
+      "https://ui.nowts.app/r/submit-button.json",
+      "https://ui.nowts.app/r/extended-form.json",
       "card",
-      "scroll-area",
+      "input",
+      "label",
+      "sonner",
     ],
+    dependencies: ["zod"],
     files: [
       {
-        path: "examples/audio-player-demo.tsx",
+        path: "examples/submit-button-demo.tsx",
         type: "registry:example",
       },
     ],
   },
   {
-    name: "orb-demo",
-    type: "registry:example",
-    registryDependencies: ["https://ui.elevenlabs.io/r/orb.json", "button"],
-    files: [
-      {
-        path: "examples/orb-demo.tsx",
-        type: "registry:example",
-      },
-    ],
-  },
-  {
-    name: "waveform-demo",
-    type: "registry:example",
-    registryDependencies: ["https://ui.elevenlabs.io/r/waveform.json"],
-    files: [
-      {
-        path: "examples/waveform-demo.tsx",
-        type: "registry:example",
-      },
-    ],
-  },
-  {
-    name: "live-waveform-demo",
+    name: "extended-form-demo",
     type: "registry:example",
     registryDependencies: [
-      "https://ui.elevenlabs.io/r/live-waveform.json",
+      "https://ui.nowts.app/r/extended-form.json",
+      "card",
+      "input",
+      "label",
+      "button",
+      "sonner",
+    ],
+    dependencies: ["zod"],
+    files: [
+      {
+        path: "examples/extended-form-demo.tsx",
+        type: "registry:example",
+      },
+    ],
+  },
+  {
+    name: "next-top-loader-demo",
+    type: "registry:example",
+    registryDependencies: [
+      "https://ui.nowts.app/r/next-top-loader.json",
+      "card",
       "button",
     ],
     files: [
       {
-        path: "examples/live-waveform-demo.tsx",
+        path: "examples/next-top-loader-demo.tsx",
         type: "registry:example",
       },
     ],
   },
   {
-    name: "bar-visualizer-demo",
+    name: "tanstack-form-demo",
     type: "registry:example",
     registryDependencies: [
-      "https://ui.elevenlabs.io/r/bar-visualizer.json",
+      "https://ui.nowts.app/r/tanstack-form.json",
+      "card",
+      "input",
+      "label",
       "button",
+      "sonner",
+      "select",
     ],
+    dependencies: ["zod"],
     files: [
       {
-        path: "examples/bar-visualizer-demo.tsx",
+        path: "examples/tanstack-form-demo.tsx",
         type: "registry:example",
       },
     ],
   },
   {
-    name: "message-demo",
+    name: "tanstack-form-complex-demo",
     type: "registry:example",
     registryDependencies: [
-      "https://ui.elevenlabs.io/r/message.json",
-      "https://ui.elevenlabs.io/r/response.json",
+      "https://ui.nowts.app/r/tanstack-form.json",
+      "card",
+      "input",
+      "label",
+      "button",
+      "select",
+      "checkbox",
+      "switch",
+      "textarea",
+      "sonner",
     ],
+    dependencies: ["zod", "lucide-react"],
     files: [
       {
-        path: "examples/message-demo.tsx",
+        path: "examples/tanstack-form-complex-demo.tsx",
         type: "registry:example",
       },
     ],
   },
   {
-    name: "response-demo",
-    type: "registry:example",
-    registryDependencies: ["https://ui.elevenlabs.io/r/response.json"],
-    files: [
-      {
-        path: "examples/response-demo.tsx",
-        type: "registry:example",
-      },
-    ],
-  },
-  {
-    name: "shimmering-text-demo",
-    type: "registry:example",
-    registryDependencies: ["https://ui.elevenlabs.io/r/shimmering-text.json"],
-    files: [
-      {
-        path: "examples/shimmering-text-demo.tsx",
-        type: "registry:example",
-      },
-    ],
-  },
-  {
-    name: "voice-picker-demo",
+    name: "tanstack-form-array-demo",
     type: "registry:example",
     registryDependencies: [
-      "https://ui.elevenlabs.io/r/voice-picker.json",
-      "https://ui.elevenlabs.io/r/audio-player.json",
+      "https://ui.nowts.app/r/tanstack-form.json",
+      "card",
+      "input",
+      "button",
+      "sonner",
     ],
+    dependencies: ["zod", "lucide-react"],
     files: [
       {
-        path: "examples/voice-picker-demo.tsx",
+        path: "examples/tanstack-form-array-demo.tsx",
         type: "registry:example",
       },
     ],
   },
   {
-    name: "voice-button-demo",
+    name: "typography-demo",
     type: "registry:example",
-    registryDependencies: ["https://ui.elevenlabs.io/r/voice-button.json"],
+    registryDependencies: ["https://ui.nowts.app/r/typography.json", "card"],
     files: [
       {
-        path: "examples/voice-button-demo.tsx",
+        path: "examples/typography-demo.tsx",
         type: "registry:example",
       },
     ],
   },
   {
-    name: "conversation-bar-demo",
+    name: "server-toast-demo",
     type: "registry:example",
-    registryDependencies: ["https://ui.elevenlabs.io/r/conversation-bar.json"],
+    registryDependencies: ["card", "button", "sonner"],
     files: [
       {
-        path: "examples/conversation-bar-demo.tsx",
+        path: "examples/server-toast-demo.tsx",
         type: "registry:example",
       },
     ],
   },
   {
-    name: "conversation-demo",
+    name: "dialog-manager-demo",
     type: "registry:example",
     registryDependencies: [
-      "https://ui.elevenlabs.io/r/message.json",
-      "https://ui.elevenlabs.io/r/response.json",
-      "https://ui.elevenlabs.io/r/conversation.json",
+      "https://ui.nowts.app/r/dialog-manager.json",
+      "card",
+      "button",
+      "sonner",
     ],
+    dependencies: ["lucide-react"],
     files: [
       {
-        path: "examples/conversation-demo.tsx",
+        path: "examples/dialog-manager-demo.tsx",
+        type: "registry:example",
+      },
+    ],
+  },
+  {
+    name: "form-management-demo",
+    type: "registry:example",
+    registryDependencies: [
+      "https://ui.nowts.app/r/form-management.json",
+      "https://ui.nowts.app/r/extended-form.json",
+      "card",
+      "input",
+      "label",
+      "textarea",
+      "sonner",
+    ],
+    dependencies: ["zod"],
+    files: [
+      {
+        path: "examples/form-management-demo.tsx",
         type: "registry:example",
       },
     ],

@@ -1,0 +1,159 @@
+---
+title: Extended Form
+description: Enhanced form component with Zod schema validation and TypeScript support using react-hook-form.
+featured: true
+---
+
+<ComponentPreview name="extended-form-demo" description="A form with automatic validation and fieldset management" />
+
+## Installation
+
+<Tabs defaultValue="cli">
+
+<TabsList>
+  <TabsTrigger value="cli">CLI</TabsTrigger>
+  <TabsTrigger value="manual">Manual</TabsTrigger>
+</TabsList>
+
+<TabsContent value="cli">
+
+```bash
+npx shadcn@latest add https://ui.nowts.app/r/extended-form.json
+```
+
+</TabsContent>
+
+<TabsContent value="manual">
+
+<Steps>
+
+### Install dependencies
+
+```bash
+npm install react-hook-form @hookform/resolvers zod
+```
+
+### Add the component
+
+<ComponentSource name="extended-form" title="components/ui/extended-form.tsx" />
+
+</Steps>
+
+</TabsContent>
+
+</Tabs>
+
+## Usage
+
+The `ExtendedForm` component provides type-safe forms with Zod validation:
+
+```tsx
+import { ExtendedForm, useZodForm } from "@/components/ui/extended-form"
+import { z } from "zod"
+
+const schema = z.object({
+  name: z.string().min(2),
+  email: z.string().email(),
+})
+
+export function MyForm() {
+  const form = useZodForm({
+    schema,
+    defaultValues: {
+      name: "",
+      email: "",
+    },
+  })
+
+  const onSubmit = async (data: z.infer<typeof schema>) => {
+    console.log(data) // Fully typed!
+  }
+
+  return (
+    <ExtendedForm form={form} onSubmit={onSubmit}>
+      <input {...form.register("name")} />
+      <input {...form.register("email")} />
+      <button type="submit">Submit</button>
+    </ExtendedForm>
+  )
+}
+```
+
+## Features
+
+### Automatic Fieldset Management
+
+The form automatically wraps your inputs in a `<fieldset>` that:
+- Disables all inputs during form submission
+- Can be manually disabled via the `disabled` prop
+- Prevents duplicate submissions
+
+### Type Safety
+
+The `useZodForm` hook provides full TypeScript support:
+
+```tsx
+const form = useZodForm({ schema })
+// form is fully typed based on your Zod schema
+```
+
+### Form State
+
+Access form state from the hook:
+
+```tsx
+const form = useZodForm({ schema })
+
+console.log(form.formState.isSubmitting) // boolean
+console.log(form.formState.errors) // typed errors
+console.log(form.formState.isDirty) // boolean
+```
+
+## With shadcn/ui Form
+
+You can combine with shadcn/ui's Form components:
+
+```tsx
+import { Form, FormField, FormItem, FormLabel, FormControl } from "@/components/ui/form"
+import { ExtendedForm, useZodForm } from "@/components/ui/extended-form"
+import { Input } from "@/components/ui/input"
+
+export function MyForm() {
+  const form = useZodForm({ schema })
+
+  return (
+    <ExtendedForm form={form} onSubmit={onSubmit}>
+      <FormField
+        control={form.control}
+        name="email"
+        render={({ field }) => (
+          <FormItem>
+            <FormLabel>Email</FormLabel>
+            <FormControl>
+              <Input {...field} />
+            </FormControl>
+          </FormItem>
+        )}
+      />
+    </ExtendedForm>
+  )
+}
+```
+
+## Props
+
+### ExtendedForm
+
+| Prop | Type | Required | Description |
+| --- | --- | --- | --- |
+| form | UseFormReturn | Yes | Form instance from useZodForm |
+| onSubmit | SubmitHandler | Yes | Form submission handler |
+| disabled | boolean | No | Manually disable the form |
+| ...formProps | FormHTMLAttributes | No | Standard form attributes |
+
+### useZodForm
+
+| Prop | Type | Required | Description |
+| --- | --- | --- | --- |
+| schema | ZodType | Yes | Zod validation schema |
+| ...formProps | UseFormProps | No | react-hook-form options |

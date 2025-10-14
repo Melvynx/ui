@@ -2,156 +2,88 @@ import { type Registry } from "shadcn/schema"
 
 export const ui: Registry["items"] = [
   {
-    name: "orb",
+    name: "submit-button",
     type: "registry:ui",
-    dependencies: [
-      "@react-three/drei",
-      "@react-three/fiber",
-      "three",
-      "@types/three",
-    ],
+    title: "Submit Button",
+    description:
+      "Enhanced submit button with loading state that automatically detects form submission state using React's useFormStatus hook.",
+    dependencies: ["motion", "lucide-react"],
+    registryDependencies: ["button", "https://ui.nowts.app/r/spinner.json"],
     files: [
       {
-        path: "ui/orb.tsx",
+        path: "ui/submit-button.tsx",
         type: "registry:ui",
       },
     ],
   },
   {
-    name: "waveform",
+    name: "spinner",
     type: "registry:ui",
+    title: "Spinner",
+    description:
+      "A simple loading spinner component using Lucide's Loader2 icon with spin animation.",
+    dependencies: ["lucide-react"],
     files: [
       {
-        path: "ui/waveform.tsx",
+        path: "ui/spinner.tsx",
         type: "registry:ui",
       },
     ],
   },
   {
-    name: "live-waveform",
+    name: "next-top-loader",
     type: "registry:ui",
+    title: "Next Top Loader",
+    description:
+      "A Next.js compatible top loading bar component with automatic navigation detection and customizable progress indicators.",
+    dependencies: ["zustand"],
     files: [
       {
-        path: "ui/live-waveform.tsx",
+        path: "ui/next-top-loader.tsx",
         type: "registry:ui",
       },
     ],
   },
   {
-    name: "shimmering-text",
+    name: "extended-form",
     type: "registry:ui",
-    dependencies: ["motion"],
+    title: "Extended Form",
+    description:
+      "Enhanced form component with Zod schema validation and TypeScript support using react-hook-form.",
+    dependencies: ["react-hook-form", "@hookform/resolvers", "zod"],
+    registryDependencies: ["form"],
     files: [
       {
-        path: "ui/shimmering-text.tsx",
+        path: "ui/extended-form.tsx",
         type: "registry:ui",
       },
     ],
   },
   {
-    name: "audio-player",
+    name: "tanstack-form",
     type: "registry:ui",
-    dependencies: ["@radix-ui/react-slider", "@radix-ui/react-dropdown-menu"],
-    registryDependencies: ["button", "dropdown-menu"],
+    title: "TanStack Form",
+    description:
+      "A complete form management solution using TanStack Form with Zod validation, supporting all input types including arrays and nested objects.",
+    dependencies: ["@tanstack/react-form", "zod"],
+    registryDependencies: ["label"],
     files: [
       {
-        path: "ui/audio-player.tsx",
+        path: "ui/tanstack-form.tsx",
         type: "registry:ui",
       },
     ],
   },
   {
-    name: "message",
+    name: "typography",
     type: "registry:ui",
+    title: "Typography",
+    description:
+      "A polymorphic typography component with multiple variants for consistent text styling across your application.",
     dependencies: ["class-variance-authority"],
-    registryDependencies: ["avatar"],
     files: [
       {
-        path: "ui/message.tsx",
-        type: "registry:ui",
-      },
-    ],
-  },
-  {
-    name: "conversation",
-    type: "registry:ui",
-    dependencies: ["use-stick-to-bottom"],
-    registryDependencies: ["button"],
-    files: [
-      {
-        path: "ui/conversation.tsx",
-        type: "registry:ui",
-      },
-    ],
-  },
-  {
-    name: "response",
-    type: "registry:ui",
-    dependencies: ["streamdown"],
-    files: [
-      {
-        path: "ui/response.tsx",
-        type: "registry:ui",
-      },
-    ],
-  },
-  {
-    name: "bar-visualizer",
-    type: "registry:ui",
-    files: [
-      {
-        path: "ui/bar-visualizer.tsx",
-        type: "registry:ui",
-      },
-    ],
-  },
-  {
-    name: "voice-picker",
-    type: "registry:ui",
-    dependencies: ["@elevenlabs/elevenlabs-js"],
-    registryDependencies: [
-      "button",
-      "badge",
-      "command",
-      "popover",
-      "https://ui.elevenlabs.io/r/orb.json",
-      "https://ui.elevenlabs.io/r/audio-player.json",
-    ],
-    files: [
-      {
-        path: "ui/voice-picker.tsx",
-        type: "registry:ui",
-      },
-    ],
-  },
-  {
-    name: "voice-button",
-    type: "registry:ui",
-    registryDependencies: [
-      "button",
-      "https://ui.elevenlabs.io/r/live-waveform.json",
-    ],
-    files: [
-      {
-        path: "ui/voice-button.tsx",
-        type: "registry:ui",
-      },
-    ],
-  },
-  {
-    name: "conversation-bar",
-    type: "registry:ui",
-    registryDependencies: [
-      "button",
-      "https://ui.elevenlabs.io/r/live-waveform.json",
-      "card",
-      "separator",
-      "textarea",
-    ],
-    dependencies: ["@elevenlabs/react"],
-    files: [
-      {
-        path: "ui/conversation-bar.tsx",
+        path: "ui/typography.tsx",
         type: "registry:ui",
       },
     ],

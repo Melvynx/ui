@@ -1,0 +1,154 @@
+---
+title: Typography
+description: A polymorphic typography component with multiple variants for consistent text styling across your application.
+---
+
+<ComponentPreview name="typography-demo" description="Typography variants showcase" />
+
+## Installation
+
+<Tabs defaultValue="cli">
+
+<TabsList>
+  <TabsTrigger value="cli">CLI</TabsTrigger>
+  <TabsTrigger value="manual">Manual</TabsTrigger>
+</TabsList>
+
+<TabsContent value="cli">
+
+```bash
+npx shadcn@latest add https://ui.nowts.app/r/typography.json
+```
+
+</TabsContent>
+
+<TabsContent value="manual">
+
+<Steps>
+
+### Install dependencies
+
+```bash
+npm install class-variance-authority
+```
+
+### Add the component
+
+<ComponentSource name="typography" title="components/ui/typography.tsx" />
+
+</Steps>
+
+</TabsContent>
+
+</Tabs>
+
+## Usage
+
+The `Typography` component provides consistent text styling with multiple variants:
+
+```tsx
+import { Typography } from "@/components/ui/typography"
+
+export function MyComponent() {
+  return (
+    <div>
+      <Typography variant="h1">Page Title</Typography>
+      <Typography variant="lead">
+        An introductory paragraph with larger text
+      </Typography>
+      <Typography variant="p">
+        Regular paragraph text
+      </Typography>
+    </div>
+  )
+}
+```
+
+## Variants
+
+### Headings
+
+```tsx
+<Typography variant="h1">Heading 1</Typography>
+<Typography variant="h2">Heading 2</Typography>
+<Typography variant="h3">Heading 3</Typography>
+```
+
+### Text
+
+```tsx
+<Typography variant="p">Paragraph</Typography>
+<Typography variant="lead">Lead text</Typography>
+<Typography variant="large">Large text</Typography>
+<Typography variant="small">Small text</Typography>
+<Typography variant="muted">Muted text</Typography>
+```
+
+### Special
+
+```tsx
+<Typography variant="code">const code = true</Typography>
+<Typography variant="quote">A memorable quote</Typography>
+<Typography variant="link" as="a" href="/about">Link text</Typography>
+```
+
+## Polymorphic
+
+The component is polymorphic and renders the appropriate HTML element by default:
+
+```tsx
+<Typography variant="h1"> {/* renders <h1> */}
+<Typography variant="p">  {/* renders <p> */}
+<Typography variant="link"> {/* renders <a> */}
+```
+
+You can override the element with the `as` prop:
+
+```tsx
+<Typography variant="h2" as="h1">
+  This is an h1 styled as h2
+</Typography>
+
+<Typography variant="p" as="div">
+  This is a div styled as a paragraph
+</Typography>
+```
+
+## Custom Styling
+
+Add custom classes with `className`:
+
+```tsx
+<Typography variant="h1" className="text-blue-500">
+  Blue Heading
+</Typography>
+
+<Typography variant="p" className="text-center">
+  Centered paragraph
+</Typography>
+```
+
+## Props
+
+| Prop | Type | Default | Description |
+| --- | --- | --- | --- |
+| variant | string | "p" | Typography variant (h1, h2, h3, p, lead, large, small, muted, code, quote, link) |
+| as | ElementType | - | Override the HTML element |
+| className | string | - | Additional CSS classes |
+| ...props | HTMLAttributes | - | Standard HTML attributes |
+
+## Variants Reference
+
+| Variant | Default Element | Description |
+| --- | --- | --- |
+| h1 | h1 | Large page heading |
+| h2 | h2 | Section heading |
+| h3 | h3 | Subsection heading |
+| p | p | Regular paragraph |
+| lead | p | Introductory text |
+| large | p | Emphasized text |
+| small | p | Fine print |
+| muted | p | Secondary text |
+| code | code | Inline code |
+| quote | blockquote | Quotation |
+| link | a | Link text |

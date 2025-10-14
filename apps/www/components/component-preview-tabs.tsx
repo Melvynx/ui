@@ -3,7 +3,7 @@
 import * as React from "react"
 
 import { cn } from "@/lib/utils"
-import { Tabs, TabsList, TabsTrigger } from "@/registry/elevenlabs-ui/ui/tabs"
+import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs"
 
 export function ComponentPreviewTabs({
   className,
@@ -63,7 +63,7 @@ export function ComponentPreviewTabs({
           <div
             data-align={align}
             className={cn(
-              "preview flex h-[450px] w-full justify-center data-[align=center]:items-center data-[align=end]:items-end data-[align=start]:items-start",
+              "preview flex h-[450px] w-full justify-center overflow-auto data-[align=center]:items-center data-[align=end]:items-end data-[align=start]:items-start",
               marginOff ? "p-0" : "p-10"
             )}
           >

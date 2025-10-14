@@ -8,7 +8,7 @@ import { ActiveThemeProvider } from "@/components/active-theme"
 import { Analytics } from "@/components/analytics"
 import { TailwindIndicator } from "@/components/tailwind-indicator"
 import { ThemeProvider } from "@/components/theme-provider"
-import { Toaster } from "@/registry/elevenlabs-ui/ui/sonner"
+import { Toaster } from "sonner"
 
 import "@/styles/globals.css"
 
@@ -17,16 +17,16 @@ export const metadata: Metadata = {
     default: siteConfig.name,
     template: `%s | ${siteConfig.name}`,
   },
-  metadataBase: new URL(process.env.NEXT_PUBLIC_APP_URL!),
+  metadataBase: new URL("http://localhost:4000"),
   description: siteConfig.description,
-  keywords: ["ElevenLabs", "UI", "shadcn", "Components", "audio", "agents"],
+  keywords: ["Now.ts", "UI", "shadcn", "Components", "Forms", "Auth", "React"],
   authors: [
     {
-      name: "ElevenLabs",
-      url: "https://elevenlabs.io",
+      name: "Melvyn Malherbe",
+      url: "https://nowts.app",
     },
   ],
-  creator: "elevenlabs",
+  creator: "melvynx",
   openGraph: {
     type: "website",
     locale: "en_US",
@@ -48,7 +48,7 @@ export const metadata: Metadata = {
     title: siteConfig.name,
     description: siteConfig.description,
     images: [`${process.env.NEXT_PUBLIC_APP_URL}/opengraph-image.png`],
-    creator: "@elevenlabsio",
+    creator: "@melvynxdev",
   },
   icons: {
     icon: "/favicon.ico",

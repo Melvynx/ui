@@ -2,7 +2,7 @@
 
 import React, { useState } from "react"
 
-import { Switch } from "@/registry/elevenlabs-ui/ui/switch"
+import { Switch } from "@/components/ui/switch"
 
 interface BlurVignetteProps {
   children: React.ReactNode

@@ -1,12 +1,12 @@
 export const siteConfig = {
-  name: "ElevenLabs UI",
-  url: "https://ui.elevenlabs.io",
-  ogImage: "https://ui.elevenlabs.io/og.jpg",
+  name: "Now.ts UI",
+  url: "https://ui.nowts.app",
+  ogImage: "https://ui.nowts.app/og.jpg",
   description:
-    "A collection of Open Source agent and audio components that you can customize, extend, and build on.",
+    "A collection of fullstack React components for authentication, forms, dialogs, and more. Built with shadcn/ui.",
   links: {
-    twitter: "https://twitter.com/louisjoejordan",
-    github: "https://github.com/elevenlabs/ui",
+    twitter: "https://twitter.com/melvynxdev",
+    github: "https://github.com/melvynx/nowts-ui",
   },
   navItems: [
     {
@@ -23,11 +23,9 @@ export const siteConfig = {
     },
   ],
   utm: {
-    main: "https://elevenlabs.io?utm_source=ui_elevenlabs&utm_medium=web&utm_campaign=growth_experiments_ui_components",
-    agents:
-      "https://elevenlabs.io/agents?utm_source=ui_elevenlabs&utm_medium=web&utm_campaign=growth_experiments_ui_components",
-    sales:
-      "https://elevenlabs.io/contact-sales?utm_source=ui_elevenlabs&utm_medium=web&utm_campaign=growth_experiments_ui_components",
+    main: "https://nowts.app",
+    agents: "https://nowts.app",
+    sales: "https://nowts.app/contact",
   },
 }
 

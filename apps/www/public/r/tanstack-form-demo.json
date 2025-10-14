@@ -1,0 +1,24 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "tanstack-form-demo",
+  "type": "registry:example",
+  "dependencies": [
+    "zod"
+  ],
+  "registryDependencies": [
+    "https://ui.nowts.app/r/tanstack-form.json",
+    "card",
+    "input",
+    "label",
+    "button",
+    "sonner",
+    "select"
+  ],
+  "files": [
+    {
+      "path": "examples/tanstack-form-demo.tsx",
+      "content": "\"use client\"\n\nimport { toast } from \"sonner\"\nimport { z } from \"zod\"\n\nimport { Button } from \"@/components/ui/button\"\nimport { Card } from \"@/components/ui/card\"\nimport { Checkbox } from \"@/components/ui/checkbox\"\nimport { Input } from \"@/components/ui/input\"\nimport {\n  Select,\n  SelectContent,\n  SelectItem,\n  SelectTrigger,\n  SelectValue,\n} from \"@/components/ui/select\"\nimport {\n  Form,\n  FormControl,\n  FormField,\n  FormItem,\n  FormLabel,\n  FormMessage,\n  getCheckboxFieldProps,\n  getInputFieldProps,\n  getSelectFieldProps,\n  useForm,\n} from \"@/components/ui/tanstack-form\"\n\nconst accountSchema = z.object({\n  email: z.string().email(\"Invalid email\"),\n  password: z.string().min(8, \"Password must be at least 8 characters\"),\n  role: z.enum([\"admin\", \"user\", \"guest\"]),\n  newsletter: z.boolean(),\n})\n\nexport default function TanstackFormDemo() {\n  const form = useForm({\n    schema: accountSchema,\n    defaultValues: {\n      email: \"\",\n      password: \"\",\n      role: \"user\" as const,\n      newsletter: false,\n    },\n    onSubmit: async (values) => {\n      await new Promise((resolve) => setTimeout(resolve, 1000))\n      toast.success(\"Account created successfully!\")\n      console.log(values)\n    },\n  })\n\n  return (\n    <Card className=\"mx-auto w-full max-w-md p-6\">\n      <div className=\"mb-6\">\n        <h3 className=\"text-lg font-semibold\">Create Account</h3>\n        <p className=\"text-muted-foreground text-sm\">\n          TanStack Form with Zod validation\n        </p>\n      </div>\n\n      <Form form={form} className=\"space-y-4\">\n        <FormField form={form} name=\"email\">\n          {(field) => (\n            <FormItem field={field} form={form}>\n              <FormLabel>Email</FormLabel>\n              <FormControl>\n                <Input\n                  {...getInputFieldProps(field)}\n                  type=\"email\"\n                  placeholder=\"you@example.com\"\n                />\n              </FormControl>\n              <FormMessage />\n            </FormItem>\n          )}\n        </FormField>\n\n        <FormField form={form} name=\"password\">\n          {(field) => (\n            <FormItem field={field} form={form}>\n              <FormLabel>Password</FormLabel>\n              <FormControl>\n                <Input\n                  {...getInputFieldProps(field)}\n                  type=\"password\"\n                  placeholder=\"••••••••\"\n                />\n              </FormControl>\n              <FormMessage />\n            </FormItem>\n          )}\n        </FormField>\n\n        <FormField form={form} name=\"role\">\n          {(field) => (\n            <FormItem field={field} form={form}>\n              <FormLabel>Role</FormLabel>\n              <FormControl>\n                <Select {...getSelectFieldProps(field)}>\n                  <SelectTrigger>\n                    <SelectValue placeholder=\"Select a role\" />\n                  </SelectTrigger>\n                  <SelectContent>\n                    <SelectItem value=\"admin\">Admin</SelectItem>\n                    <SelectItem value=\"user\">User</SelectItem>\n                    <SelectItem value=\"guest\">Guest</SelectItem>\n                  </SelectContent>\n                </Select>\n              </FormControl>\n              <FormMessage />\n            </FormItem>\n          )}\n        </FormField>\n\n        <FormField form={form} name=\"newsletter\">\n          {(field) => (\n            <FormItem field={field} form={form}>\n              <div className=\"flex items-center space-x-2\">\n                <FormControl>\n                  <Checkbox {...getCheckboxFieldProps(field)} id=\"newsletter\" />\n                </FormControl>\n                <FormLabel\n                  className=\"!mt-0 cursor-pointer\"\n                  htmlFor=\"newsletter\"\n                >\n                  Subscribe to newsletter\n                </FormLabel>\n              </div>\n              <FormMessage />\n            </FormItem>\n          )}\n        </FormField>\n\n        <Button type=\"submit\" className=\"w-full\">\n          Create Account\n        </Button>\n      </Form>\n    </Card>\n  )\n}\n",
+      "type": "registry:example"
+    }
+  ]
+}

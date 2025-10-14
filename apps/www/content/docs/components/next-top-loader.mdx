@@ -1,0 +1,109 @@
+---
+title: Next Top Loader
+description: A Next.js compatible top loading bar component with automatic navigation detection and customizable progress indicators.
+---
+
+<ComponentPreview name="next-top-loader-demo" description="A loading bar that appears at the top during navigation" />
+
+## Installation
+
+<Tabs defaultValue="cli">
+
+<TabsList>
+  <TabsTrigger value="cli">CLI</TabsTrigger>
+  <TabsTrigger value="manual">Manual</TabsTrigger>
+</TabsList>
+
+<TabsContent value="cli">
+
+```bash
+npx shadcn@latest add https://ui.nowts.app/r/next-top-loader.json
+```
+
+</TabsContent>
+
+<TabsContent value="manual">
+
+<Steps>
+
+### Install dependencies
+
+```bash
+npm install zustand
+```
+
+### Add the component
+
+<ComponentSource name="next-top-loader" title="components/ui/next-top-loader.tsx" />
+
+</Steps>
+
+</TabsContent>
+
+</Tabs>
+
+## Usage
+
+Add the `NextTopLoader` component to your root layout:
+
+```tsx
+// app/layout.tsx
+import { NextTopLoader } from "@/components/ui/next-top-loader"
+
+export default function RootLayout({
+  children,
+}: {
+  children: React.ReactNode
+}) {
+  return (
+    <html lang="en">
+      <body>
+        <NextTopLoader />
+        {children}
+      </body>
+    </html>
+  )
+}
+```
+
+The component will automatically show a loading bar at the top of the page during navigation.
+
+## Customization
+
+Customize the appearance by passing props:
+
+```tsx
+<NextTopLoader
+  color="#3b82f6"
+  height={3}
+  showSpinner={false}
+/>
+```
+
+## Manual Control
+
+You can manually trigger the loading bar:
+
+```tsx
+import { useTopLoader } from "@/components/ui/next-top-loader"
+
+export function MyComponent() {
+  const { start, done } = useTopLoader()
+
+  const handleAction = async () => {
+    start()
+    await someAsyncAction()
+    done()
+  }
+
+  return <button onClick={handleAction}>Start Action</button>
+}
+```
+
+## Props
+
+| Prop | Type | Default | Description |
+| --- | --- | --- | --- |
+| color | string | "hsl(var(--primary))" | Loading bar color |
+| height | number | 2 | Loading bar height in pixels |
+| showSpinner | boolean | false | Show spinner on the right |

@@ -1,6 +1,6 @@
 import { cn } from "@/lib/utils"
 import { Icons } from "@/components/icons"
-import { Button } from "@/registry/elevenlabs-ui/ui/button"
+import { Button } from "@/components/ui/button"
 
 export function OpenInV0Button({
   name,

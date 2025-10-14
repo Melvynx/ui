@@ -9,11 +9,11 @@ import {
   PageHeaderHeading,
 } from "@/components/page-header"
 import { PageNav } from "@/components/page-nav"
-import { Button } from "@/registry/elevenlabs-ui/ui/button"
+import { Button } from "@/components/ui/button"
 
 const title = "Examples"
 const description =
-  "A collection of building blocks for agents and audio that you can customize and extend."
+  "A collection of fullstack React components for authentication, forms, dialogs, and more."
 
 export const metadata: Metadata = {
   title,
@@ -54,7 +54,7 @@ export default function BlocksLayout({
             <a href="#blocks">Browse Examples</a>
           </Button>
           <Button asChild variant="ghost" size="sm">
-            <Link href="https://github.com/elevenlabs/ui">Add a block</Link>
+            <Link href="https://github.com/melvynx/nowts-ui">Add a block</Link>
           </Button>
         </PageActions>
       </PageHeader>

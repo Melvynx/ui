@@ -1,47 +1,32 @@
 [
   {
-    "name": "speaker-01",
-    "description": "EL-01 Speaker",
-    "categories": ["audio"]
+    "name": "better-auth-otp",
+    "description": "A component for signing in with email OTP.",
+    "categories": ["authentication"]
   },
   {
-    "name": "transcriber-01",
-    "description": "Transcriber",
-    "categories": ["audio"]
+    "name": "better-auth-signin",
+    "description": "A complete and customizable sign-in page with email/password, OTP, and OAuth provider support using Better Auth.",
+    "categories": ["authentication"]
   },
   {
-    "name": "voice-chat-01",
-    "description": "Voice chat 1",
-    "categories": ["agents"]
+    "name": "better-auth-signup",
+    "description": "A complete sign-up form component with email and password authentication using Better Auth.",
+    "categories": ["authentication"]
   },
   {
-    "name": "voice-chat-02",
-    "description": "Voice chat 2",
-    "categories": ["agents"]
+    "name": "server-toast",
+    "description": "A library for server-side toast notifications.",
+    "categories": ["notifications"]
   },
   {
-    "name": "voice-chat-03",
-    "description": "Voice chat 3",
-    "categories": ["agents"]
+    "name": "dialog-manager",
+    "description": "A powerful dialog manager for handling confirm, input, and custom dialogs with global state management.",
+    "categories": ["dialogs"]
   },
   {
-    "name": "music-player-01",
-    "description": "Music player with playlist",
-    "categories": ["audio"]
-  },
-  {
-    "name": "music-player-02",
-    "description": "Simple music player",
-    "categories": ["audio"]
-  },
-  {
-    "name": "voice-form-01",
-    "description": "Voice-fill form",
-    "categories": ["audio"]
-  },
-  {
-    "name": "voice-nav-01",
-    "description": "Voice-nav site navigation",
-    "categories": ["audio"]
+    "name": "form-management",
+    "description": "A comprehensive form management system with auto-save, unsaved changes warning, and sticky action bar for enhanced UX.",
+    "categories": ["forms"]
   }
 ]

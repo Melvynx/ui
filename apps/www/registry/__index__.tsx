@@ -26,403 +26,277 @@ export const Index: Record<string, any> = {
     categories: undefined,
     meta: undefined,
   },
-  "orb": {
-    name: "orb",
-    description: "",
+  "submit-button": {
+    name: "submit-button",
+    description: "Enhanced submit button with loading state that automatically detects form submission state using React's useFormStatus hook.",
+    type: "registry:ui",
+    registryDependencies: ["button","https://ui.nowts.app/r/spinner.json"],
+    files: [{
+      path: "registry/nowts/ui/submit-button.tsx",
+      type: "registry:ui",
+      target: ""
+    }],
+    component: React.lazy(async () => {
+      const mod = await import("@/registry/nowts/ui/submit-button.tsx")
+      const exportName = Object.keys(mod).find(key => typeof mod[key] === 'function' || typeof mod[key] === 'object') || item.name
+      return { default: mod.default || mod[exportName] }
+    }),
+    categories: undefined,
+    meta: undefined,
+  },
+  "spinner": {
+    name: "spinner",
+    description: "A simple loading spinner component using Lucide's Loader2 icon with spin animation.",
     type: "registry:ui",
     registryDependencies: undefined,
     files: [{
-      path: "registry/elevenlabs-ui/ui/orb.tsx",
+      path: "registry/nowts/ui/spinner.tsx",
       type: "registry:ui",
       target: ""
     }],
     component: React.lazy(async () => {
-      const mod = await import("@/registry/elevenlabs-ui/ui/orb.tsx")
+      const mod = await import("@/registry/nowts/ui/spinner.tsx")
       const exportName = Object.keys(mod).find(key => typeof mod[key] === 'function' || typeof mod[key] === 'object') || item.name
       return { default: mod.default || mod[exportName] }
     }),
     categories: undefined,
     meta: undefined,
   },
-  "waveform": {
-    name: "waveform",
-    description: "",
+  "next-top-loader": {
+    name: "next-top-loader",
+    description: "A Next.js compatible top loading bar component with automatic navigation detection and customizable progress indicators.",
     type: "registry:ui",
     registryDependencies: undefined,
     files: [{
-      path: "registry/elevenlabs-ui/ui/waveform.tsx",
+      path: "registry/nowts/ui/next-top-loader.tsx",
       type: "registry:ui",
       target: ""
     }],
     component: React.lazy(async () => {
-      const mod = await import("@/registry/elevenlabs-ui/ui/waveform.tsx")
+      const mod = await import("@/registry/nowts/ui/next-top-loader.tsx")
       const exportName = Object.keys(mod).find(key => typeof mod[key] === 'function' || typeof mod[key] === 'object') || item.name
       return { default: mod.default || mod[exportName] }
     }),
     categories: undefined,
     meta: undefined,
   },
-  "live-waveform": {
-    name: "live-waveform",
-    description: "",
+  "extended-form": {
+    name: "extended-form",
+    description: "Enhanced form component with Zod schema validation and TypeScript support using react-hook-form.",
+    type: "registry:ui",
+    registryDependencies: ["form"],
+    files: [{
+      path: "registry/nowts/ui/extended-form.tsx",
+      type: "registry:ui",
+      target: ""
+    }],
+    component: React.lazy(async () => {
+      const mod = await import("@/registry/nowts/ui/extended-form.tsx")
+      const exportName = Object.keys(mod).find(key => typeof mod[key] === 'function' || typeof mod[key] === 'object') || item.name
+      return { default: mod.default || mod[exportName] }
+    }),
+    categories: undefined,
+    meta: undefined,
+  },
+  "tanstack-form": {
+    name: "tanstack-form",
+    description: "A complete form management solution using TanStack Form with Zod validation, supporting all input types including arrays and nested objects.",
+    type: "registry:ui",
+    registryDependencies: ["label"],
+    files: [{
+      path: "registry/nowts/ui/tanstack-form.tsx",
+      type: "registry:ui",
+      target: ""
+    }],
+    component: React.lazy(async () => {
+      const mod = await import("@/registry/nowts/ui/tanstack-form.tsx")
+      const exportName = Object.keys(mod).find(key => typeof mod[key] === 'function' || typeof mod[key] === 'object') || item.name
+      return { default: mod.default || mod[exportName] }
+    }),
+    categories: undefined,
+    meta: undefined,
+  },
+  "typography": {
+    name: "typography",
+    description: "A polymorphic typography component with multiple variants for consistent text styling across your application.",
     type: "registry:ui",
     registryDependencies: undefined,
     files: [{
-      path: "registry/elevenlabs-ui/ui/live-waveform.tsx",
+      path: "registry/nowts/ui/typography.tsx",
       type: "registry:ui",
       target: ""
     }],
     component: React.lazy(async () => {
-      const mod = await import("@/registry/elevenlabs-ui/ui/live-waveform.tsx")
+      const mod = await import("@/registry/nowts/ui/typography.tsx")
       const exportName = Object.keys(mod).find(key => typeof mod[key] === 'function' || typeof mod[key] === 'object') || item.name
       return { default: mod.default || mod[exportName] }
     }),
     categories: undefined,
     meta: undefined,
   },
-  "shimmering-text": {
-    name: "shimmering-text",
-    description: "",
-    type: "registry:ui",
-    registryDependencies: undefined,
-    files: [{
-      path: "registry/elevenlabs-ui/ui/shimmering-text.tsx",
-      type: "registry:ui",
-      target: ""
-    }],
-    component: React.lazy(async () => {
-      const mod = await import("@/registry/elevenlabs-ui/ui/shimmering-text.tsx")
-      const exportName = Object.keys(mod).find(key => typeof mod[key] === 'function' || typeof mod[key] === 'object') || item.name
-      return { default: mod.default || mod[exportName] }
-    }),
-    categories: undefined,
-    meta: undefined,
-  },
-  "audio-player": {
-    name: "audio-player",
-    description: "",
-    type: "registry:ui",
-    registryDependencies: ["button","dropdown-menu"],
-    files: [{
-      path: "registry/elevenlabs-ui/ui/audio-player.tsx",
-      type: "registry:ui",
-      target: ""
-    }],
-    component: React.lazy(async () => {
-      const mod = await import("@/registry/elevenlabs-ui/ui/audio-player.tsx")
-      const exportName = Object.keys(mod).find(key => typeof mod[key] === 'function' || typeof mod[key] === 'object') || item.name
-      return { default: mod.default || mod[exportName] }
-    }),
-    categories: undefined,
-    meta: undefined,
-  },
-  "message": {
-    name: "message",
-    description: "",
-    type: "registry:ui",
-    registryDependencies: ["avatar"],
-    files: [{
-      path: "registry/elevenlabs-ui/ui/message.tsx",
-      type: "registry:ui",
-      target: ""
-    }],
-    component: React.lazy(async () => {
-      const mod = await import("@/registry/elevenlabs-ui/ui/message.tsx")
-      const exportName = Object.keys(mod).find(key => typeof mod[key] === 'function' || typeof mod[key] === 'object') || item.name
-      return { default: mod.default || mod[exportName] }
-    }),
-    categories: undefined,
-    meta: undefined,
-  },
-  "conversation": {
-    name: "conversation",
-    description: "",
-    type: "registry:ui",
-    registryDependencies: ["button"],
-    files: [{
-      path: "registry/elevenlabs-ui/ui/conversation.tsx",
-      type: "registry:ui",
-      target: ""
-    }],
-    component: React.lazy(async () => {
-      const mod = await import("@/registry/elevenlabs-ui/ui/conversation.tsx")
-      const exportName = Object.keys(mod).find(key => typeof mod[key] === 'function' || typeof mod[key] === 'object') || item.name
-      return { default: mod.default || mod[exportName] }
-    }),
-    categories: undefined,
-    meta: undefined,
-  },
-  "response": {
-    name: "response",
-    description: "",
-    type: "registry:ui",
-    registryDependencies: undefined,
-    files: [{
-      path: "registry/elevenlabs-ui/ui/response.tsx",
-      type: "registry:ui",
-      target: ""
-    }],
-    component: React.lazy(async () => {
-      const mod = await import("@/registry/elevenlabs-ui/ui/response.tsx")
-      const exportName = Object.keys(mod).find(key => typeof mod[key] === 'function' || typeof mod[key] === 'object') || item.name
-      return { default: mod.default || mod[exportName] }
-    }),
-    categories: undefined,
-    meta: undefined,
-  },
-  "bar-visualizer": {
-    name: "bar-visualizer",
-    description: "",
-    type: "registry:ui",
-    registryDependencies: undefined,
-    files: [{
-      path: "registry/elevenlabs-ui/ui/bar-visualizer.tsx",
-      type: "registry:ui",
-      target: ""
-    }],
-    component: React.lazy(async () => {
-      const mod = await import("@/registry/elevenlabs-ui/ui/bar-visualizer.tsx")
-      const exportName = Object.keys(mod).find(key => typeof mod[key] === 'function' || typeof mod[key] === 'object') || item.name
-      return { default: mod.default || mod[exportName] }
-    }),
-    categories: undefined,
-    meta: undefined,
-  },
-  "voice-picker": {
-    name: "voice-picker",
-    description: "",
-    type: "registry:ui",
-    registryDependencies: ["button","badge","command","popover","https://ui.elevenlabs.io/r/orb.json","https://ui.elevenlabs.io/r/audio-player.json"],
-    files: [{
-      path: "registry/elevenlabs-ui/ui/voice-picker.tsx",
-      type: "registry:ui",
-      target: ""
-    }],
-    component: React.lazy(async () => {
-      const mod = await import("@/registry/elevenlabs-ui/ui/voice-picker.tsx")
-      const exportName = Object.keys(mod).find(key => typeof mod[key] === 'function' || typeof mod[key] === 'object') || item.name
-      return { default: mod.default || mod[exportName] }
-    }),
-    categories: undefined,
-    meta: undefined,
-  },
-  "voice-button": {
-    name: "voice-button",
-    description: "",
-    type: "registry:ui",
-    registryDependencies: ["button","https://ui.elevenlabs.io/r/live-waveform.json"],
-    files: [{
-      path: "registry/elevenlabs-ui/ui/voice-button.tsx",
-      type: "registry:ui",
-      target: ""
-    }],
-    component: React.lazy(async () => {
-      const mod = await import("@/registry/elevenlabs-ui/ui/voice-button.tsx")
-      const exportName = Object.keys(mod).find(key => typeof mod[key] === 'function' || typeof mod[key] === 'object') || item.name
-      return { default: mod.default || mod[exportName] }
-    }),
-    categories: undefined,
-    meta: undefined,
-  },
-  "conversation-bar": {
-    name: "conversation-bar",
-    description: "",
-    type: "registry:ui",
-    registryDependencies: ["button","https://ui.elevenlabs.io/r/live-waveform.json","card","separator","textarea"],
-    files: [{
-      path: "registry/elevenlabs-ui/ui/conversation-bar.tsx",
-      type: "registry:ui",
-      target: ""
-    }],
-    component: React.lazy(async () => {
-      const mod = await import("@/registry/elevenlabs-ui/ui/conversation-bar.tsx")
-      const exportName = Object.keys(mod).find(key => typeof mod[key] === 'function' || typeof mod[key] === 'object') || item.name
-      return { default: mod.default || mod[exportName] }
-    }),
-    categories: undefined,
-    meta: undefined,
-  },
-  "speaker-01": {
-    name: "speaker-01",
-    description: "EL-01 Speaker",
+  "better-auth-otp": {
+    name: "better-auth-otp",
+    description: "A component for signing in with email OTP.",
     type: "registry:block",
-    registryDependencies: ["https://ui.elevenlabs.io/r/audio-player.json","https://ui.elevenlabs.io/r/orb.json","https://ui.elevenlabs.io/r/waveform.json","button","card"],
+    registryDependencies: ["button","input","label","textarea","card","input-otp","sonner"],
     files: [{
-      path: "registry/elevenlabs-ui/blocks/speaker-01/page.tsx",
-      type: "registry:page",
-      target: "app/speaker/page.tsx"
-    },{
-      path: "registry/elevenlabs-ui/blocks/speaker-01/components/speaker.tsx",
+      path: "registry/nowts/blocks/better-auth-otp/components/better-auth-otp.tsx",
       type: "registry:component",
-      target: "components/speaker.tsx"
-    }],
-    component: React.lazy(async () => {
-      const mod = await import("@/registry/elevenlabs-ui/blocks/speaker-01/page.tsx")
-      const exportName = Object.keys(mod).find(key => typeof mod[key] === 'function' || typeof mod[key] === 'object') || item.name
-      return { default: mod.default || mod[exportName] }
-    }),
-    categories: ["audio"],
-    meta: {"iframeHeight":"900px","container":"w-full bg-surface min-h-svh flex px-4 py-12 items-center md:py-20 justify-center min-w-0","mobile":"component"},
-  },
-  "transcriber-01": {
-    name: "transcriber-01",
-    description: "Transcriber",
-    type: "registry:block",
-    registryDependencies: ["https://ui.elevenlabs.io/r/live-waveform.json","button","card","scroll-area","separator"],
-    files: [{
-      path: "registry/elevenlabs-ui/blocks/transcriber-01/page.tsx",
-      type: "registry:page",
-      target: "app/transcriber-01/page.tsx"
+      target: ""
     },{
-      path: "registry/elevenlabs-ui/blocks/transcriber-01/actions/transcribe.ts",
-      type: "registry:file",
-      target: "app/transcriber-01/actions/transcribe.ts"
+      path: "registry/nowts/blocks/better-auth-otp/hooks/use-countdown.ts",
+      type: "registry:hook",
+      target: ""
     }],
     component: React.lazy(async () => {
-      const mod = await import("@/registry/elevenlabs-ui/blocks/transcriber-01/page.tsx")
+      const mod = await import("@/registry/nowts/blocks/better-auth-otp/components/better-auth-otp.tsx")
       const exportName = Object.keys(mod).find(key => typeof mod[key] === 'function' || typeof mod[key] === 'object') || item.name
       return { default: mod.default || mod[exportName] }
     }),
-    categories: ["audio"],
-    meta: {"iframeHeight":"600px","container":"w-full bg-surface min-h-svh flex px-4 py-12 items-center md:py-20 justify-center min-w-0","mobile":"component"},
+    categories: ["authentication"],
+    meta: undefined,
   },
-  "voice-chat-01": {
-    name: "voice-chat-01",
-    description: "Voice chat 1",
+  "better-auth-signin": {
+    name: "better-auth-signin",
+    description: "A complete and customizable sign-in page with email/password, OTP, and OAuth provider support using Better Auth.",
     type: "registry:block",
-    registryDependencies: ["https://ui.elevenlabs.io/r/orb.json","https://ui.elevenlabs.io/r/shimmering-text.json","button","card","https://ui.elevenlabs.io/r/message.json","https://ui.elevenlabs.io/r/response.json","https://ui.elevenlabs.io/r/conversation.json","scroll-area"],
+    registryDependencies: ["button","input","label","card","avatar","sonner","https://ui.nowts.app/r/better-auth-otp.json"],
     files: [{
-      path: "registry/elevenlabs-ui/blocks/voice-chat-01/page.tsx",
+      path: "registry/nowts/blocks/better-auth-signin/sign-in-page.tsx",
       type: "registry:page",
-      target: "app/voice-chat/page.tsx"
-    }],
-    component: React.lazy(async () => {
-      const mod = await import("@/registry/elevenlabs-ui/blocks/voice-chat-01/page.tsx")
-      const exportName = Object.keys(mod).find(key => typeof mod[key] === 'function' || typeof mod[key] === 'object') || item.name
-      return { default: mod.default || mod[exportName] }
-    }),
-    categories: ["agents"],
-    meta: {"iframeHeight":"800px","container":"w-full bg-surface min-h-svh flex px-4 py-12 items-center md:py-20 justify-center min-w-0","mobile":"component"},
-  },
-  "voice-chat-02": {
-    name: "voice-chat-02",
-    description: "Voice chat 2",
-    type: "registry:block",
-    registryDependencies: ["https://ui.elevenlabs.io/r/orb.json","https://ui.elevenlabs.io/r/shimmering-text.json","button","card"],
-    files: [{
-      path: "registry/elevenlabs-ui/blocks/voice-chat-02/page.tsx",
-      type: "registry:page",
-      target: "app/voice-chat/page.tsx"
-    }],
-    component: React.lazy(async () => {
-      const mod = await import("@/registry/elevenlabs-ui/blocks/voice-chat-02/page.tsx")
-      const exportName = Object.keys(mod).find(key => typeof mod[key] === 'function' || typeof mod[key] === 'object') || item.name
-      return { default: mod.default || mod[exportName] }
-    }),
-    categories: ["agents"],
-    meta: {"iframeHeight":"600px","container":"w-full bg-surface min-h-svh flex px-4 py-12 items-center md:py-20 justify-center min-w-0","mobile":"component"},
-  },
-  "voice-chat-03": {
-    name: "voice-chat-03",
-    description: "Voice chat 3",
-    type: "registry:block",
-    registryDependencies: ["https://ui.elevenlabs.io/r/conversation-bar.json","https://ui.elevenlabs.io/r/conversation.json","https://ui.elevenlabs.io/r/message.json","https://ui.elevenlabs.io/r/orb.json","https://ui.elevenlabs.io/r/response.json","tooltip","card","button"],
-    files: [{
-      path: "registry/elevenlabs-ui/blocks/voice-chat-03/page.tsx",
-      type: "registry:page",
-      target: "app/voice-chat/page.tsx"
-    }],
-    component: React.lazy(async () => {
-      const mod = await import("@/registry/elevenlabs-ui/blocks/voice-chat-03/page.tsx")
-      const exportName = Object.keys(mod).find(key => typeof mod[key] === 'function' || typeof mod[key] === 'object') || item.name
-      return { default: mod.default || mod[exportName] }
-    }),
-    categories: ["agents"],
-    meta: {"iframeHeight":"800px","container":"w-full bg-surface min-h-svh flex px-4 py-12 items-center md:py-20 justify-center min-w-0","mobile":"component"},
-  },
-  "music-player-01": {
-    name: "music-player-01",
-    description: "Music player with playlist",
-    type: "registry:block",
-    registryDependencies: ["https://ui.elevenlabs.io/r/audio-player.json","button","scroll-area"],
-    files: [{
-      path: "registry/elevenlabs-ui/blocks/music-player-01/page.tsx",
-      type: "registry:page",
-      target: "app/music-player/page.tsx"
-    }],
-    component: React.lazy(async () => {
-      const mod = await import("@/registry/elevenlabs-ui/blocks/music-player-01/page.tsx")
-      const exportName = Object.keys(mod).find(key => typeof mod[key] === 'function' || typeof mod[key] === 'object') || item.name
-      return { default: mod.default || mod[exportName] }
-    }),
-    categories: ["audio"],
-    meta: {"iframeHeight":"600px","container":"w-full bg-surface min-h-svh flex px-4 py-12 items-center md:py-20 justify-center min-w-0","mobile":"component"},
-  },
-  "music-player-02": {
-    name: "music-player-02",
-    description: "Simple music player",
-    type: "registry:block",
-    registryDependencies: ["https://ui.elevenlabs.io/r/audio-player.json","card"],
-    files: [{
-      path: "registry/elevenlabs-ui/blocks/music-player-02/page.tsx",
-      type: "registry:page",
-      target: "app/music-player/page.tsx"
-    }],
-    component: React.lazy(async () => {
-      const mod = await import("@/registry/elevenlabs-ui/blocks/music-player-02/page.tsx")
-      const exportName = Object.keys(mod).find(key => typeof mod[key] === 'function' || typeof mod[key] === 'object') || item.name
-      return { default: mod.default || mod[exportName] }
-    }),
-    categories: ["audio"],
-    meta: {"iframeHeight":"400px","container":"w-full bg-surface min-h-svh flex px-4 py-12 items-center md:py-20 justify-center min-w-0","mobile":"component"},
-  },
-  "voice-form-01": {
-    name: "voice-form-01",
-    description: "Voice-fill form",
-    type: "registry:block",
-    registryDependencies: ["https://ui.elevenlabs.io/r/voice-button.json","https://ui.elevenlabs.io/r/live-waveform.json","button","card","form","input"],
-    files: [{
-      path: "registry/elevenlabs-ui/blocks/voice-form-01/page.tsx",
-      type: "registry:page",
-      target: "app/voice-form/page.tsx"
+      target: "app/sign-in/page.tsx"
     },{
-      path: "registry/elevenlabs-ui/blocks/voice-form-01/schema.ts",
-      type: "registry:file",
-      target: "app/voice-form/schema.ts"
+      path: "registry/nowts/blocks/better-auth-signin/sign-in-auth-methods.tsx",
+      type: "registry:component",
+      target: ""
     },{
-      path: "registry/elevenlabs-ui/blocks/voice-form-01/actions/voice-to-form.ts",
-      type: "registry:file",
-      target: "app/voice-form/actions/voice-to-form.ts"
+      path: "registry/nowts/blocks/better-auth-signin/sign-in-password-form.tsx",
+      type: "registry:component",
+      target: ""
+    },{
+      path: "registry/nowts/blocks/better-auth-signin/sign-in-provider-button.tsx",
+      type: "registry:component",
+      target: ""
+    },{
+      path: "registry/nowts/blocks/better-auth-signin/divider.tsx",
+      type: "registry:component",
+      target: ""
     }],
     component: React.lazy(async () => {
-      const mod = await import("@/registry/elevenlabs-ui/blocks/voice-form-01/page.tsx")
+      const mod = await import("@/registry/nowts/blocks/better-auth-signin/sign-in-page.tsx")
       const exportName = Object.keys(mod).find(key => typeof mod[key] === 'function' || typeof mod[key] === 'object') || item.name
       return { default: mod.default || mod[exportName] }
     }),
-    categories: ["audio"],
-    meta: {"iframeHeight":"700px","container":"w-full bg-surface min-h-svh flex px-4 py-12 items-center md:py-20 justify-center min-w-0","mobile":"component"},
+    categories: ["authentication"],
+    meta: undefined,
   },
-  "voice-nav-01": {
-    name: "voice-nav-01",
-    description: "Voice-nav site navigation",
+  "better-auth-signup": {
+    name: "better-auth-signup",
+    description: "A complete sign-up form component with email and password authentication using Better Auth.",
     type: "registry:block",
-    registryDependencies: ["https://ui.elevenlabs.io/r/voice-button.json","button","card"],
+    registryDependencies: ["button","input","label","card","sonner","https://ui.nowts.app/r/extended-form.json"],
     files: [{
-      path: "registry/elevenlabs-ui/blocks/voice-nav-01/page.tsx",
+      path: "registry/nowts/blocks/better-auth-signup/better-auth-signup.tsx",
       type: "registry:page",
-      target: "app/voice-nav/page.tsx"
-    },{
-      path: "registry/elevenlabs-ui/blocks/voice-nav-01/actions/voice-to-site.ts",
-      type: "registry:file",
-      target: "app/voice-nav/actions/voice-to-site.ts"
+      target: "app/sign-up/page.tsx"
     }],
     component: React.lazy(async () => {
-      const mod = await import("@/registry/elevenlabs-ui/blocks/voice-nav-01/page.tsx")
+      const mod = await import("@/registry/nowts/blocks/better-auth-signup/better-auth-signup.tsx")
       const exportName = Object.keys(mod).find(key => typeof mod[key] === 'function' || typeof mod[key] === 'object') || item.name
       return { default: mod.default || mod[exportName] }
     }),
-    categories: ["audio"],
-    meta: {"iframeHeight":"900px","container":"w-full bg-surface min-h-svh flex px-4 py-12 items-center md:py-20 justify-center min-w-0","mobile":"component"},
+    categories: ["authentication"],
+    meta: undefined,
+  },
+  "server-toast": {
+    name: "server-toast",
+    description: "A library for server-side toast notifications.",
+    type: "registry:block",
+    registryDependencies: ["sonner"],
+    files: [{
+      path: "registry/nowts/blocks/server-toast/server-toast.type.ts",
+      type: "registry:lib",
+      target: "lib/server-toast/server-toast.type.ts"
+    },{
+      path: "registry/nowts/blocks/server-toast/server-toast.ts",
+      type: "registry:lib",
+      target: "lib/server-toast/server-toast.ts"
+    },{
+      path: "registry/nowts/blocks/server-toast/server-toast.server.tsx",
+      type: "registry:lib",
+      target: "lib/server-toast/server-toast.server.tsx"
+    },{
+      path: "registry/nowts/blocks/server-toast/server-toast.client.tsx",
+      type: "registry:lib",
+      target: "lib/server-toast/server-toast.client.tsx"
+    }],
+    component: React.lazy(async () => {
+      const mod = await import("@/registry/nowts/blocks/server-toast/server-toast.type.ts")
+      const exportName = Object.keys(mod).find(key => typeof mod[key] === 'function' || typeof mod[key] === 'object') || item.name
+      return { default: mod.default || mod[exportName] }
+    }),
+    categories: ["notifications"],
+    meta: undefined,
+  },
+  "dialog-manager": {
+    name: "dialog-manager",
+    description: "A powerful dialog manager for handling confirm, input, and custom dialogs with global state management.",
+    type: "registry:block",
+    registryDependencies: ["alert-dialog","button","input","label","sonner"],
+    files: [{
+      path: "registry/nowts/blocks/dialog-manager/dialog-types.ts",
+      type: "registry:lib",
+      target: "lib/dialog-manager/dialog-types.ts"
+    },{
+      path: "registry/nowts/blocks/dialog-manager/dialog-factory.ts",
+      type: "registry:lib",
+      target: "lib/dialog-manager/dialog-factory.ts"
+    },{
+      path: "registry/nowts/blocks/dialog-manager/dialog-store.ts",
+      type: "registry:lib",
+      target: "lib/dialog-manager/dialog-store.ts"
+    },{
+      path: "registry/nowts/blocks/dialog-manager/dialog-manager.ts",
+      type: "registry:lib",
+      target: "lib/dialog-manager/dialog-manager.ts"
+    },{
+      path: "registry/nowts/blocks/dialog-manager/dialog-component.tsx",
+      type: "registry:lib",
+      target: "lib/dialog-manager/dialog-component.tsx"
+    },{
+      path: "registry/nowts/blocks/dialog-manager/dialog-manager-renderer.tsx",
+      type: "registry:lib",
+      target: "lib/dialog-manager/dialog-manager-renderer.tsx"
+    }],
+    component: React.lazy(async () => {
+      const mod = await import("@/registry/nowts/blocks/dialog-manager/dialog-types.ts")
+      const exportName = Object.keys(mod).find(key => typeof mod[key] === 'function' || typeof mod[key] === 'object') || item.name
+      return { default: mod.default || mod[exportName] }
+    }),
+    categories: ["dialogs"],
+    meta: undefined,
+  },
+  "form-management": {
+    name: "form-management",
+    description: "A comprehensive form management system with auto-save, unsaved changes warning, and sticky action bar for enhanced UX.",
+    type: "registry:block",
+    registryDependencies: ["button","tooltip","https://ui.nowts.app/r/submit-button.json","https://ui.nowts.app/r/extended-form.json","https://ui.nowts.app/r/use-debounce-fn.json","https://ui.nowts.app/r/use-warn-if-unsaved-changes.json","https://ui.nowts.app/r/use-is-client.json"],
+    files: [{
+      path: "registry/nowts/blocks/form-management/form-management.tsx",
+      type: "registry:lib",
+      target: "lib/form-management/form-management.tsx"
+    },{
+      path: "registry/nowts/blocks/form-management/form-management-sticky-bar.tsx",
+      type: "registry:lib",
+      target: "lib/form-management/form-management-sticky-bar.tsx"
+    }],
+    component: React.lazy(async () => {
+      const mod = await import("@/registry/nowts/blocks/form-management/form-management.tsx")
+      const exportName = Object.keys(mod).find(key => typeof mod[key] === 'function' || typeof mod[key] === 'object') || item.name
+      return { default: mod.default || mod[exportName] }
+    }),
+    categories: ["forms"],
+    meta: undefined,
   },
   "use-mobile": {
     name: "use-mobile",
@@ -430,228 +304,282 @@ export const Index: Record<string, any> = {
     type: "registry:hook",
     registryDependencies: undefined,
     files: [{
-      path: "registry/elevenlabs-ui/hooks/use-mobile.ts",
+      path: "registry/nowts/hooks/use-mobile.ts",
       type: "registry:hook",
       target: ""
     }],
     component: React.lazy(async () => {
-      const mod = await import("@/registry/elevenlabs-ui/hooks/use-mobile.ts")
+      const mod = await import("@/registry/nowts/hooks/use-mobile.ts")
       const exportName = Object.keys(mod).find(key => typeof mod[key] === 'function' || typeof mod[key] === 'object') || item.name
       return { default: mod.default || mod[exportName] }
     }),
     categories: undefined,
     meta: undefined,
   },
-  "audio-player-demo": {
-    name: "audio-player-demo",
-    description: "",
-    type: "registry:example",
-    registryDependencies: ["https://ui.elevenlabs.io/r/audio-player.json","button","card","scroll-area"],
+  "use-is-client": {
+    name: "use-is-client",
+    description: "A React hook to check if the component is rendered on the client side, useful for SSR/hydration scenarios.",
+    type: "registry:hook",
+    registryDependencies: undefined,
     files: [{
-      path: "registry/elevenlabs-ui/examples/audio-player-demo.tsx",
-      type: "registry:example",
+      path: "registry/nowts/hooks/use-is-client.ts",
+      type: "registry:hook",
       target: ""
     }],
     component: React.lazy(async () => {
-      const mod = await import("@/registry/elevenlabs-ui/examples/audio-player-demo.tsx")
+      const mod = await import("@/registry/nowts/hooks/use-is-client.ts")
       const exportName = Object.keys(mod).find(key => typeof mod[key] === 'function' || typeof mod[key] === 'object') || item.name
       return { default: mod.default || mod[exportName] }
     }),
     categories: undefined,
     meta: undefined,
   },
-  "orb-demo": {
-    name: "orb-demo",
-    description: "",
-    type: "registry:example",
-    registryDependencies: ["https://ui.elevenlabs.io/r/orb.json","button"],
+  "use-warn-if-unsaved-changes": {
+    name: "use-warn-if-unsaved-changes",
+    description: "A React hook that warns users before leaving the page when there are unsaved changes.",
+    type: "registry:hook",
+    registryDependencies: undefined,
     files: [{
-      path: "registry/elevenlabs-ui/examples/orb-demo.tsx",
-      type: "registry:example",
+      path: "registry/nowts/hooks/use-warn-if-unsaved-changes.ts",
+      type: "registry:hook",
       target: ""
     }],
     component: React.lazy(async () => {
-      const mod = await import("@/registry/elevenlabs-ui/examples/orb-demo.tsx")
+      const mod = await import("@/registry/nowts/hooks/use-warn-if-unsaved-changes.ts")
       const exportName = Object.keys(mod).find(key => typeof mod[key] === 'function' || typeof mod[key] === 'object') || item.name
       return { default: mod.default || mod[exportName] }
     }),
     categories: undefined,
     meta: undefined,
   },
-  "waveform-demo": {
-    name: "waveform-demo",
-    description: "",
-    type: "registry:example",
-    registryDependencies: ["https://ui.elevenlabs.io/r/waveform.json"],
+  "use-debounce-fn": {
+    name: "use-debounce-fn",
+    description: "A React hook that debounces function calls to improve performance and prevent excessive API calls.",
+    type: "registry:hook",
+    registryDependencies: undefined,
     files: [{
-      path: "registry/elevenlabs-ui/examples/waveform-demo.tsx",
-      type: "registry:example",
+      path: "registry/nowts/hooks/use-debounce-fn.ts",
+      type: "registry:hook",
       target: ""
     }],
     component: React.lazy(async () => {
-      const mod = await import("@/registry/elevenlabs-ui/examples/waveform-demo.tsx")
+      const mod = await import("@/registry/nowts/hooks/use-debounce-fn.ts")
       const exportName = Object.keys(mod).find(key => typeof mod[key] === 'function' || typeof mod[key] === 'object') || item.name
       return { default: mod.default || mod[exportName] }
     }),
     categories: undefined,
     meta: undefined,
   },
-  "live-waveform-demo": {
-    name: "live-waveform-demo",
-    description: "",
-    type: "registry:example",
-    registryDependencies: ["https://ui.elevenlabs.io/r/live-waveform.json","button"],
+  "use-copy-to-clipboard": {
+    name: "use-copy-to-clipboard",
+    description: "A React hook for copying text to the clipboard with fallback support and feedback state management.",
+    type: "registry:hook",
+    registryDependencies: undefined,
     files: [{
-      path: "registry/elevenlabs-ui/examples/live-waveform-demo.tsx",
-      type: "registry:example",
+      path: "registry/nowts/hooks/use-copy-to-clipboard.ts",
+      type: "registry:hook",
       target: ""
     }],
     component: React.lazy(async () => {
-      const mod = await import("@/registry/elevenlabs-ui/examples/live-waveform-demo.tsx")
+      const mod = await import("@/registry/nowts/hooks/use-copy-to-clipboard.ts")
       const exportName = Object.keys(mod).find(key => typeof mod[key] === 'function' || typeof mod[key] === 'object') || item.name
       return { default: mod.default || mod[exportName] }
     }),
     categories: undefined,
     meta: undefined,
   },
-  "bar-visualizer-demo": {
-    name: "bar-visualizer-demo",
+  "spinner-demo": {
+    name: "spinner-demo",
     description: "",
     type: "registry:example",
-    registryDependencies: ["https://ui.elevenlabs.io/r/bar-visualizer.json","button"],
+    registryDependencies: ["https://ui.nowts.app/r/spinner.json","card"],
     files: [{
-      path: "registry/elevenlabs-ui/examples/bar-visualizer-demo.tsx",
+      path: "registry/nowts/examples/spinner-demo.tsx",
       type: "registry:example",
       target: ""
     }],
     component: React.lazy(async () => {
-      const mod = await import("@/registry/elevenlabs-ui/examples/bar-visualizer-demo.tsx")
+      const mod = await import("@/registry/nowts/examples/spinner-demo.tsx")
       const exportName = Object.keys(mod).find(key => typeof mod[key] === 'function' || typeof mod[key] === 'object') || item.name
       return { default: mod.default || mod[exportName] }
     }),
     categories: undefined,
     meta: undefined,
   },
-  "message-demo": {
-    name: "message-demo",
+  "submit-button-demo": {
+    name: "submit-button-demo",
     description: "",
     type: "registry:example",
-    registryDependencies: ["https://ui.elevenlabs.io/r/message.json","https://ui.elevenlabs.io/r/response.json"],
+    registryDependencies: ["https://ui.nowts.app/r/submit-button.json","https://ui.nowts.app/r/extended-form.json","card","input","label","sonner"],
     files: [{
-      path: "registry/elevenlabs-ui/examples/message-demo.tsx",
+      path: "registry/nowts/examples/submit-button-demo.tsx",
       type: "registry:example",
       target: ""
     }],
     component: React.lazy(async () => {
-      const mod = await import("@/registry/elevenlabs-ui/examples/message-demo.tsx")
+      const mod = await import("@/registry/nowts/examples/submit-button-demo.tsx")
       const exportName = Object.keys(mod).find(key => typeof mod[key] === 'function' || typeof mod[key] === 'object') || item.name
       return { default: mod.default || mod[exportName] }
     }),
     categories: undefined,
     meta: undefined,
   },
-  "response-demo": {
-    name: "response-demo",
+  "extended-form-demo": {
+    name: "extended-form-demo",
     description: "",
     type: "registry:example",
-    registryDependencies: ["https://ui.elevenlabs.io/r/response.json"],
+    registryDependencies: ["https://ui.nowts.app/r/extended-form.json","card","input","label","button","sonner"],
     files: [{
-      path: "registry/elevenlabs-ui/examples/response-demo.tsx",
+      path: "registry/nowts/examples/extended-form-demo.tsx",
       type: "registry:example",
       target: ""
     }],
     component: React.lazy(async () => {
-      const mod = await import("@/registry/elevenlabs-ui/examples/response-demo.tsx")
+      const mod = await import("@/registry/nowts/examples/extended-form-demo.tsx")
       const exportName = Object.keys(mod).find(key => typeof mod[key] === 'function' || typeof mod[key] === 'object') || item.name
       return { default: mod.default || mod[exportName] }
     }),
     categories: undefined,
     meta: undefined,
   },
-  "shimmering-text-demo": {
-    name: "shimmering-text-demo",
+  "next-top-loader-demo": {
+    name: "next-top-loader-demo",
     description: "",
     type: "registry:example",
-    registryDependencies: ["https://ui.elevenlabs.io/r/shimmering-text.json"],
+    registryDependencies: ["https://ui.nowts.app/r/next-top-loader.json","card","button"],
     files: [{
-      path: "registry/elevenlabs-ui/examples/shimmering-text-demo.tsx",
+      path: "registry/nowts/examples/next-top-loader-demo.tsx",
       type: "registry:example",
       target: ""
     }],
     component: React.lazy(async () => {
-      const mod = await import("@/registry/elevenlabs-ui/examples/shimmering-text-demo.tsx")
+      const mod = await import("@/registry/nowts/examples/next-top-loader-demo.tsx")
       const exportName = Object.keys(mod).find(key => typeof mod[key] === 'function' || typeof mod[key] === 'object') || item.name
       return { default: mod.default || mod[exportName] }
     }),
     categories: undefined,
     meta: undefined,
   },
-  "voice-picker-demo": {
-    name: "voice-picker-demo",
+  "tanstack-form-demo": {
+    name: "tanstack-form-demo",
     description: "",
     type: "registry:example",
-    registryDependencies: ["https://ui.elevenlabs.io/r/voice-picker.json","https://ui.elevenlabs.io/r/audio-player.json"],
+    registryDependencies: ["https://ui.nowts.app/r/tanstack-form.json","card","input","label","button","sonner","select"],
     files: [{
-      path: "registry/elevenlabs-ui/examples/voice-picker-demo.tsx",
+      path: "registry/nowts/examples/tanstack-form-demo.tsx",
       type: "registry:example",
       target: ""
     }],
     component: React.lazy(async () => {
-      const mod = await import("@/registry/elevenlabs-ui/examples/voice-picker-demo.tsx")
+      const mod = await import("@/registry/nowts/examples/tanstack-form-demo.tsx")
       const exportName = Object.keys(mod).find(key => typeof mod[key] === 'function' || typeof mod[key] === 'object') || item.name
       return { default: mod.default || mod[exportName] }
     }),
     categories: undefined,
     meta: undefined,
   },
-  "voice-button-demo": {
-    name: "voice-button-demo",
+  "tanstack-form-complex-demo": {
+    name: "tanstack-form-complex-demo",
     description: "",
     type: "registry:example",
-    registryDependencies: ["https://ui.elevenlabs.io/r/voice-button.json"],
+    registryDependencies: ["https://ui.nowts.app/r/tanstack-form.json","card","input","label","button","select","checkbox","switch","textarea","sonner"],
     files: [{
-      path: "registry/elevenlabs-ui/examples/voice-button-demo.tsx",
+      path: "registry/nowts/examples/tanstack-form-complex-demo.tsx",
       type: "registry:example",
       target: ""
     }],
     component: React.lazy(async () => {
-      const mod = await import("@/registry/elevenlabs-ui/examples/voice-button-demo.tsx")
+      const mod = await import("@/registry/nowts/examples/tanstack-form-complex-demo.tsx")
       const exportName = Object.keys(mod).find(key => typeof mod[key] === 'function' || typeof mod[key] === 'object') || item.name
       return { default: mod.default || mod[exportName] }
     }),
     categories: undefined,
     meta: undefined,
   },
-  "conversation-bar-demo": {
-    name: "conversation-bar-demo",
+  "tanstack-form-array-demo": {
+    name: "tanstack-form-array-demo",
     description: "",
     type: "registry:example",
-    registryDependencies: ["https://ui.elevenlabs.io/r/conversation-bar.json"],
+    registryDependencies: ["https://ui.nowts.app/r/tanstack-form.json","card","input","button","sonner"],
     files: [{
-      path: "registry/elevenlabs-ui/examples/conversation-bar-demo.tsx",
+      path: "registry/nowts/examples/tanstack-form-array-demo.tsx",
       type: "registry:example",
       target: ""
     }],
     component: React.lazy(async () => {
-      const mod = await import("@/registry/elevenlabs-ui/examples/conversation-bar-demo.tsx")
+      const mod = await import("@/registry/nowts/examples/tanstack-form-array-demo.tsx")
       const exportName = Object.keys(mod).find(key => typeof mod[key] === 'function' || typeof mod[key] === 'object') || item.name
       return { default: mod.default || mod[exportName] }
     }),
     categories: undefined,
     meta: undefined,
   },
-  "conversation-demo": {
-    name: "conversation-demo",
+  "typography-demo": {
+    name: "typography-demo",
     description: "",
     type: "registry:example",
-    registryDependencies: ["https://ui.elevenlabs.io/r/message.json","https://ui.elevenlabs.io/r/response.json","https://ui.elevenlabs.io/r/conversation.json"],
+    registryDependencies: ["https://ui.nowts.app/r/typography.json","card"],
     files: [{
-      path: "registry/elevenlabs-ui/examples/conversation-demo.tsx",
+      path: "registry/nowts/examples/typography-demo.tsx",
       type: "registry:example",
       target: ""
     }],
     component: React.lazy(async () => {
-      const mod = await import("@/registry/elevenlabs-ui/examples/conversation-demo.tsx")
+      const mod = await import("@/registry/nowts/examples/typography-demo.tsx")
+      const exportName = Object.keys(mod).find(key => typeof mod[key] === 'function' || typeof mod[key] === 'object') || item.name
+      return { default: mod.default || mod[exportName] }
+    }),
+    categories: undefined,
+    meta: undefined,
+  },
+  "server-toast-demo": {
+    name: "server-toast-demo",
+    description: "",
+    type: "registry:example",
+    registryDependencies: ["card","button","sonner"],
+    files: [{
+      path: "registry/nowts/examples/server-toast-demo.tsx",
+      type: "registry:example",
+      target: ""
+    }],
+    component: React.lazy(async () => {
+      const mod = await import("@/registry/nowts/examples/server-toast-demo.tsx")
+      const exportName = Object.keys(mod).find(key => typeof mod[key] === 'function' || typeof mod[key] === 'object') || item.name
+      return { default: mod.default || mod[exportName] }
+    }),
+    categories: undefined,
+    meta: undefined,
+  },
+  "dialog-manager-demo": {
+    name: "dialog-manager-demo",
+    description: "",
+    type: "registry:example",
+    registryDependencies: ["https://ui.nowts.app/r/dialog-manager.json","card","button","sonner"],
+    files: [{
+      path: "registry/nowts/examples/dialog-manager-demo.tsx",
+      type: "registry:example",
+      target: ""
+    }],
+    component: React.lazy(async () => {
+      const mod = await import("@/registry/nowts/examples/dialog-manager-demo.tsx")
+      const exportName = Object.keys(mod).find(key => typeof mod[key] === 'function' || typeof mod[key] === 'object') || item.name
+      return { default: mod.default || mod[exportName] }
+    }),
+    categories: undefined,
+    meta: undefined,
+  },
+  "form-management-demo": {
+    name: "form-management-demo",
+    description: "",
+    type: "registry:example",
+    registryDependencies: ["https://ui.nowts.app/r/form-management.json","https://ui.nowts.app/r/extended-form.json","card","input","label","textarea","sonner"],
+    files: [{
+      path: "registry/nowts/examples/form-management-demo.tsx",
+      type: "registry:example",
+      target: ""
+    }],
+    component: React.lazy(async () => {
+      const mod = await import("@/registry/nowts/examples/form-management-demo.tsx")
       const exportName = Object.keys(mod).find(key => typeof mod[key] === 'function' || typeof mod[key] === 'object') || item.name
       return { default: mod.default || mod[exportName] }
     }),

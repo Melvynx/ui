@@ -1,0 +1,672 @@
+---
+title: TanStack Form
+description: A complete form management solution using TanStack Form with Zod validation, supporting all input types including arrays and nested objects.
+featured: true
+---
+
+<ComponentPreview
+  name="tanstack-form-demo"
+  description="A form built with TanStack Form and Zod validation"
+/>
+
+## Installation
+
+<Tabs defaultValue="cli">
+
+<TabsList>
+  <TabsTrigger value="cli">CLI</TabsTrigger>
+  <TabsTrigger value="manual">Manual</TabsTrigger>
+</TabsList>
+
+<TabsContent value="cli">
+
+```bash
+npx shadcn@latest add https://ui.nowts.app/r/tanstack-form.json
+```
+
+</TabsContent>
+
+<TabsContent value="manual">
+
+<Steps>
+
+### Install dependencies
+
+```bash
+npm install @tanstack/react-form zod
+```
+
+### Add the component
+
+<ComponentSource name="tanstack-form" />
+
+</Steps>
+
+</TabsContent>
+
+</Tabs>
+
+## About
+
+The **TanStack Form** component is a complete form management solution built on top of TanStack Form with Zod schema validation, providing type-safe forms with automatic field validation and error handling.
+
+### Features
+
+- ✅ **Full TypeScript support**: Type-safe form data with automatic inference from Zod schemas
+- ✅ **Zod validation**: Schema-based validation with custom error messages
+- ✅ **All input types**: Input, Textarea, Select, Checkbox, RadioGroup, Switch
+- ✅ **Array fields**: Dynamic arrays with add/remove functionality
+- ✅ **Nested objects**: Deep object paths with type-safe field names
+- ✅ **Field helpers**: Pre-built helpers for all input types
+- ✅ **Validation modes**: onBlur, onChange, or onSubmit validation
+- ✅ **Form state**: Access to submitting, valid, dirty states
+
+## Usage
+
+### Basic form with Input
+
+```tsx
+"use client"
+
+import { z } from "zod"
+
+import { Button } from "@/components/ui/button"
+import { Input } from "@/components/ui/input"
+import {
+  Form,
+  FormControl,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+  getInputFieldProps,
+  useForm,
+} from "@/registry/nowts/ui/tanstack-form"
+
+const schema = z.object({
+  email: z.string().email("Please enter a valid email address"),
+  name: z.string().min(2, "Name must be at least 2 characters"),
+})
+
+export function BasicForm() {
+  const form = useForm({
+    schema,
+    defaultValues: {
+      email: "",
+      name: "",
+    },
+    onSubmit: async (values) => {
+      console.log(values)
+    },
+  })
+
+  return (
+    <Form form={form} className="space-y-4">
+      <FormField form={form} name="name">
+        {(field) => (
+          <FormItem field={field} form={form}>
+            <FormLabel>Name</FormLabel>
+            <FormControl>
+              <Input {...getInputFieldProps(field)} placeholder="John Doe" />
+            </FormControl>
+            <FormMessage />
+          </FormItem>
+        )}
+      </FormField>
+
+      <FormField form={form} name="email">
+        {(field) => (
+          <FormItem field={field} form={form}>
+            <FormLabel>Email</FormLabel>
+            <FormControl>
+              <Input
+                {...getInputFieldProps(field)}
+                type="email"
+                placeholder="john@example.com"
+              />
+            </FormControl>
+            <FormMessage />
+          </FormItem>
+        )}
+      </FormField>
+
+      <Button type="submit" disabled={form.state.isSubmitting}>
+        {form.state.isSubmitting ? "Submitting..." : "Submit"}
+      </Button>
+    </Form>
+  )
+}
+```
+
+### Textarea field
+
+```tsx
+import { Textarea } from "@/components/ui/textarea"
+import {
+  FormControl,
+  FormDescription,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+  getTextareaFieldProps,
+} from "@/registry/nowts/ui/tanstack-form"
+
+const schema = z.object({
+  bio: z
+    .string()
+    .min(10, "Bio must be at least 10 characters")
+    .max(500, "Bio must be at most 500 characters"),
+})
+
+// Inside your form:
+<FormField form={form} name="bio">
+  {(field) => (
+    <FormItem field={field} form={form}>
+      <FormLabel>Bio</FormLabel>
+      <FormControl>
+        <Textarea
+          {...getTextareaFieldProps(field)}
+          placeholder="Tell us about yourself..."
+          rows={4}
+        />
+      </FormControl>
+      <FormDescription>
+        A brief description about yourself (10-500 characters)
+      </FormDescription>
+      <FormMessage />
+    </FormItem>
+  )}
+</FormField>
+```
+
+### Select field
+
+```tsx
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select"
+import {
+  FormControl,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+  getSelectFieldProps,
+} from "@/registry/nowts/ui/tanstack-form"
+
+const schema = z.object({
+  role: z.string().min(1, "Please select a role"),
+})
+
+// Inside your form:
+<FormField form={form} name="role">
+  {(field) => (
+    <FormItem field={field} form={form}>
+      <FormLabel>Role</FormLabel>
+      <FormControl>
+        <Select {...getSelectFieldProps(field)}>
+          <SelectTrigger>
+            <SelectValue placeholder="Select your role" />
+          </SelectTrigger>
+          <SelectContent>
+            <SelectItem value="admin">Admin</SelectItem>
+            <SelectItem value="user">User</SelectItem>
+            <SelectItem value="guest">Guest</SelectItem>
+          </SelectContent>
+        </Select>
+      </FormControl>
+      <FormMessage />
+    </FormItem>
+  )}
+</FormField>
+```
+
+### Checkbox field
+
+```tsx
+import { Checkbox } from "@/components/ui/checkbox"
+import {
+  FormControl,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+  getCheckboxFieldProps,
+} from "@/registry/nowts/ui/tanstack-form"
+
+const schema = z.object({
+  consent: z
+    .boolean()
+    .refine((val) => val === true, "You must accept the terms to continue"),
+})
+
+// Inside your form:
+<FormField form={form} name="consent">
+  {(field) => (
+    <FormItem field={field} form={form}>
+      <div className="flex items-start gap-2">
+        <FormControl>
+          <Checkbox {...getCheckboxFieldProps(field)} id="consent" />
+        </FormControl>
+        <div className="flex flex-col gap-1">
+          <FormLabel htmlFor="consent" className="font-normal">
+            I agree to receive marketing emails and accept the terms and
+            conditions
+          </FormLabel>
+          <FormMessage />
+        </div>
+      </div>
+    </FormItem>
+  )}
+</FormField>
+```
+
+### RadioGroup field
+
+```tsx
+import { Label } from "@/components/ui/label"
+import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group"
+import {
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+  getRadioGroupFieldProps,
+} from "@/registry/nowts/ui/tanstack-form"
+
+const schema = z.object({
+  preferredContact: z.string().min(1, "Please select a contact method"),
+})
+
+// Inside your form:
+<FormField form={form} name="preferredContact">
+  {(field) => (
+    <FormItem field={field} form={form}>
+      <FormLabel>Preferred Contact Method</FormLabel>
+      <RadioGroup {...getRadioGroupFieldProps(field)}>
+        <div className="flex items-center space-x-2">
+          <RadioGroupItem value="email" id="contact-email" />
+          <Label htmlFor="contact-email" className="font-normal">
+            Email
+          </Label>
+        </div>
+        <div className="flex items-center space-x-2">
+          <RadioGroupItem value="phone" id="contact-phone" />
+          <Label htmlFor="contact-phone" className="font-normal">
+            Phone
+          </Label>
+        </div>
+        <div className="flex items-center space-x-2">
+          <RadioGroupItem value="slack" id="contact-slack" />
+          <Label htmlFor="contact-slack" className="font-normal">
+            Slack
+          </Label>
+        </div>
+      </RadioGroup>
+      <FormMessage />
+    </FormItem>
+  )}
+</FormField>
+```
+
+### Switch field
+
+```tsx
+import { Switch } from "@/components/ui/switch"
+import {
+  FormDescription,
+  FormField,
+  FormItem,
+  FormLabel,
+  getSwitchFieldProps,
+} from "@/registry/nowts/ui/tanstack-form"
+
+const schema = z.object({
+  notifications: z.boolean(),
+})
+
+// Inside your form:
+<FormField form={form} name="notifications">
+  {(field) => (
+    <FormItem field={field} form={form}>
+      <div className="flex items-center justify-between">
+        <div className="space-y-0.5">
+          <FormLabel>Notifications</FormLabel>
+          <FormDescription>Receive notifications about updates</FormDescription>
+        </div>
+        <Switch {...getSwitchFieldProps(field)} />
+      </div>
+    </FormItem>
+  )}
+</FormField>
+```
+
+## Complex Form Example
+
+A complete registration form combining multiple field types (Input, Select, Textarea, Checkbox, Switch):
+
+<ComponentPreview
+  align="start"
+  name="tanstack-form-complex-demo"
+  description="Complex form with multiple field types"
+/>
+
+## Advanced Usage
+
+### Array fields
+
+Dynamic array fields with add/remove functionality. Use `mode="array"` on FormField and access `field.pushValue` and `field.removeValue`:
+
+<ComponentPreview
+  name="tanstack-form-array-demo"
+  description="Dynamic array fields with user list"
+/>
+
+### Nested objects
+
+Access deeply nested fields using dot notation. TypeScript provides full autocompletion:
+
+```tsx
+const schema = z.object({
+  user: z.object({
+    profile: z.object({
+      firstName: z.string().min(2),
+      lastName: z.string().min(2),
+    }),
+    contact: z.object({
+      email: z.string().email(),
+    }),
+  }),
+})
+
+// Use dot notation to access nested fields
+<FormField form={form} name="user.profile.firstName">
+  {(field) => (
+    <FormItem field={field} form={form}>
+      <FormLabel>First Name</FormLabel>
+      <FormControl>
+        <Input {...getInputFieldProps(field)} />
+      </FormControl>
+      <FormMessage />
+    </FormItem>
+  )}
+</FormField>
+
+<FormField form={form} name="user.contact.email">
+  {(field) => (
+    <FormItem field={field} form={form}>
+      <FormLabel>Email</FormLabel>
+      <FormControl>
+        <Input {...getInputFieldProps(field)} type="email" />
+      </FormControl>
+      <FormMessage />
+    </FormItem>
+  )}
+</FormField>
+```
+
+## API Reference
+
+### useForm
+
+Create a form instance with Zod validation:
+
+```tsx
+function useForm<TSchema extends z.ZodType>({
+  schema: TSchema
+  defaultValues: z.infer<TSchema>
+  onSubmit: (values: z.infer<TSchema>) => void | Promise<void>
+  validationMode?: "onChange" | "onBlur" | "onSubmit"
+}): FormApi<z.infer<TSchema>>
+```
+
+| Parameter        | Type                                   | Description                | Default    |
+| ---------------- | -------------------------------------- | -------------------------- | ---------- |
+| `schema`         | `z.ZodType`                            | Zod schema for validation  | -          |
+| `defaultValues`  | `z.infer<TSchema>`                     | Initial form values        | -          |
+| `onSubmit`       | `(values) => void \| Promise<void>`    | Form submission handler    | -          |
+| `validationMode` | `"onChange" \| "onBlur" \| "onSubmit"` | When to trigger validation | `"onBlur"` |
+
+### Form Components
+
+#### Form
+
+Wrapper component that handles form submission:
+
+```tsx
+<Form form={form} className="space-y-4">
+  {/* Form fields */}
+</Form>
+```
+
+#### FormField
+
+Connects a field to the form with type-safe field names:
+
+```tsx
+<FormField form={form} name="email" mode="value">
+  {(field) => ({
+    /* Field UI */
+  })}
+</FormField>
+```
+
+| Parameter | Type                 | Description                          | Default   |
+| --------- | -------------------- | ------------------------------------ | --------- |
+| `form`    | `FormApi`            | Form instance from useForm           | -         |
+| `name`    | `string`             | Type-safe field name (e.g., "email") | -         |
+| `mode`    | `"value" \| "array"` | Field mode (use "array" for arrays)  | `"value"` |
+
+#### FormItem
+
+Container for field components with error state:
+
+```tsx
+<FormItem field={field} form={form}>
+  <FormLabel>Email</FormLabel>
+  <FormControl>
+    <Input {...getInputFieldProps(field)} />
+  </FormControl>
+  <FormDescription>Your email address</FormDescription>
+  <FormMessage />
+</FormItem>
+```
+
+### Field Helpers
+
+Pre-built helpers for common input types:
+
+#### getInputFieldProps
+
+For Input and Textarea components:
+
+```tsx
+<Input {...getInputFieldProps(field)} type="email" />
+<Textarea {...getTextareaFieldProps(field)} rows={4} />
+```
+
+Returns: `{ name, value, onChange, onBlur, "aria-invalid" }`
+
+#### getSelectFieldProps
+
+For Select components:
+
+```tsx
+<Select {...getSelectFieldProps(field)}>
+  <SelectTrigger>
+    <SelectValue />
+  </SelectTrigger>
+  <SelectContent>...</SelectContent>
+</Select>
+```
+
+Returns: `{ name, value, onValueChange, "aria-invalid" }`
+
+#### getCheckboxFieldProps
+
+For Checkbox and Switch components:
+
+```tsx
+<Checkbox {...getCheckboxFieldProps(field)} />
+<Switch {...getSwitchFieldProps(field)} />
+```
+
+Returns: `{ name, checked, onCheckedChange, "aria-invalid" }`
+
+#### getRadioGroupFieldProps
+
+For RadioGroup components:
+
+```tsx
+<RadioGroup {...getRadioGroupFieldProps(field)}>
+  <RadioGroupItem value="option1" />
+  <RadioGroupItem value="option2" />
+</RadioGroup>
+```
+
+Returns: `{ name, value, onValueChange, "aria-invalid" }`
+
+### Form State
+
+Access form state through `form.state`:
+
+```tsx
+form.state.isSubmitting // Boolean: Is form currently submitting?
+form.state.canSubmit // Boolean: Can form be submitted?
+form.state.isValid // Boolean: Are all fields valid?
+form.state.isDirty // Boolean: Has form been modified?
+form.state.submissionAttempts // Number: How many times has submit been attempted?
+form.state.values // Object: Current form values
+form.state.errors // Array: Form-level validation errors
+```
+
+### Validation Modes
+
+Choose when validation should trigger:
+
+```tsx
+// Validate on blur (default) - good balance of UX and performance
+const form = useForm({ ..., validationMode: "onBlur" })
+
+// Validate on every change - instant feedback but more expensive
+const form = useForm({ ..., validationMode: "onChange" })
+
+// Validate only on submit - minimal validation until submission
+const form = useForm({ ..., validationMode: "onSubmit" })
+```
+
+## Type Safety
+
+The form component provides full type safety:
+
+```tsx
+const schema = z.object({
+  email: z.string().email(),
+  age: z.number().min(18),
+})
+
+const form = useForm({ schema, ... })
+
+// ✅ Valid - autocomplete works
+<FormField form={form} name="email">
+
+// ✅ Valid - autocomplete works
+<FormField form={form} name="age">
+
+// ❌ TypeScript error - field doesn't exist
+<FormField form={form} name="invalid">
+
+// ✅ Valid - nested paths work
+const nestedSchema = z.object({
+  user: z.object({ email: z.string() })
+})
+<FormField form={form} name="user.email">
+
+// ✅ Valid - array syntax works
+const arraySchema = z.object({
+  users: z.array(z.object({ email: z.string() }))
+})
+<FormField form={form} name="users[0].email">
+```
+
+## Best Practices
+
+### 1. Use validation mode wisely
+
+```tsx
+// For most forms, onBlur provides the best UX
+const form = useForm({ validationMode: "onBlur", ... })
+
+// For search/filter forms, onChange provides instant feedback
+const searchForm = useForm({ validationMode: "onChange", ... })
+```
+
+### 2. Handle loading states
+
+```tsx
+<Button type="submit" disabled={form.state.isSubmitting}>
+  {form.state.isSubmitting ? "Saving..." : "Save"}
+</Button>
+```
+
+### 3. Provide helpful error messages
+
+```tsx
+const schema = z.object({
+  email: z
+    .string()
+    .min(1, "Email is required")
+    .email("Please enter a valid email address"),
+  password: z
+    .string()
+    .min(8, "Password must be at least 8 characters")
+    .regex(/[A-Z]/, "Password must contain at least one uppercase letter"),
+})
+```
+
+### 4. Use FormDescription for hints
+
+```tsx
+<FormItem field={field} form={form}>
+  <FormLabel>Email</FormLabel>
+  <FormControl>
+    <Input {...getInputFieldProps(field)} />
+  </FormControl>
+  <FormDescription>We'll never share your email with anyone</FormDescription>
+  <FormMessage />
+</FormItem>
+```
+
+### 5. Reset forms after submission
+
+```tsx
+onSubmit: async (values) => {
+  await saveData(values)
+  form.reset() // Reset to default values
+}
+```
+
+## Troubleshooting
+
+### Validation not triggering
+
+- Check that you've set the correct `validationMode`
+- Ensure the field has been touched (blurred at least once)
+- Verify that `form.state.submissionAttempts > 0` for submit validation
+
+### Type errors with field names
+
+- Make sure the field name matches your schema exactly
+- Use dot notation for nested objects: `"user.email"`
+- Use bracket notation for arrays: `"users[0].email"`
+
+### Array fields not updating
+
+- Make sure to use `mode="array"` on the FormField
+- Use `field.pushValue?.()` and `field.removeValue?.()` for array operations
+- Always provide unique keys when mapping over array items

@@ -2,267 +2,202 @@ import { type Registry } from "shadcn/schema"
 
 export const blocks: Registry["items"] = [
   {
-    name: "speaker-01",
-    description: "EL-01 Speaker",
+    name: "better-auth-otp",
     type: "registry:block",
+    title: "Better Auth OTP",
+    description: "A component for signing in with email OTP.",
     registryDependencies: [
-      "https://ui.elevenlabs.io/r/audio-player.json",
-      "https://ui.elevenlabs.io/r/orb.json",
-      "https://ui.elevenlabs.io/r/waveform.json",
       "button",
-      "card",
-    ],
-    files: [
-      {
-        path: "blocks/speaker-01/page.tsx",
-        type: "registry:page",
-        target: "app/speaker/page.tsx",
-      },
-      {
-        path: "blocks/speaker-01/components/speaker.tsx",
-        type: "registry:component",
-        target: "components/speaker.tsx",
-      },
-    ],
-    meta: {
-      iframeHeight: "900px",
-      container:
-        "w-full bg-surface min-h-svh flex px-4 py-12 items-center md:py-20 justify-center min-w-0",
-      mobile: "component",
-    },
-    categories: ["audio"],
-  },
-  {
-    name: "transcriber-01",
-    description: "Transcriber",
-    type: "registry:block",
-    registryDependencies: [
-      "https://ui.elevenlabs.io/r/live-waveform.json",
-      "button",
-      "card",
-      "scroll-area",
-      "separator",
-    ],
-    dependencies: ["@elevenlabs/elevenlabs-js", "streamdown"],
-    files: [
-      {
-        path: "blocks/transcriber-01/page.tsx",
-        type: "registry:page",
-        target: "app/transcriber-01/page.tsx",
-      },
-      {
-        path: "blocks/transcriber-01/actions/transcribe.ts",
-        type: "registry:file",
-        target: "app/transcriber-01/actions/transcribe.ts",
-      },
-    ],
-    meta: {
-      iframeHeight: "600px",
-      container:
-        "w-full bg-surface min-h-svh flex px-4 py-12 items-center md:py-20 justify-center min-w-0",
-      mobile: "component",
-    },
-    categories: ["audio"],
-  },
-  {
-    name: "voice-chat-01",
-    description: "Voice chat 1",
-    type: "registry:block",
-    registryDependencies: [
-      "https://ui.elevenlabs.io/r/orb.json",
-      "https://ui.elevenlabs.io/r/shimmering-text.json",
-      "button",
-      "card",
-      "https://ui.elevenlabs.io/r/message.json",
-      "https://ui.elevenlabs.io/r/response.json",
-      "https://ui.elevenlabs.io/r/conversation.json",
-      "scroll-area",
-    ],
-    dependencies: ["@elevenlabs/react"],
-    files: [
-      {
-        path: "blocks/voice-chat-01/page.tsx",
-        type: "registry:page",
-        target: "app/voice-chat/page.tsx",
-      },
-    ],
-    meta: {
-      iframeHeight: "800px",
-      container:
-        "w-full bg-surface min-h-svh flex px-4 py-12 items-center md:py-20 justify-center min-w-0",
-      mobile: "component",
-    },
-    categories: ["agents"],
-  },
-  {
-    name: "voice-chat-02",
-    description: "Voice chat 2",
-    type: "registry:block",
-    registryDependencies: [
-      "https://ui.elevenlabs.io/r/orb.json",
-      "https://ui.elevenlabs.io/r/shimmering-text.json",
-      "button",
-      "card",
-    ],
-    dependencies: ["@elevenlabs/react", "framer-motion"],
-    files: [
-      {
-        path: "blocks/voice-chat-02/page.tsx",
-        type: "registry:page",
-        target: "app/voice-chat/page.tsx",
-      },
-    ],
-    meta: {
-      iframeHeight: "600px",
-      container:
-        "w-full bg-surface min-h-svh flex px-4 py-12 items-center md:py-20 justify-center min-w-0",
-      mobile: "component",
-    },
-    categories: ["agents"],
-  },
-  {
-    name: "voice-chat-03",
-    description: "Voice chat 3",
-    type: "registry:block",
-    registryDependencies: [
-      "https://ui.elevenlabs.io/r/conversation-bar.json",
-      "https://ui.elevenlabs.io/r/conversation.json",
-      "https://ui.elevenlabs.io/r/message.json",
-      "https://ui.elevenlabs.io/r/orb.json",
-      "https://ui.elevenlabs.io/r/response.json",
-      "tooltip",
-      "card",
-      "button",
-    ],
-    dependencies: ["@elevenlabs/react"],
-    files: [
-      {
-        path: "blocks/voice-chat-03/page.tsx",
-        type: "registry:page",
-        target: "app/voice-chat/page.tsx",
-      },
-    ],
-    meta: {
-      iframeHeight: "800px",
-      container:
-        "w-full bg-surface min-h-svh flex px-4 py-12 items-center md:py-20 justify-center min-w-0",
-      mobile: "component",
-    },
-    categories: ["agents"],
-  },
-  {
-    name: "music-player-01",
-    description: "Music player with playlist",
-    type: "registry:block",
-    registryDependencies: [
-      "https://ui.elevenlabs.io/r/audio-player.json",
-      "button",
-      "scroll-area",
-    ],
-    files: [
-      {
-        path: "blocks/music-player-01/page.tsx",
-        type: "registry:page",
-        target: "app/music-player/page.tsx",
-      },
-    ],
-    meta: {
-      iframeHeight: "600px",
-      container:
-        "w-full bg-surface min-h-svh flex px-4 py-12 items-center md:py-20 justify-center min-w-0",
-      mobile: "component",
-    },
-    categories: ["audio"],
-  },
-  {
-    name: "music-player-02",
-    description: "Simple music player",
-    type: "registry:block",
-    registryDependencies: [
-      "https://ui.elevenlabs.io/r/audio-player.json",
-      "card",
-    ],
-    files: [
-      {
-        path: "blocks/music-player-02/page.tsx",
-        type: "registry:page",
-        target: "app/music-player/page.tsx",
-      },
-    ],
-    meta: {
-      iframeHeight: "400px",
-      container:
-        "w-full bg-surface min-h-svh flex px-4 py-12 items-center md:py-20 justify-center min-w-0",
-      mobile: "component",
-    },
-    categories: ["audio"],
-  },
-  {
-    name: "voice-form-01",
-    description: "Voice-fill form",
-    type: "registry:block",
-    registryDependencies: [
-      "https://ui.elevenlabs.io/r/voice-button.json",
-      "https://ui.elevenlabs.io/r/live-waveform.json",
-      "button",
-      "card",
-      "form",
       "input",
+      "label",
+      "textarea",
+      "card",
+      "input-otp",
+      "sonner",
     ],
-    dependencies: ["@elevenlabs/elevenlabs-js", "ai", "zod"],
+    dependencies: ["motion", "react-use-measure", "@hookform/resolvers"],
     files: [
       {
-        path: "blocks/voice-form-01/page.tsx",
-        type: "registry:page",
-        target: "app/voice-form/page.tsx",
+        path: "blocks/better-auth-otp/components/better-auth-otp.tsx",
+        type: "registry:component",
       },
       {
-        path: "blocks/voice-form-01/schema.ts",
-        type: "registry:file",
-        target: "app/voice-form/schema.ts",
-      },
-      {
-        path: "blocks/voice-form-01/actions/voice-to-form.ts",
-        type: "registry:file",
-        target: "app/voice-form/actions/voice-to-form.ts",
+        path: "blocks/better-auth-otp/hooks/use-countdown.ts",
+        type: "registry:hook",
       },
     ],
-    meta: {
-      iframeHeight: "700px",
-      container:
-        "w-full bg-surface min-h-svh flex px-4 py-12 items-center md:py-20 justify-center min-w-0",
-      mobile: "component",
-    },
-    categories: ["audio"],
+    categories: ["authentication"],
   },
   {
-    name: "voice-nav-01",
-    description: "Voice-nav site navigation",
+    name: "better-auth-signin",
     type: "registry:block",
+    title: "Better Auth Sign In Page",
+    description:
+      "A complete and customizable sign-in page with email/password, OTP, and OAuth provider support using Better Auth.",
     registryDependencies: [
-      "https://ui.elevenlabs.io/r/voice-button.json",
       "button",
+      "input",
+      "label",
       "card",
+      "avatar",
+      "sonner",
+      "https://ui.nowts.app/r/better-auth-otp.json",
     ],
-    dependencies: ["@elevenlabs/elevenlabs-js", "ai", "zod"],
     files: [
       {
-        path: "blocks/voice-nav-01/page.tsx",
+        path: "blocks/better-auth-signin/sign-in-page.tsx",
         type: "registry:page",
-        target: "app/voice-nav/page.tsx",
+        target: "app/sign-in/page.tsx",
       },
       {
-        path: "blocks/voice-nav-01/actions/voice-to-site.ts",
-        type: "registry:file",
-        target: "app/voice-nav/actions/voice-to-site.ts",
+        path: "blocks/better-auth-signin/sign-in-auth-methods.tsx",
+        type: "registry:component",
+      },
+      {
+        path: "blocks/better-auth-signin/sign-in-password-form.tsx",
+        type: "registry:component",
+      },
+      {
+        path: "blocks/better-auth-signin/sign-in-provider-button.tsx",
+        type: "registry:component",
+      },
+      {
+        path: "blocks/better-auth-signin/divider.tsx",
+        type: "registry:component",
       },
     ],
-    meta: {
-      iframeHeight: "900px",
-      container:
-        "w-full bg-surface min-h-svh flex px-4 py-12 items-center md:py-20 justify-center min-w-0",
-      mobile: "component",
-    },
-    categories: ["audio"],
+    categories: ["authentication"],
+  },
+  {
+    name: "better-auth-signup",
+    type: "registry:block",
+    title: "Better Auth Sign Up",
+    description:
+      "A complete sign-up form component with email and password authentication using Better Auth.",
+    registryDependencies: [
+      "button",
+      "input",
+      "label",
+      "card",
+      "sonner",
+      "https://ui.nowts.app/r/extended-form.json",
+    ],
+    dependencies: ["zod", "react-hook-form", "@hookform/resolvers"],
+    files: [
+      {
+        path: "blocks/better-auth-signup/better-auth-signup.tsx",
+        type: "registry:page",
+        target: "app/sign-up/page.tsx",
+      },
+    ],
+    categories: ["authentication"],
+  },
+  {
+    name: "server-toast",
+    type: "registry:block",
+    title: "Server Toast",
+    description: "A library for server-side toast notifications.",
+    registryDependencies: ["sonner"],
+    files: [
+      {
+        path: "blocks/server-toast/server-toast.type.ts",
+        type: "registry:lib",
+        target: "lib/server-toast/server-toast.type.ts",
+      },
+      {
+        path: "blocks/server-toast/server-toast.ts",
+        type: "registry:lib",
+        target: "lib/server-toast/server-toast.ts",
+      },
+      {
+        path: "blocks/server-toast/server-toast.server.tsx",
+        type: "registry:lib",
+        target: "lib/server-toast/server-toast.server.tsx",
+      },
+      {
+        path: "blocks/server-toast/server-toast.client.tsx",
+        type: "registry:lib",
+        target: "lib/server-toast/server-toast.client.tsx",
+      },
+    ],
+    categories: ["notifications"],
+  },
+  {
+    name: "dialog-manager",
+    type: "registry:block",
+    title: "Dialog Manager",
+    description:
+      "A powerful dialog manager for handling confirm, input, and custom dialogs with global state management.",
+    registryDependencies: [
+      "alert-dialog",
+      "button",
+      "input",
+      "label",
+      "sonner",
+    ],
+    dependencies: ["zustand"],
+    files: [
+      {
+        path: "blocks/dialog-manager/dialog-types.ts",
+        type: "registry:lib",
+        target: "lib/dialog-manager/dialog-types.ts",
+      },
+      {
+        path: "blocks/dialog-manager/dialog-factory.ts",
+        type: "registry:lib",
+        target: "lib/dialog-manager/dialog-factory.ts",
+      },
+      {
+        path: "blocks/dialog-manager/dialog-store.ts",
+        type: "registry:lib",
+        target: "lib/dialog-manager/dialog-store.ts",
+      },
+      {
+        path: "blocks/dialog-manager/dialog-manager.ts",
+        type: "registry:lib",
+        target: "lib/dialog-manager/dialog-manager.ts",
+      },
+      {
+        path: "blocks/dialog-manager/dialog-component.tsx",
+        type: "registry:lib",
+        target: "lib/dialog-manager/dialog-component.tsx",
+      },
+      {
+        path: "blocks/dialog-manager/dialog-manager-renderer.tsx",
+        type: "registry:lib",
+        target: "lib/dialog-manager/dialog-manager-renderer.tsx",
+      },
+    ],
+    categories: ["dialogs"],
+  },
+  {
+    name: "form-management",
+    type: "registry:block",
+    title: "Form Management",
+    description:
+      "A comprehensive form management system with auto-save, unsaved changes warning, and sticky action bar for enhanced UX.",
+    registryDependencies: [
+      "button",
+      "tooltip",
+      "https://ui.nowts.app/r/submit-button.json",
+      "https://ui.nowts.app/r/extended-form.json",
+      "https://ui.nowts.app/r/use-debounce-fn.json",
+      "https://ui.nowts.app/r/use-warn-if-unsaved-changes.json",
+      "https://ui.nowts.app/r/use-is-client.json",
+    ],
+    dependencies: ["motion", "react-hotkeys-hook", "lucide-react"],
+    files: [
+      {
+        path: "blocks/form-management/form-management.tsx",
+        type: "registry:lib",
+        target: "lib/form-management/form-management.tsx",
+      },
+      {
+        path: "blocks/form-management/form-management-sticky-bar.tsx",
+        type: "registry:lib",
+        target: "lib/form-management/form-management-sticky-bar.tsx",
+      },
+    ],
+    categories: ["forms"],
   },
 ]

@@ -1,0 +1,17 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "server-toast-demo",
+  "type": "registry:example",
+  "registryDependencies": [
+    "card",
+    "button",
+    "sonner"
+  ],
+  "files": [
+    {
+      "path": "examples/server-toast-demo.tsx",
+      "content": "\"use client\"\n\nimport { toast } from \"sonner\"\n\nimport { Button } from \"@/components/ui/button\"\nimport { Card } from \"@/components/ui/card\"\n\nexport default function ServerToastDemo() {\n  const handleSuccess = () => {\n    toast.success(\"Success! Your action was completed.\")\n  }\n\n  const handleError = () => {\n    toast.error(\"Error! Something went wrong.\")\n  }\n\n  const handleInfo = () => {\n    toast.info(\"Info: This is an informational message.\")\n  }\n\n  const handleWarning = () => {\n    toast.warning(\"Warning: Please review this action.\")\n  }\n\n  return (\n    <Card className=\"p-6\">\n      <div className=\"mb-6\">\n        <h3 className=\"text-lg font-semibold\">Server Toast</h3>\n        <p className=\"text-muted-foreground text-sm\">\n          Display toast notifications from server actions\n        </p>\n      </div>\n\n      <div className=\"grid gap-2\">\n        <Button onClick={handleSuccess} variant=\"default\" className=\"w-full\">\n          Success Toast\n        </Button>\n        <Button onClick={handleError} variant=\"destructive\" className=\"w-full\">\n          Error Toast\n        </Button>\n        <Button onClick={handleInfo} variant=\"secondary\" className=\"w-full\">\n          Info Toast\n        </Button>\n        <Button onClick={handleWarning} variant=\"outline\" className=\"w-full\">\n          Warning Toast\n        </Button>\n      </div>\n    </Card>\n  )\n}\n",
+      "type": "registry:example"
+    }
+  ]
+}

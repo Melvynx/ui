@@ -1,0 +1,17 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "typography",
+  "type": "registry:ui",
+  "title": "Typography",
+  "description": "A polymorphic typography component with multiple variants for consistent text styling across your application.",
+  "dependencies": [
+    "class-variance-authority"
+  ],
+  "files": [
+    {
+      "path": "components/ui/typography.tsx",
+      "content": "import type {\n  ComponentPropsWithoutRef,\n  ElementType,\n  PropsWithChildren,\n} from \"react\"\nimport type React from \"react\"\nimport type { VariantProps } from \"class-variance-authority\"\nimport { cva } from \"class-variance-authority\"\n\nimport { cn } from \"@/lib/utils\"\n\ntype PolymorphicAsProp<E extends ElementType> = {\n  as?:\n    | E\n    | React.ComponentType<Omit<ComponentPropsWithoutRef<E>, \"as\">>\n    | React.FunctionComponent<Omit<ComponentPropsWithoutRef<E>, \"as\">>\n}\n\ntype PolymorphicProps<E extends ElementType> = PropsWithChildren<\n  Omit<ComponentPropsWithoutRef<E>, \"as\"> & PolymorphicAsProp<E>\n>\n\nconst typographyVariants = cva(\"\", {\n  variants: {\n    variant: {\n      h1: \"scroll-m-20 font-caption text-4xl font-extrabold tracking-tight lg:text-5xl\",\n      h2: \"scroll-m-20 text-xl font-semibold tracking-tight transition-colors md:text-2xl lg:text-3xl\",\n      h3: \"scroll-m-20 text-xl font-semibold tracking-tight\",\n      p: \"text-lg leading-7 not-first:mt-6\",\n      base: \"text-lg\",\n      quote: \"mt-6 border-l-2 pl-6 italic\",\n      code: \"relative rounded bg-muted px-[0.3rem] py-[0.2rem] font-mono text-sm font-semibold\",\n      lead: \"text-xl text-muted-foreground\",\n      large: \"font-semibold md:text-lg\",\n      small: \"text-sm font-medium leading-none\",\n      muted: \"text-sm text-muted-foreground\",\n      link: \"font-medium text-cyan-600 hover:underline dark:text-primary\",\n    },\n  },\n  defaultVariants: {\n    variant: \"p\",\n  },\n})\ntype TypographyCvaProps = VariantProps<typeof typographyVariants>\n\nconst defaultElement = \"base\"\n\nconst defaultElementMapping: Record<\n  NonNullable<TypographyCvaProps[\"variant\"]>,\n  ElementType\n> = {\n  h1: \"h1\",\n  h2: \"h2\",\n  h3: \"h3\",\n  p: \"p\",\n  quote: \"blockquote\" as \"p\",\n  code: \"code\",\n  lead: \"p\",\n  large: \"p\",\n  small: \"p\",\n  muted: \"p\",\n  link: \"a\",\n  base: \"p\",\n} as const\n\nexport function Typography<E extends ElementType = typeof defaultElement>({\n  as,\n  children,\n  className,\n  variant,\n  ...restProps\n}: PolymorphicProps<E> & TypographyCvaProps) {\n  const Component: ElementType =\n    as ?? defaultElementMapping[variant ?? \"base\"] ?? defaultElement\n\n  return (\n    <Component\n      {...(restProps as ComponentPropsWithoutRef<E>)}\n      className={cn(typographyVariants({ variant }), className)}\n      data-typography\n      data-typography-variant={variant}\n    >\n      {children}\n    </Component>\n  )\n}\n",
+      "type": "registry:ui"
+    }
+  ]
+}

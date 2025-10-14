@@ -11,12 +11,11 @@ import {
 } from "@/components/page-header"
 import { PageNav } from "@/components/page-nav"
 import { ThemeSelector } from "@/components/theme-selector"
-import Speaker01 from "@/registry/elevenlabs-ui/blocks/speaker-01/page"
-import { Button } from "@/registry/elevenlabs-ui/ui/button"
+import { Button } from "@/components/ui/button"
 
-const title = "ElevenLabs UI"
+const title = "Now.ts UI"
 const description =
-  "A collection of Open Source agent and audio components that you can customize and extend."
+  "A collection of fullstack React components for authentication, forms, dialogs, and more. Built with shadcn/ui."
 
 export const dynamic = "force-static"
 export const revalidate = false
@@ -59,10 +58,10 @@ export default function IndexPage() {
         <PageHeader className="relative z-10">
           <PageHeaderHeading className="max-w-4xl">
             <span className="flex items-baseline gap-2 sm:gap-3">
-              <span className="font-waldenburg-ht leading-[0.95] font-bold tracking-[-0.03em]">
-                ElevenLabs
+              <span className="leading-[0.95] font-bold tracking-[-0.03em]">
+                Now.ts
               </span>
-              <span className="font-waldenburg font-normal tracking-[-0.02em] opacity-90">
+              <span className="font-normal tracking-[-0.02em] opacity-90">
                 UI
               </span>
             </span>
@@ -84,10 +83,7 @@ export default function IndexPage() {
       </PageNav>
       <div className="container-wrapper section-soft flex-1 pb-6">
         <div className="container overflow-hidden">
-          <section className="pt-8 md:hidden">
-            <Speaker01 />
-          </section>
-          <section className="theme-container hidden md:block">
+          <section className="theme-container">
             <CardsDemo />
           </section>
         </div>

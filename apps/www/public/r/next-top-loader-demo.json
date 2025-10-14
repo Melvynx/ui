@@ -1,0 +1,17 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "next-top-loader-demo",
+  "type": "registry:example",
+  "registryDependencies": [
+    "https://ui.nowts.app/r/next-top-loader.json",
+    "card",
+    "button"
+  ],
+  "files": [
+    {
+      "path": "examples/next-top-loader-demo.tsx",
+      "content": "\"use client\"\n\nimport { useRouter } from \"next/navigation\"\n\nimport { Button } from \"@/components/ui/button\"\nimport { Card } from \"@/components/ui/card\"\n\nexport default function NextTopLoaderDemo() {\n  const router = useRouter()\n\n  const simulateNavigation = () => {\n    router.push(\"/docs\")\n  }\n\n  return (\n    <Card className=\"p-6\">\n      <div className=\"space-y-4\">\n        <div>\n          <h3 className=\"text-lg font-semibold\">Next.js Top Loader</h3>\n          <p className=\"text-muted-foreground text-sm\">\n            A loading bar that appears at the top of the page during navigation\n          </p>\n        </div>\n\n        <div className=\"bg-muted/50 rounded-lg border p-4\">\n          <p className=\"mb-2 text-sm font-medium\">\n            To use this component, add it to your layout:\n          </p>\n          <code className=\"bg-background block rounded p-2 text-xs\">\n            {`import { NextTopLoader } from \"@/components/ui/next-top-loader\"\n\nexport default function Layout({ children }) {\n  return (\n    <>\n      <NextTopLoader />\n      {children}\n    </>\n  )\n}`}\n          </code>\n        </div>\n\n        <Button onClick={simulateNavigation} className=\"w-full\">\n          Simulate Navigation\n        </Button>\n      </div>\n    </Card>\n  )\n}\n",
+      "type": "registry:example"
+    }
+  ]
+}

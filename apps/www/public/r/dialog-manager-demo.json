@@ -1,0 +1,21 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "dialog-manager-demo",
+  "type": "registry:example",
+  "dependencies": [
+    "lucide-react"
+  ],
+  "registryDependencies": [
+    "https://ui.nowts.app/r/dialog-manager.json",
+    "card",
+    "button",
+    "sonner"
+  ],
+  "files": [
+    {
+      "path": "examples/dialog-manager-demo.tsx",
+      "content": "\"use client\"\n\nimport { Trash2 } from \"lucide-react\"\nimport { toast } from \"sonner\"\n\nimport { Button } from \"@/components/ui/button\"\nimport { Card } from \"@/components/ui/card\"\nimport { dialogManager } from \"@/registry/nowts/blocks/dialog-manager/dialog-manager\"\n\nexport default function DialogManagerDemo() {\n  const handleConfirmDialog = () => {\n    dialogManager.confirm({\n      title: \"Delete Account\",\n      description:\n        \"Are you sure you want to delete your account? This action cannot be undone.\",\n      action: {\n        label: \"Delete\",\n        variant: \"destructive\",\n        onClick: async () => {\n          await new Promise((resolve) => setTimeout(resolve, 1000))\n          toast.success(\"Account deleted\")\n        },\n      },\n      icon: Trash2,\n      style: \"centered\",\n    })\n  }\n\n  const handleInputDialog = () => {\n    dialogManager.input({\n      title: \"Create Project\",\n      description: \"Enter a name for your new project\",\n      input: {\n        label: \"Project Name\",\n        placeholder: \"my-awesome-project\",\n        defaultValue: \"\",\n      },\n      action: {\n        label: \"Create\",\n        onClick: async (value) => {\n          await new Promise((resolve) => setTimeout(resolve, 1000))\n          toast.success(`Project \"${value}\" created`)\n        },\n      },\n    })\n  }\n\n  const handleConfirmTextDialog = () => {\n    dialogManager.confirm({\n      title: \"Delete Everything\",\n      description: \"This will permanently delete all your data.\",\n      confirmText: \"DELETE\",\n      action: {\n        label: \"Delete\",\n        variant: \"destructive\",\n        onClick: async () => {\n          await new Promise((resolve) => setTimeout(resolve, 1000))\n          toast.success(\"All data deleted\")\n        },\n      },\n    })\n  }\n\n  return (\n    <Card className=\"p-6\">\n      <div className=\"mb-6\">\n        <h3 className=\"text-lg font-semibold\">Dialog Manager</h3>\n        <p className=\"text-muted-foreground text-sm\">\n          Programmatic dialogs with confirm, input, and custom variants\n        </p>\n      </div>\n\n      <div className=\"grid gap-2\">\n        <Button\n          onClick={handleConfirmDialog}\n          variant=\"default\"\n          className=\"w-full\"\n        >\n          Confirm Dialog\n        </Button>\n        <Button\n          onClick={handleInputDialog}\n          variant=\"secondary\"\n          className=\"w-full\"\n        >\n          Input Dialog\n        </Button>\n        <Button\n          onClick={handleConfirmTextDialog}\n          variant=\"outline\"\n          className=\"w-full\"\n        >\n          Confirm with Text\n        </Button>\n      </div>\n    </Card>\n  )\n}\n",
+      "type": "registry:example"
+    }
+  ]
+}

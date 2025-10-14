@@ -1,0 +1,16 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "typography-demo",
+  "type": "registry:example",
+  "registryDependencies": [
+    "https://ui.nowts.app/r/typography.json",
+    "card"
+  ],
+  "files": [
+    {
+      "path": "examples/typography-demo.tsx",
+      "content": "import { Card } from \"@/components/ui/card\"\nimport { Typography } from \"@/components/ui/typography\"\n\nexport default function TypographyDemo() {\n  return (\n    <Card className=\"space-y-6 p-6\">\n      <div className=\"space-y-2\">\n        <Typography variant=\"h1\">Heading 1</Typography>\n        <Typography variant=\"muted\">Large page heading</Typography>\n      </div>\n\n      <div className=\"space-y-2\">\n        <Typography variant=\"h2\">Heading 2</Typography>\n        <Typography variant=\"muted\">Section heading</Typography>\n      </div>\n\n      <div className=\"space-y-2\">\n        <Typography variant=\"h3\">Heading 3</Typography>\n        <Typography variant=\"muted\">Subsection heading</Typography>\n      </div>\n\n      <div className=\"space-y-2\">\n        <Typography variant=\"p\">\n          This is a paragraph of text using the Typography component. It\n          provides consistent styling across your application.\n        </Typography>\n      </div>\n\n      <div className=\"space-y-2\">\n        <Typography variant=\"lead\">\n          This is lead text - slightly larger and more prominent than regular\n          paragraphs.\n        </Typography>\n      </div>\n\n      <div className=\"space-y-2\">\n        <Typography variant=\"large\">Large text for emphasis</Typography>\n      </div>\n\n      <div className=\"space-y-2\">\n        <Typography variant=\"small\">Small text for fine print</Typography>\n      </div>\n\n      <div className=\"space-y-2\">\n        <Typography variant=\"muted\">\n          Muted text for secondary information\n        </Typography>\n      </div>\n\n      <div className=\"space-y-2\">\n        <Typography variant=\"code\">const code = \"inline code block\"</Typography>\n      </div>\n    </Card>\n  )\n}\n",
+      "type": "registry:example"
+    }
+  ]
+}

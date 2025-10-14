@@ -17,14 +17,14 @@ import * as React from "react"
 export const Index: Record<string, any> = {`
   for (const item of registry.items) {
     const resolveFiles = item.files?.map(
-      (file) => `registry/elevenlabs-ui/${file.path}`
+      (file) => `registry/nowts/${file.path}`
     )
     if (!resolveFiles) {
       continue
     }
 
     const componentPath = item.files?.[0]?.path
-      ? `@/registry/elevenlabs-ui/${item.files[0].path}`
+      ? `@/registry/nowts/${item.files[0].path}`
       : ""
 
     index += `
@@ -34,7 +34,7 @@ export const Index: Record<string, any> = {`
     type: "${item.type}",
     registryDependencies: ${JSON.stringify(item.registryDependencies)},
     files: [${item.files?.map((file) => {
-      const filePath = `registry/elevenlabs-ui/${typeof file === "string" ? file : file.path}`
+      const filePath = `registry/nowts/${typeof file === "string" ? file : file.path}`
       const resolvedFilePath = path.resolve(filePath)
       return typeof file === "string"
         ? `"${resolvedFilePath}"`
@@ -69,14 +69,14 @@ export const Index: Record<string, any> = {`
 }
 
 async function buildRegistryJsonFile() {
-  // 1. Add registry/elevenlabs-ui prefix for the build to work
+  // 1. Add registry/nowts prefix for the build to work
   const fixedRegistry = {
     ...registry,
     items: registry.items.map((item) => {
       const files = item.files?.map((file) => {
         return {
           ...file,
-          path: `registry/elevenlabs-ui/${file.path}`,
+          path: `registry/nowts/${file.path}`,
         }
       })
 
@@ -97,12 +97,12 @@ async function buildRegistryJsonFile() {
   // 3. Format the registry.json file.
   await exec(`prettier --write registry.json`)
 
-  // 3. Copy the registry.json to the www/public/r/styles/elevenlabs-ui directory.
+  // 3. Copy the registry.json to the www/public/r/styles/nowts directory.
   await fs.cp(
     path.join(process.cwd(), "registry.json"),
     path.join(
       process.cwd(),
-      "../www/public/r/styles/elevenlabs-ui/registry.json"
+      "../www/public/r/styles/nowts/registry.json"
     ),
     { recursive: true }
   )
@@ -125,7 +125,7 @@ async function buildRegistry() {
           console.log(stdout)
         }
 
-        // Post-process the generated JSON files to remove registry/elevenlabs-ui prefix
+        // Post-process the generated JSON files to remove registry/nowts prefix
         console.log("📝 Cleaning up paths in generated JSON files...")
         await cleanupGeneratedPaths()
 
@@ -155,15 +155,15 @@ async function cleanupGeneratedPaths() {
       json.files.forEach((file: any) => {
         if (typeof file === 'object' && file.path && file.target) {
           // Map the source registry path to the target path
-          const sourcePath = file.path.replace(/^registry\/elevenlabs-ui\//, '')
+          const sourcePath = file.path.replace(/^registry\/nowts\//, '')
           pathMappings.set(sourcePath, file.target)
         }
       })
 
       json.files = json.files.map((file: any) => {
         if (typeof file === 'object' && file.path) {
-          // Remove registry/elevenlabs-ui/ prefix
-          let cleanPath = file.path.replace(/^registry\/elevenlabs-ui\//, '')
+          // Remove registry/nowts/ prefix
+          let cleanPath = file.path.replace(/^registry\/nowts\//, '')
 
           // For UI components, prepend with components/
           if (cleanPath.startsWith('ui/')) {
@@ -206,7 +206,7 @@ function rewriteImports(content: string, pathMappings: Map<string, string>): str
       // Create regex to match this specific import path
       const escapedPath = sourcePathNoExt.replace(/\//g, '\\/')
       const importRegex = new RegExp(
-        `@\\/registry\\/elevenlabs-ui\\/${escapedPath}`,
+        `@\\/registry\\/nowts\\/${escapedPath}`,
         'g'
       )
 
@@ -214,21 +214,21 @@ function rewriteImports(content: string, pathMappings: Map<string, string>): str
     }
   })
 
-  // Rewrite imports from @/registry/elevenlabs-ui/ui/... to @/components/ui/...
+  // Rewrite imports from @/registry/nowts/ui/... to @/components/ui/...
   content = content.replace(
-    /@\/registry\/elevenlabs-ui\/ui\//g,
+    /@\/registry\/nowts\/ui\//g,
     '@/components/ui/'
   )
 
-  // Rewrite imports from @/registry/elevenlabs-ui/examples/... to @/components/examples/...
+  // Rewrite imports from @/registry/nowts/examples/... to @/components/examples/...
   content = content.replace(
-    /@\/registry\/elevenlabs-ui\/examples\//g,
+    /@\/registry\/nowts\/examples\//g,
     '@/components/examples/'
   )
 
-  // Rewrite imports from @/registry/elevenlabs-ui/lib/... to @/lib/...
+  // Rewrite imports from @/registry/nowts/lib/... to @/lib/...
   content = content.replace(
-    /@\/registry\/elevenlabs-ui\/lib\//g,
+    /@\/registry\/nowts\/lib\//g,
     '@/lib/'
   )
 
@@ -263,7 +263,7 @@ async function buildAllJson() {
     // Collect files and read their content
     if (component.files) {
       for (const file of component.files) {
-        const filePath = `registry/elevenlabs-ui/${file.path}`
+        const filePath = `registry/nowts/${file.path}`
         const absolutePath = path.join(process.cwd(), filePath)
 
         // Read file content
@@ -272,7 +272,7 @@ async function buildAllJson() {
           content = await fs.readFile(absolutePath, 'utf-8')
         }
 
-        // Clean path - remove registry/elevenlabs-ui/ prefix
+        // Clean path - remove registry/nowts/ prefix
         let cleanPath = file.path
         if (cleanPath.startsWith('ui/')) {
           cleanPath = 'components/' + cleanPath
@@ -305,7 +305,7 @@ async function buildAllJson() {
     "$schema": "https://ui.shadcn.com/schema/registry-item.json",
     name: "all",
     type: "registry:ui",
-    description: "All UI components from ElevenLabs UI",
+    description: "All UI components from Now.ts UI",
     dependencies: Array.from(allDependencies).sort(),
     registryDependencies: Array.from(allRegistryDependencies).sort(),
     files: allFiles

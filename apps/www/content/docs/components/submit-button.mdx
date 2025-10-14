@@ -1,0 +1,119 @@
+---
+title: Submit Button
+description: Enhanced submit button with loading state that automatically detects form submission state using React's useFormStatus hook.
+featured: true
+---
+
+<ComponentPreview name="submit-button-demo" description="An interactive form with a submit button that shows loading state" />
+
+## Installation
+
+<Tabs defaultValue="cli">
+
+<TabsList>
+  <TabsTrigger value="cli">CLI</TabsTrigger>
+  <TabsTrigger value="manual">Manual</TabsTrigger>
+</TabsList>
+
+<TabsContent value="cli">
+
+```bash
+npx shadcn@latest add https://ui.nowts.app/r/submit-button.json
+```
+
+</TabsContent>
+
+<TabsContent value="manual">
+
+<Steps>
+
+### Install dependencies
+
+```bash
+npm install motion lucide-react
+```
+
+### Add the component
+
+<ComponentSource name="submit-button" title="components/ui/submit-button.tsx" />
+
+</Steps>
+
+</TabsContent>
+
+</Tabs>
+
+## Usage
+
+The `SubmitButton` automatically detects form submission state using React's `useFormStatus` hook. It shows a loading spinner during form submission.
+
+```tsx
+import { SubmitButton } from "@/components/ui/submit-button"
+
+export function MyForm() {
+  return (
+    <form action={serverAction}>
+      <input name="email" type="email" />
+      <SubmitButton>Submit</SubmitButton>
+    </form>
+  )
+}
+```
+
+## With ExtendedForm
+
+The button works seamlessly with `ExtendedForm` for client-side validation:
+
+```tsx
+import { ExtendedForm, useZodForm } from "@/components/ui/extended-form"
+import { SubmitButton } from "@/components/ui/submit-button"
+import { z } from "zod"
+
+const schema = z.object({
+  email: z.string().email(),
+})
+
+export function MyForm() {
+  const form = useZodForm({ schema })
+
+  return (
+    <ExtendedForm form={form} onSubmit={async (data) => {
+      // Form submission
+    }}>
+      <input {...form.register("email")} />
+      <SubmitButton>Submit</SubmitButton>
+    </ExtendedForm>
+  )
+}
+```
+
+## LoadingButton Variant
+
+You can also use `LoadingButton` for manual control of the loading state:
+
+```tsx
+import { LoadingButton } from "@/components/ui/submit-button"
+
+export function MyButton() {
+  const [isLoading, setIsLoading] = useState(false)
+
+  return (
+    <LoadingButton loading={isLoading} onClick={handleClick}>
+      Click Me
+    </LoadingButton>
+  )
+}
+```
+
+## Props
+
+### SubmitButton
+
+Accepts all props from `Button` component from shadcn/ui.
+
+### LoadingButton
+
+| Prop | Type | Default | Description |
+| --- | --- | --- | --- |
+| loading | boolean | false | Controls the loading state |
+| ...buttonProps | ButtonProps | - | All button props are forwarded |

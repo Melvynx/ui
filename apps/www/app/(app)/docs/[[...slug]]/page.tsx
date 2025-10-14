@@ -13,8 +13,8 @@ import { absoluteUrl } from "@/lib/utils"
 import { DocsCopyPage } from "@/components/docs-copy-page"
 import { DocsSidebarCta } from "@/components/docs-sidebar-cta"
 import { DocsTableOfContents } from "@/components/docs-toc"
-import { Badge } from "@/registry/elevenlabs-ui/ui/badge"
-import { Button } from "@/registry/elevenlabs-ui/ui/button"
+import { Badge } from "@/components/ui/badge"
+import { Button } from "@/components/ui/button"
 
 export const revalidate = false
 export const dynamic = "force-static"
@@ -67,7 +67,7 @@ export async function generateMetadata(props: {
           )}&description=${encodeURIComponent(doc.description)}`,
         },
       ],
-      creator: "@elevenlabsio",
+      creator: "@melvynxdev",
     },
   }
 }

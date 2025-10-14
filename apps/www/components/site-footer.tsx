@@ -8,13 +8,13 @@ export function SiteFooter() {
       <div className="container-wrapper px-4 xl:px-6">
         <div className="flex h-(--footer-height) items-center justify-between">
           <div className="text-muted-foreground w-full px-1 text-center text-xs leading-loose sm:text-sm">
-            Engineered by{" "}
+            Built by{" "}
             <Link
               href={siteConfig.utm.main}
               rel="noreferrer"
               className="font-medium underline underline-offset-4"
             >
-              ElevenLabs
+              Melvyn Malherbe
             </Link>
             . The source code is available on{" "}
             <a

@@ -2,7 +2,7 @@
 
 import { cn } from "@/lib/utils"
 import { useThemeConfig } from "@/components/active-theme"
-import { Label } from "@/registry/elevenlabs-ui/ui/label"
+import { Label } from "@/components/ui/label"
 import {
   Select,
   SelectContent,
@@ -12,7 +12,7 @@ import {
   SelectSeparator,
   SelectTrigger,
   SelectValue,
-} from "@/registry/elevenlabs-ui/ui/select"
+} from "@/components/ui/select"
 
 const DEFAULT_THEMES = [
   {
