@@ -55,7 +55,7 @@ export default function TanstackFormComplexDemo() {
     defaultValues: {
       name: "",
       email: "",
-      role: undefined,
+      role: "developer" as const,
       bio: "",
       newsletter: false,
       notifications: true,

@@ -20,7 +20,10 @@ The **Dialog Manager** is a comprehensive dialog management system that provides
 
 ## Preview
 
-<ComponentPreview name="dialog-manager-demo" description="Powerful dialog manager for confirm, input, and custom dialogs with global state management" />
+<ComponentPreview
+  name="dialog-manager-demo"
+  description="Powerful dialog manager for confirm, input, and custom dialogs with global state management"
+/>
 
 ## Installation
 
@@ -35,12 +38,12 @@ npx shadcn@latest add https://ui.nowts.app/r/dialog-manager.json
 Add the `DialogManagerRenderer` to your root layout:
 
 ```tsx title="app/layout.tsx"
-import { DialogManagerRenderer } from "@/lib/dialog-manager/dialog-manager-renderer";
+import { DialogManagerRenderer } from "@/lib/dialog-manager/dialog-manager-renderer"
 
 export default function RootLayout({
   children,
 }: {
-  children: React.ReactNode;
+  children: React.ReactNode
 }) {
   return (
     <html lang="en">
@@ -49,7 +52,7 @@ export default function RootLayout({
         <DialogManagerRenderer />
       </body>
     </html>
-  );
+  )
 }
 ```
 
@@ -58,7 +61,7 @@ export default function RootLayout({
 ### Basic confirm dialog
 
 ```tsx
-import { dialogManager } from "@/lib/dialog-manager/dialog-manager";
+import { dialogManager } from "@/lib/dialog-manager/dialog-manager"
 
 export function DeleteButton() {
   const handleDelete = () => {
@@ -69,17 +72,17 @@ export function DeleteButton() {
         label: "Delete",
         variant: "destructive",
         onClick: async () => {
-          await deleteItem();
+          await deleteItem()
         },
       },
-    });
-  };
+    })
+  }
 
   return (
     <Button onClick={handleDelete} variant="destructive">
       Delete
     </Button>
-  );
+  )
 }
 ```
 
@@ -95,10 +98,10 @@ dialogManager.confirm({
     label: "Delete Account",
     variant: "destructive",
     onClick: async () => {
-      await deleteAccount();
+      await deleteAccount()
     },
   },
-});
+})
 ```
 
 ### Input dialog
@@ -114,11 +117,11 @@ dialogManager.input({
   action: {
     label: "Create",
     onClick: async (projectName) => {
-      if (!projectName?.trim()) return;
-      await createProject(projectName);
+      if (!projectName?.trim()) return
+      await createProject(projectName)
     },
   },
-});
+})
 ```
 
 ### Input dialog with validation
@@ -136,33 +139,33 @@ dialogManager.input({
     label: "Rename",
     onClick: async (filename) => {
       if (!filename?.trim()) {
-        throw new Error("Filename cannot be empty");
+        throw new Error("Filename cannot be empty")
       }
 
       if (!/^[a-zA-Z0-9._-]+$/.test(filename)) {
-        throw new Error("Invalid filename format");
+        throw new Error("Invalid filename format")
       }
 
-      await renameFile(filename);
+      await renameFile(filename)
     },
   },
-});
+})
 ```
 
 ### Custom dialog with form
 
 ```tsx
 function CreateUserForm({ onClose }: { onClose: () => void }) {
-  const [formData, setFormData] = useState({ name: "", email: "" });
+  const [formData, setFormData] = useState({ name: "", email: "" })
 
   const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    await createUser(formData);
-    onClose();
-  };
+    e.preventDefault()
+    await createUser(formData)
+    onClose()
+  }
 
   return (
-    <form onSubmit={handleSubmit} className="p-6 space-y-4">
+    <form onSubmit={handleSubmit} className="space-y-4 p-6">
       <h2 className="text-lg font-semibold">Create New User</h2>
       <div>
         <Label htmlFor="name">Name</Label>
@@ -192,13 +195,13 @@ function CreateUserForm({ onClose }: { onClose: () => void }) {
         <Button type="submit">Create User</Button>
       </div>
     </form>
-  );
+  )
 }
 
 // Usage
 dialogManager.custom({
   children: <CreateUserForm onClose={() => dialogManager.closeAll()} />,
-});
+})
 ```
 
 ### Loading State
@@ -215,9 +218,9 @@ dialogManager.confirm({
     label: "Delete",
     variant: "destructive",
     onClick: async () => {
-      await new Promise((resolve) => setTimeout(resolve, 1000));
-      throw new Error("Failed to delete item");
+      await new Promise((resolve) => setTimeout(resolve, 1000))
+      throw new Error("Failed to delete item")
     },
   },
-});
+})
 ```

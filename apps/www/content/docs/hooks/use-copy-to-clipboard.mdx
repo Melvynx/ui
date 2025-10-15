@@ -20,7 +20,10 @@ The **useCopyToClipboard** hook provides a simple and reliable way to copy text 
 
 ## Preview
 
-<ComponentPreview name="use-copy-to-clipboard-demo" description="Copy text to your clipboard with visual feedback" />
+<ComponentPreview
+  name="use-copy-to-clipboard-demo"
+  description="Copy text to your clipboard with visual feedback"
+/>
 
 ## Installation
 
@@ -33,11 +36,11 @@ npx shadcn@latest add https://ui.nowts.app/r/use-copy-to-clipboard.json
 ### Basic copy button
 
 ```tsx
-import { useCopyToClipboard } from "@/hooks/use-copy-to-clipboard";
-import { Button } from "@/components/ui/button";
+import { useCopyToClipboard } from "@/hooks/use-copy-to-clipboard"
+import { Button } from "@/components/ui/button"
 
 export function BasicCopyButton() {
-  const { isCopied, copyToClipboard } = useCopyToClipboard();
+  const { isCopied, copyToClipboard } = useCopyToClipboard()
 
   return (
     <Button
@@ -46,44 +49,45 @@ export function BasicCopyButton() {
     >
       {isCopied ? "Copied!" : "Copy Text"}
     </Button>
-  );
+  )
 }
 ```
 
 ### Copy with custom delay
 
 ```tsx
-import { useCopyToClipboard } from "@/hooks/use-copy-to-clipboard";
-import { Button } from "@/components/ui/button";
+import { useCopyToClipboard } from "@/hooks/use-copy-to-clipboard"
+import { Button } from "@/components/ui/button"
 
 export function CustomDelayExample() {
   // Reset feedback state after 3 seconds
-  const { isCopied, copyToClipboard } = useCopyToClipboard(3000);
+  const { isCopied, copyToClipboard } = useCopyToClipboard(3000)
 
   return (
     <Button onClick={() => copyToClipboard("Text to copy")}>
       {isCopied ? "Copied!" : "Copy"}
     </Button>
-  );
+  )
 }
 ```
 
 ### Copy code block with icon
 
 ```tsx
-import { useCopyToClipboard } from "@/hooks/use-copy-to-clipboard";
-import { Button } from "@/components/ui/button";
-import { Check, Copy } from "lucide-react";
+import { Check, Copy } from "lucide-react"
+
+import { useCopyToClipboard } from "@/hooks/use-copy-to-clipboard"
+import { Button } from "@/components/ui/button"
 
 export function CopyCodeBlock() {
-  const { isCopied, copyToClipboard } = useCopyToClipboard();
+  const { isCopied, copyToClipboard } = useCopyToClipboard()
 
   const code = `const greeting = "Hello, World!";
-console.log(greeting);`;
+console.log(greeting);`
 
   return (
     <div className="relative">
-      <pre className="bg-muted p-4 rounded-md overflow-x-auto">
+      <pre className="bg-muted overflow-x-auto rounded-md p-4">
         <code>{code}</code>
       </pre>
       <Button
@@ -93,72 +97,74 @@ console.log(greeting);`;
         className="absolute top-2 right-2 h-8 w-8 p-0"
       >
         {isCopied ? (
-          <Check className="w-4 h-4 text-green-600" />
+          <Check className="h-4 w-4 text-green-600" />
         ) : (
-          <Copy className="w-4 h-4" />
+          <Copy className="h-4 w-4" />
         )}
       </Button>
     </div>
-  );
+  )
 }
 ```
 
 ### Copy URL or sharing
 
 ```tsx
-import { useCopyToClipboard } from "@/hooks/use-copy-to-clipboard";
-import { Button } from "@/components/ui/button";
-import { Share2, Check } from "lucide-react";
+import { Check, Share2 } from "lucide-react"
+
+import { useCopyToClipboard } from "@/hooks/use-copy-to-clipboard"
+import { Button } from "@/components/ui/button"
 
 export function ShareButton() {
-  const { isCopied, copyToClipboard } = useCopyToClipboard(2000);
+  const { isCopied, copyToClipboard } = useCopyToClipboard(2000)
 
   const handleShare = () => {
-    const url = window.location.href;
-    copyToClipboard(url);
-  };
+    const url = window.location.href
+    copyToClipboard(url)
+  }
 
   return (
     <Button onClick={handleShare} variant="outline" size="sm">
       {isCopied ? (
         <>
-          <Check className="w-4 h-4 mr-2" />
+          <Check className="mr-2 h-4 w-4" />
           Link Copied!
         </>
       ) : (
         <>
-          <Share2 className="w-4 h-4 mr-2" />
+          <Share2 className="mr-2 h-4 w-4" />
           Share Link
         </>
       )}
     </Button>
-  );
+  )
 }
 ```
 
 ### Copy form data
 
 ```tsx
-import { useCopyToClipboard } from "@/hooks/use-copy-to-clipboard";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
-import { useState } from "react";
+import { useState } from "react"
+
+import { useCopyToClipboard } from "@/hooks/use-copy-to-clipboard"
+import { Button } from "@/components/ui/button"
+import { Input } from "@/components/ui/input"
+import { Label } from "@/components/ui/label"
 
 export function CopyFormData() {
-  const { isCopied, copyToClipboard } = useCopyToClipboard();
-  const [email, setEmail] = useState("user@example.com");
-  const [apiKey, setApiKey] = useState("sk-1234567890abcdef");
+  const { isCopied, copyToClipboard } = useCopyToClipboard()
+  const [email, setEmail] = useState("user@example.com")
+  const [apiKey, setApiKey] = useState("sk-1234567890abcdef")
 
   const copyCredentials = () => {
     const credentials = `Email: ${email}
 API Key: ${apiKey}
-Environment: Production`;
-    copyToClipboard(credentials);
-  };
+Environment: Production`
+    copyToClipboard(credentials)
+  }
 
   return (
-    <div className="space-y-4 p-4 border rounded-lg">
+    <div className="space-y-4 rounded-lg border p-4">
       <div className="space-y-2">
         <Label htmlFor="email">Email</Label>
         <Input
@@ -184,32 +190,33 @@ Environment: Production`;
         {isCopied ? "Credentials Copied!" : "Copy Credentials"}
       </Button>
     </div>
-  );
+  )
 }
 ```
 
 ### Copy with toast notification
 
 ```tsx
-import { useCopyToClipboard } from "@/hooks/use-copy-to-clipboard";
-import { Button } from "@/components/ui/button";
-import { toast } from "sonner";
-import { useEffect } from "react";
+import { useEffect } from "react"
+import { toast } from "sonner"
+
+import { useCopyToClipboard } from "@/hooks/use-copy-to-clipboard"
+import { Button } from "@/components/ui/button"
 
 export function CopyWithToast() {
-  const { isCopied, copyToClipboard } = useCopyToClipboard();
+  const { isCopied, copyToClipboard } = useCopyToClipboard()
 
   useEffect(() => {
     if (isCopied) {
-      toast.success("Text copied to clipboard!");
+      toast.success("Text copied to clipboard!")
     }
-  }, [isCopied]);
+  }, [isCopied])
 
   const handleCopy = () => {
-    copyToClipboard("This text will show a toast notification when copied!");
-  };
+    copyToClipboard("This text will show a toast notification when copied!")
+  }
 
-  return <Button onClick={handleCopy}>Copy with Toast</Button>;
+  return <Button onClick={handleCopy}>Copy with Toast</Button>
 }
 ```
 
@@ -243,12 +250,12 @@ The hook is fully typed and provides excellent IntelliSense support:
 ```tsx
 // The hook is typed like this:
 declare const useCopyToClipboard: (delay?: number) => {
-  isCopied: boolean;
-  copyToClipboard: (text: string) => void;
-};
+  isCopied: boolean
+  copyToClipboard: (text: string) => void
+}
 
 // Usage with TypeScript
-const { isCopied, copyToClipboard } = useCopyToClipboard(3000);
+const { isCopied, copyToClipboard } = useCopyToClipboard(3000)
 
 // isCopied is inferred as boolean
 // copyToClipboard is inferred as (text: string) => void

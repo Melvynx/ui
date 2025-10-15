@@ -22,7 +22,10 @@ The **Better Auth OTP** component is a modern and animated user interface for em
 
 ## Preview
 
-<ComponentPreview name="better-auth-otp-demo" description="Clean, animated OTP authentication component with email verification" />
+<ComponentPreview
+  name="better-auth-otp-demo"
+  description="Clean, animated OTP authentication component with email verification"
+/>
 
 ## Installation
 
@@ -37,8 +40,8 @@ npx shadcn@latest add https://ui.nowts.app/r/better-auth-otp.json
 First, configure Better Auth with the Email OTP plugin:
 
 ```ts title="auth.ts"
-import { betterAuth } from "better-auth";
-import { emailOTP } from "better-auth/plugins";
+import { betterAuth } from "better-auth"
+import { emailOTP } from "better-auth/plugins"
 
 export const auth = betterAuth({
   // ... other options
@@ -51,26 +54,26 @@ export const auth = betterAuth({
           to: email,
           subject: "Your verification code",
           html: `Your OTP code is: <strong>${otp}</strong>`,
-        });
+        })
       },
       otpLength: 6,
       expiresIn: 300, // 5 minutes
       resendCooldown: 60, // 1 minute
     }),
   ],
-});
+})
 ```
 
 ### 3. Configure the client
 
 ```ts title="auth-client.ts"
-import { createAuthClient } from "better-auth/client";
-import { emailOTPClient } from "better-auth/client/plugins";
+import { createAuthClient } from "better-auth/client"
+import { emailOTPClient } from "better-auth/client/plugins"
 
 export const authClient = createAuthClient({
   baseURL: "http://localhost:3000",
   plugins: [emailOTPClient()],
-});
+})
 ```
 
 ## Usage
@@ -78,9 +81,10 @@ export const authClient = createAuthClient({
 ### Basic usage
 
 ```tsx
-import { OtpForm } from "@/components/better-auth-otp";
-import { authClient } from "@/lib/auth-client";
-import { toast } from "sonner";
+import { toast } from "sonner"
+
+import { authClient } from "@/lib/auth-client"
+import { OtpForm } from "@/components/better-auth-otp"
 
 export function SignInForm() {
   return (
@@ -89,20 +93,20 @@ export function SignInForm() {
         const result = await authClient.emailOtp.sendVerificationOtp({
           email,
           type: "sign-in",
-        });
-        if (result.error) throw new Error(result.error.message);
+        })
+        if (result.error) throw new Error(result.error.message)
       }}
       verifyOtp={async (email, otp) => {
-        const result = await authClient.signIn.emailOtp({ email, otp });
-        if (result.error) throw new Error(result.error.message);
+        const result = await authClient.signIn.emailOtp({ email, otp })
+        if (result.error) throw new Error(result.error.message)
       }}
       onSuccess={() => {
-        toast.success("Successfully signed in!");
-        window.location.href = "/dashboard";
+        toast.success("Successfully signed in!")
+        window.location.href = "/dashboard"
       }}
       onError={(error) => toast.error(error)}
     />
-  );
+  )
 }
 ```
 
@@ -114,18 +118,18 @@ export function SignInForm() {
     const result = await authClient.emailOtp.sendVerificationOtp({
       email,
       type: "email-verification",
-    });
-    if (result.error) throw new Error(result.error.message);
+    })
+    if (result.error) throw new Error(result.error.message)
   }}
   verifyOtp={async (email, otp) => {
     const result = await authClient.emailOtp.verifyEmail({
       email,
       otp,
-    });
-    if (result.error) throw new Error(result.error.message);
+    })
+    if (result.error) throw new Error(result.error.message)
   }}
   onSuccess={() => {
-    toast.success("Email verified successfully!");
+    toast.success("Email verified successfully!")
   }}
   onError={(error) => toast.error(error)}
 />
@@ -139,19 +143,19 @@ export function SignInForm() {
     const result = await authClient.emailOtp.sendVerificationOtp({
       email,
       type: "forget-password",
-    });
-    if (result.error) throw new Error(result.error.message);
+    })
+    if (result.error) throw new Error(result.error.message)
   }}
   verifyOtp={async (email, otp) => {
     const result = await authClient.emailOtp.resetPassword({
       email,
       otp,
       password: newPassword, // Get the new password from a form
-    });
-    if (result.error) throw new Error(result.error.message);
+    })
+    if (result.error) throw new Error(result.error.message)
   }}
   onSuccess={() => {
-    toast.success("Password reset successfully!");
+    toast.success("Password reset successfully!")
   }}
   onError={(error) => toast.error(error)}
 />

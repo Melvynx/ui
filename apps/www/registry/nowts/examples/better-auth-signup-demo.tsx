@@ -11,7 +11,6 @@ export function BetterAuthSignupDemo() {
     password: string
   }) => {
     await new Promise((resolve) => setTimeout(resolve, 1000))
-    // eslint-disable-next-line no-console
     console.info("Sign up data:", data)
   }
 

@@ -24,7 +24,10 @@ The **Server Toast** component is a complete notification system for React Serve
 
 ## Preview
 
-<ComponentPreview name="server-toast-demo" description="Server-side toast notification system for Next.js server actions" />
+<ComponentPreview
+  name="server-toast-demo"
+  description="Server-side toast notification system for Next.js server actions"
+/>
 
 ## Installation
 
@@ -37,13 +40,14 @@ npx shadcn@latest add https://ui.nowts.app/r/server-toast.json
 ### 2. Add the Toaster to your layout
 
 ```tsx title="app/layout.tsx"
-import { ServerToaster } from "@/components/server-toast/server-toast.server";
-import { Suspense } from "react";
+import { Suspense } from "react"
+
+import { ServerToaster } from "@/components/server-toast/server-toast.server"
 
 export default function RootLayout({
   children,
 }: {
-  children: React.ReactNode;
+  children: React.ReactNode
 }) {
   return (
     <html lang="en">
@@ -55,7 +59,7 @@ export default function RootLayout({
         </Suspense>
       </body>
     </html>
-  );
+  )
 }
 ```
 
@@ -64,18 +68,18 @@ export default function RootLayout({
 ### Basic usage
 
 ```tsx title="actions.ts"
-import { serverToast } from "@/components/server-toast";
+import { serverToast } from "@/components/server-toast"
 
 export async function saveUserAction(formData: FormData) {
-  "use server";
+  "use server"
 
   try {
     // Your save logic
-    const user = await saveUser(formData);
+    const user = await saveUser(formData)
 
-    await serverToast("User saved successfully!", "success");
+    await serverToast("User saved successfully!", "success")
   } catch (error) {
-    await serverToast("Failed to save user", "error");
+    await serverToast("Failed to save user", "error")
   }
 }
 ```
@@ -83,46 +87,47 @@ export async function saveUserAction(formData: FormData) {
 ### All toast types
 
 ```tsx title="actions.ts"
-import { serverToast } from "@/components/server-toast";
+import { serverToast } from "@/components/server-toast"
 
 // Success toast
-await serverToast("Operation completed!", "success");
+await serverToast("Operation completed!", "success")
 
 // Error toast
-await serverToast("Something went wrong!", "error");
+await serverToast("Something went wrong!", "error")
 
 // Warning toast
-await serverToast("Please check your input", "warning");
+await serverToast("Please check your input", "warning")
 
 // Info toast (default)
-await serverToast("Here's some information", "info");
+await serverToast("Here's some information", "info")
 // or simply
-await serverToast("Here's some information");
+await serverToast("Here's some information")
 ```
 
 ### With forms
 
 ```tsx title="components/CreatePostForm.tsx"
-import { serverToast } from "@/components/server-toast";
-import { redirect } from "next/navigation";
+import { redirect } from "next/navigation"
+
+import { serverToast } from "@/components/server-toast"
 
 async function createPostAction(formData: FormData) {
-  "use server";
+  "use server"
 
-  const title = formData.get("title") as string;
-  const content = formData.get("content") as string;
+  const title = formData.get("title") as string
+  const content = formData.get("content") as string
 
   if (!title || !content) {
-    await serverToast("Title and content are required", "warning");
-    return;
+    await serverToast("Title and content are required", "warning")
+    return
   }
 
   try {
-    await createPost({ title, content });
-    await serverToast("Post created successfully!", "success");
-    redirect("/posts");
+    await createPost({ title, content })
+    await serverToast("Post created successfully!", "success")
+    redirect("/posts")
   } catch (error) {
-    await serverToast("Failed to create post", "error");
+    await serverToast("Failed to create post", "error")
   }
 }
 
@@ -133,29 +138,30 @@ export function CreatePostForm() {
       <textarea name="content" placeholder="Post content" required />
       <button type="submit">Create Post</button>
     </form>
-  );
+  )
 }
 ```
 
 ### With API Routes
 
 ```tsx title="app/api/data/route.ts"
-import { serverToast } from "@/components/server-toast";
-import { NextRequest } from "next/server";
+import { NextRequest } from "next/server"
+
+import { serverToast } from "@/components/server-toast"
 
 export async function POST(request: NextRequest) {
   try {
-    const data = await request.json();
+    const data = await request.json()
 
     // Your API logic
-    await processData(data);
+    await processData(data)
 
-    await serverToast("Data processed successfully!", "success");
+    await serverToast("Data processed successfully!", "success")
 
-    return Response.json({ success: true });
+    return Response.json({ success: true })
   } catch (error) {
-    await serverToast("Failed to process data", "error");
-    return Response.json({ error: "Failed" }, { status: 500 });
+    await serverToast("Failed to process data", "error")
+    return Response.json({ error: "Failed" }, { status: 500 })
   }
 }
 ```
@@ -167,8 +173,8 @@ export async function POST(request: NextRequest) {
 ```tsx
 function serverToast(
   message: string,
-  type?: "success" | "error" | "warning" | "info",
-): Promise<void>;
+  type?: "success" | "error" | "warning" | "info"
+): Promise<void>
 ```
 
 | Parameter | Type                                          | Description            | Default  |
@@ -236,49 +242,49 @@ Toasts survive:
 ### With custom middleware
 
 ```tsx title="actions.ts"
-import { serverToast } from "@/components/server-toast";
-import { auth } from "@/lib/auth";
+import { auth } from "@/lib/auth"
+import { serverToast } from "@/components/server-toast"
 
 export async function authenticatedAction(formData: FormData) {
-  "use server";
+  "use server"
 
-  const user = await auth.getUser();
+  const user = await auth.getUser()
 
   if (!user) {
-    await serverToast("Please sign in to continue", "warning");
-    redirect("/login");
-    return;
+    await serverToast("Please sign in to continue", "warning")
+    redirect("/login")
+    return
   }
 
   // Authenticated action...
-  await serverToast(`Welcome ${user.name}!`, "success");
+  await serverToast(`Welcome ${user.name}!`, "success")
 }
 ```
 
 ### Conditional toast
 
 ```tsx title="actions.ts"
-import { serverToast } from "@/components/server-toast";
+import { serverToast } from "@/components/server-toast"
 
 export async function updateUserAction(formData: FormData) {
-  "use server";
+  "use server"
 
-  const changes = getChanges(formData);
+  const changes = getChanges(formData)
 
   if (changes.length === 0) {
-    await serverToast("No changes to save", "info");
-    return;
+    await serverToast("No changes to save", "info")
+    return
   }
 
-  const result = await updateUser(changes);
+  const result = await updateUser(changes)
 
   if (result.warnings.length > 0) {
     await serverToast(
       `Saved with ${result.warnings.length} warnings`,
-      "warning",
-    );
+      "warning"
+    )
   } else {
-    await serverToast("All changes saved successfully!", "success");
+    await serverToast("All changes saved successfully!", "success")
   }
 }
 ```
@@ -286,33 +292,33 @@ export async function updateUserAction(formData: FormData) {
 ### Complex notification system
 
 ```tsx title="actions.ts"
-import { serverToast } from "@/components/server-toast";
+import { serverToast } from "@/components/server-toast"
 
 export async function bulkImportAction(formData: FormData) {
-  "use server";
+  "use server"
 
-  const file = formData.get("file") as File;
-  const results = await processBulkImport(file);
+  const file = formData.get("file") as File
+  const results = await processBulkImport(file)
 
   // Multiple messages based on result
   if (results.errors.length > 0) {
     await serverToast(
       `${results.errors.length} items failed to import`,
-      "error",
-    );
+      "error"
+    )
   }
 
   if (results.warnings.length > 0) {
     await serverToast(
       `${results.warnings.length} items imported with warnings`,
-      "warning",
-    );
+      "warning"
+    )
   }
 
   await serverToast(
     `${results.success.length} items imported successfully!`,
-    "success",
-  );
+    "success"
+  )
 }
 ```
 

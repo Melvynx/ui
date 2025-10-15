@@ -19,7 +19,10 @@ The **useWarnIfUnsavedChanges** hook provides a simple way to warn users before 
 
 ## Preview
 
-<ComponentPreview name="use-warn-if-unsaved-changes-demo" description="Try editing and navigating away to see the unsaved changes warning" />
+<ComponentPreview
+  name="use-warn-if-unsaved-changes-demo"
+  description="Try editing and navigating away to see the unsaved changes warning"
+/>
 
 ## Installation
 
@@ -32,21 +35,22 @@ npx shadcn@latest add https://ui.nowts.app/r/use-warn-if-unsaved-changes.json
 ### Basic usage with form
 
 ```tsx
-import { useWarnIfUnsavedChanges } from "@/hooks/use-warn-if-unsaved-changes";
-import { useState } from "react";
+import { useState } from "react"
+
+import { useWarnIfUnsavedChanges } from "@/hooks/use-warn-if-unsaved-changes"
 
 export function MyForm() {
-  const [formData, setFormData] = useState("");
-  const [savedData, setSavedData] = useState("");
+  const [formData, setFormData] = useState("")
+  const [savedData, setSavedData] = useState("")
 
-  const hasUnsavedChanges = formData !== savedData;
+  const hasUnsavedChanges = formData !== savedData
 
-  useWarnIfUnsavedChanges(hasUnsavedChanges);
+  useWarnIfUnsavedChanges(hasUnsavedChanges)
 
   const handleSave = () => {
-    setSavedData(formData);
+    setSavedData(formData)
     // Your save logic here
-  };
+  }
 
   return (
     <form>
@@ -55,7 +59,7 @@ export function MyForm() {
         Save
       </button>
     </form>
-  );
+  )
 }
 ```
 
@@ -64,53 +68,54 @@ export function MyForm() {
 ```tsx
 useWarnIfUnsavedChanges(
   hasUnsavedChanges,
-  "You have unsaved changes that will be lost. Do you want to continue?",
-);
+  "You have unsaved changes that will be lost. Do you want to continue?"
+)
 ```
 
 ### With complex form state
 
 ```tsx
-import { useWarnIfUnsavedChanges } from "@/hooks/use-warn-if-unsaved-changes";
-import { useState, useEffect } from "react";
+import { useEffect, useState } from "react"
+
+import { useWarnIfUnsavedChanges } from "@/hooks/use-warn-if-unsaved-changes"
 
 export function UserProfileForm() {
   const [formData, setFormData] = useState({
     name: "",
     email: "",
     bio: "",
-  });
+  })
 
   const [originalData, setOriginalData] = useState({
     name: "",
     email: "",
     bio: "",
-  });
+  })
 
   // Load initial data
   useEffect(() => {
     const loadUserData = async () => {
-      const userData = await fetchUserProfile();
-      setFormData(userData);
-      setOriginalData(userData);
-    };
-    loadUserData();
-  }, []);
+      const userData = await fetchUserProfile()
+      setFormData(userData)
+      setOriginalData(userData)
+    }
+    loadUserData()
+  }, [])
 
   // Check if any field has changed
   const hasUnsavedChanges = Object.keys(formData).some(
-    (key) => formData[key] !== originalData[key],
-  );
+    (key) => formData[key] !== originalData[key]
+  )
 
   useWarnIfUnsavedChanges(
     hasUnsavedChanges,
-    "Your profile changes haven't been saved. Leave anyway?",
-  );
+    "Your profile changes haven't been saved. Leave anyway?"
+  )
 
   const handleSave = async () => {
-    await saveUserProfile(formData);
-    setOriginalData(formData); // Reset the baseline
-  };
+    await saveUserProfile(formData)
+    setOriginalData(formData) // Reset the baseline
+  }
 
   return (
     <form>
@@ -119,44 +124,45 @@ export function UserProfileForm() {
         Save Profile
       </button>
     </form>
-  );
+  )
 }
 ```
 
 ### With auto-save functionality
 
 ```tsx
-import { useWarnIfUnsavedChanges } from "@/hooks/use-warn-if-unsaved-changes";
-import { useDebounceFn } from "@/hooks/use-debounce-fn";
-import { useState, useEffect } from "react";
+import { useEffect, useState } from "react"
+
+import { useDebounceFn } from "@/hooks/use-debounce-fn"
+import { useWarnIfUnsavedChanges } from "@/hooks/use-warn-if-unsaved-changes"
 
 export function AutoSaveForm() {
-  const [content, setContent] = useState("");
-  const [lastSaved, setLastSaved] = useState("");
-  const [isSaving, setIsSaving] = useState(false);
+  const [content, setContent] = useState("")
+  const [lastSaved, setLastSaved] = useState("")
+  const [isSaving, setIsSaving] = useState(false)
 
-  const hasUnsavedChanges = content !== lastSaved && !isSaving;
+  const hasUnsavedChanges = content !== lastSaved && !isSaving
 
   useWarnIfUnsavedChanges(
     hasUnsavedChanges,
-    "Your document has unsaved changes. Leave without saving?",
-  );
+    "Your document has unsaved changes. Leave without saving?"
+  )
 
   const debouncedSave = useDebounceFn(async (value: string) => {
-    setIsSaving(true);
+    setIsSaving(true)
     try {
-      await saveDocument(value);
-      setLastSaved(value);
+      await saveDocument(value)
+      setLastSaved(value)
     } finally {
-      setIsSaving(false);
+      setIsSaving(false)
     }
-  }, 1000);
+  }, 1000)
 
   useEffect(() => {
     if (content !== lastSaved) {
-      debouncedSave(content);
+      debouncedSave(content)
     }
-  }, [content, lastSaved, debouncedSave]);
+  }, [content, lastSaved, debouncedSave])
 
   return (
     <div>
@@ -165,7 +171,7 @@ export function AutoSaveForm() {
         onChange={(e) => setContent(e.target.value)}
         placeholder="Start typing..."
       />
-      <div className="text-sm text-muted-foreground">
+      <div className="text-muted-foreground text-sm">
         {isSaving
           ? "Saving..."
           : hasUnsavedChanges
@@ -173,7 +179,7 @@ export function AutoSaveForm() {
             : "All changes saved"}
       </div>
     </div>
-  );
+  )
 }
 ```
 

@@ -25,7 +25,10 @@ The **useIsClient** hook is a simple utility that helps you determine if your Re
 
 ## Preview
 
-<ComponentPreview name="use-is-client-demo" description="Interactive demo showing client-side vs server-side rendering detection" />
+<ComponentPreview
+  name="use-is-client-demo"
+  description="Interactive demo showing client-side vs server-side rendering detection"
+/>
 
 ## Installation
 
@@ -38,13 +41,13 @@ npx shadcn@latest add https://ui.nowts.app/r/use-is-client.json
 ### Basic usage
 
 ```tsx
-import { useIsClient } from "@/hooks/use-is-client";
+import { useIsClient } from "@/hooks/use-is-client"
 
 export function ClientOnlyComponent() {
-  const isClient = useIsClient();
+  const isClient = useIsClient()
 
   if (!isClient) {
-    return <div>Loading...</div>;
+    return <div>Loading...</div>
   }
 
   return (
@@ -52,36 +55,36 @@ export function ClientOnlyComponent() {
       <p>This content only renders on the client!</p>
       <p>Current URL: {window.location.href}</p>
     </div>
-  );
+  )
 }
 ```
 
 ### Conditional rendering with browser APIs
 
 ```tsx
-import { useIsClient } from "@/hooks/use-is-client";
+import { useIsClient } from "@/hooks/use-is-client"
 
 export function GeolocationComponent() {
-  const isClient = useIsClient();
-  const [location, setLocation] = useState<string | null>(null);
+  const isClient = useIsClient()
+  const [location, setLocation] = useState<string | null>(null)
 
   useEffect(() => {
     if (isClient && navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(
         (position) => {
           setLocation(
-            `${position.coords.latitude}, ${position.coords.longitude}`,
-          );
+            `${position.coords.latitude}, ${position.coords.longitude}`
+          )
         },
         (error) => {
-          setLocation("Location unavailable");
-        },
-      );
+          setLocation("Location unavailable")
+        }
+      )
     }
-  }, [isClient]);
+  }, [isClient])
 
   if (!isClient) {
-    return <div>Checking location availability...</div>;
+    return <div>Checking location availability...</div>
   }
 
   return (
@@ -89,94 +92,94 @@ export function GeolocationComponent() {
       <h3>Your Location</h3>
       <p>{location || "Getting location..."}</p>
     </div>
-  );
+  )
 }
 ```
 
 ### Progressive enhancement
 
 ```tsx
-import { useIsClient } from "@/hooks/use-is-client";
+import { useIsClient } from "@/hooks/use-is-client"
 
 export function EnhancedButton() {
-  const isClient = useIsClient();
-  const [interactionCount, setInteractionCount] = useState(0);
+  const isClient = useIsClient()
+  const [interactionCount, setInteractionCount] = useState(0)
 
   const handleClick = () => {
-    setInteractionCount((prev) => prev + 1);
+    setInteractionCount((prev) => prev + 1)
 
     // Client-only enhancements
     if (isClient) {
       // Haptic feedback on mobile
       if ("vibrate" in navigator) {
-        navigator.vibrate(50);
+        navigator.vibrate(50)
       }
 
       // Analytics tracking
       gtag?.("event", "button_click", {
         interaction_count: interactionCount + 1,
-      });
+      })
     }
-  };
+  }
 
   return (
     <button
       onClick={handleClick}
-      className="px-4 py-2 bg-blue-500 text-white rounded"
+      className="rounded bg-blue-500 px-4 py-2 text-white"
     >
       Click me {isClient ? `(${interactionCount})` : ""}
     </button>
-  );
+  )
 }
 ```
 
 ### Preventing hydration mismatches
 
 ```tsx
-import { useIsClient } from "@/hooks/use-is-client";
+import { useIsClient } from "@/hooks/use-is-client"
 
 export function DynamicContent() {
-  const isClient = useIsClient();
+  const isClient = useIsClient()
 
   // This would cause hydration mismatch without useIsClient
-  const randomId = Math.random().toString(36).substr(2, 9);
+  const randomId = Math.random().toString(36).substr(2, 9)
 
   return (
     <div>
       <h2>Dynamic Content</h2>
       {isClient ? <p>Random ID: {randomId}</p> : <p>Random ID: Loading...</p>}
     </div>
-  );
+  )
 }
 ```
 
 ### Working with local storage
 
 ```tsx
-import { useIsClient } from "@/hooks/use-is-client";
+import { useIsClient } from "@/hooks/use-is-client"
 
 export function UserPreferences() {
-  const isClient = useIsClient();
-  const [theme, setTheme] = useState<string>("light");
+  const isClient = useIsClient()
+  const [theme, setTheme] = useState<string>("light")
 
   useEffect(() => {
     if (isClient) {
-      const savedTheme = localStorage.getItem("theme") || "light";
-      setTheme(savedTheme);
+      const savedTheme = localStorage.getItem("theme") || "light"
+      setTheme(savedTheme)
     }
-  }, [isClient]);
+  }, [isClient])
 
   const toggleTheme = () => {
-    const newTheme = theme === "light" ? "dark" : "light";
-    setTheme(newTheme);
+    const newTheme = theme === "light" ? "dark" : "light"
+    setTheme(newTheme)
 
     if (isClient) {
-      localStorage.setItem("theme", newTheme);
+      localStorage.setItem("theme", newTheme)
     }
-  };
+  }
 
   if (!isClient) {
-    return <div>Loading preferences...</div>;
+    return <div>Loading preferences...</div>
   }
 
   return (
@@ -188,6 +191,6 @@ export function UserPreferences() {
         Switch to {theme === "light" ? "dark" : "light"} theme
       </button>
     </div>
-  );
+  )
 }
 ```

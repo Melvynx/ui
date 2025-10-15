@@ -75,7 +75,8 @@ export async function generateStaticParams() {
     )
     .filter((block) => {
       const hasOnlyLibFiles = block.files?.every(
-        (file: { type: string }) => file.type === "registry:lib" || file.type === "registry:hook"
+        (file: { type: string }) =>
+          file.type === "registry:lib" || file.type === "registry:hook"
       )
       return !hasOnlyLibFiles
     })

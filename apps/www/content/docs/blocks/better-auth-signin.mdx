@@ -24,7 +24,10 @@ The **Better Auth Sign In** component provides a complete authentication experie
 
 ## Preview
 
-<ComponentPreview name="better-auth-signin-demo" description="Interactive sign-in page with email/password, OTP, and OAuth provider support" />
+<ComponentPreview
+  name="better-auth-signin-demo"
+  description="Interactive sign-in page with email/password, OTP, and OAuth provider support"
+/>
 
 ## Installation
 
@@ -39,7 +42,7 @@ This will also install the `better-auth-otp` component and all required dependen
 ### 2. Set up Better Auth
 
 ```tsx title="lib/auth.ts"
-import { betterAuth } from "better-auth";
+import { betterAuth } from "better-auth"
 
 export const auth = betterAuth({
   emailAndPassword: {
@@ -54,7 +57,7 @@ export const auth = betterAuth({
       clientSecret: process.env.GITHUB_CLIENT_SECRET!,
     },
   },
-});
+})
 ```
 
 ## Usage
@@ -62,47 +65,48 @@ export const auth = betterAuth({
 ### Basic usage with Better Auth
 
 ```tsx title="app/signin/page.tsx"
-import { SignInPage } from "@/components/sign-in-page";
-import { auth } from "@/lib/auth";
-import { Github } from "lucide-react";
-import { redirect } from "next/navigation";
+import { redirect } from "next/navigation"
+import { Github } from "lucide-react"
+
+import { auth } from "@/lib/auth"
+import { SignInPage } from "@/components/sign-in-page"
 
 export default function SignIn() {
   async function handleSendOtp(email: string) {
-    "use server";
+    "use server"
     await auth.api.sendVerificationCode({
       body: { email, type: "email-verification" },
-    });
+    })
   }
 
   async function handleVerifyOtp(email: string, otp: string) {
-    "use server";
+    "use server"
     const result = await auth.api.signInEmailOtp({
       body: { email, otp },
-    });
+    })
 
     if (result) {
-      redirect("/dashboard");
+      redirect("/dashboard")
     }
   }
 
   async function handlePasswordSignIn(credentials: {
-    email: string;
-    password: string;
+    email: string
+    password: string
   }) {
-    "use server";
+    "use server"
     const result = await auth.api.signInEmail({
       body: credentials,
-    });
+    })
 
     if (result) {
-      redirect("/dashboard");
+      redirect("/dashboard")
     }
   }
 
   async function handleProviderSignIn(provider: string) {
-    "use server";
-    redirect(`/api/auth/social/${provider}`);
+    "use server"
+    redirect(`/api/auth/social/${provider}`)
   }
 
   return (
@@ -123,14 +127,14 @@ export default function SignIn() {
       signUpUrl="/signup"
       forgotPasswordUrl="/forgot-password"
     />
-  );
+  )
 }
 ```
 
 ### OTP only
 
 ```tsx title="app/signin/page.tsx"
-import { SignInPage } from "@/components/sign-in-page";
+import { SignInPage } from "@/components/sign-in-page"
 
 export default function SignIn() {
   return (
@@ -138,24 +142,25 @@ export default function SignIn() {
       appName="Acme Inc"
       defaultMethod="otp"
       onSendOtp={async (email) => {
-        "use server";
+        "use server"
         // Send OTP logic
       }}
       onVerifyOtp={async (email, otp) => {
-        "use server";
+        "use server"
         // Verify OTP logic
       }}
       onPasswordSignIn={async () => {}} // Required but won't be shown
     />
-  );
+  )
 }
 ```
 
 ### With multiple OAuth providers
 
 ```tsx title="app/signin/page.tsx"
-import { SignInPage } from "@/components/sign-in-page";
-import { Github, Mail } from "lucide-react";
+import { Github, Mail } from "lucide-react"
+
+import { SignInPage } from "@/components/sign-in-page"
 
 export default function SignIn() {
   return (
@@ -165,8 +170,8 @@ export default function SignIn() {
       onVerifyOtp={async (email, otp) => {}}
       onPasswordSignIn={async ({ email, password }) => {}}
       onProviderSignIn={async (provider) => {
-        "use server";
-        redirect(`/api/auth/${provider}`);
+        "use server"
+        redirect(`/api/auth/${provider}`)
       }}
       providers={[
         {
@@ -183,18 +188,18 @@ export default function SignIn() {
         },
       ]}
     />
-  );
+  )
 }
 ```
 
 ### Custom styling
 
 ```tsx title="app/signin/page.tsx"
-import { SignInPage } from "@/components/sign-in-page";
+import { SignInPage } from "@/components/sign-in-page"
 
 export default function SignIn() {
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 flex items-center justify-center p-4">
+    <div className="flex min-h-screen items-center justify-center bg-gradient-to-br from-blue-50 to-indigo-100 p-4">
       <SignInPage
         appName="Acme Inc"
         description="Welcome back! Please sign in to continue."
@@ -204,7 +209,7 @@ export default function SignIn() {
         onProviderSignIn={async (provider) => {}}
       />
     </div>
-  );
+  )
 }
 ```
 
@@ -217,30 +222,30 @@ The main sign-in component.
 ```tsx
 type SignInPageProps = {
   // App information
-  appName: string;
-  appIcon?: string;
-  description?: string;
+  appName: string
+  appIcon?: string
+  description?: string
 
   // Auth callbacks (all required)
-  onSendOtp: (email: string) => Promise<void>;
-  onVerifyOtp: (email: string, otp: string) => Promise<void>;
+  onSendOtp: (email: string) => Promise<void>
+  onVerifyOtp: (email: string, otp: string) => Promise<void>
   onPasswordSignIn: (credentials: {
-    email: string;
-    password: string;
-  }) => Promise<void>;
-  onProviderSignIn: (providerId: string) => Promise<void>;
+    email: string
+    password: string
+  }) => Promise<void>
+  onProviderSignIn: (providerId: string) => Promise<void>
 
   // Optional configuration
-  defaultEmail?: string;
-  defaultMethod?: "otp" | "password";
-  forgotPasswordUrl?: string;
-  signUpUrl?: string;
-  providers?: ProviderConfig[];
+  defaultEmail?: string
+  defaultMethod?: "otp" | "password"
+  forgotPasswordUrl?: string
+  signUpUrl?: string
+  providers?: ProviderConfig[]
 
   // Callbacks
-  onSuccess?: () => void;
-  onError?: (error: string) => void;
-};
+  onSuccess?: () => void
+  onError?: (error: string) => void
+}
 ```
 
 ### ProviderConfig
@@ -249,11 +254,11 @@ Configuration for OAuth providers.
 
 ```tsx
 type ProviderConfig = {
-  id: string;
-  name: string;
-  icon: React.ReactNode;
-  buttonClassName?: string;
-};
+  id: string
+  name: string
+  icon: React.ReactNode
+  buttonClassName?: string
+}
 ```
 
 ## Components
@@ -292,22 +297,23 @@ The Better Auth Sign In component is structured as:
 ### Error handling
 
 ```tsx
-import { SignInPage } from "@/components/sign-in-page";
-import { toast } from "sonner";
+import { toast } from "sonner"
+
+import { SignInPage } from "@/components/sign-in-page"
 
 export default function SignIn() {
   return (
     <SignInPage
       appName="Acme Inc"
       onError={(error) => {
-        toast.error(error);
+        toast.error(error)
       }}
       onSuccess={() => {
-        toast.success("Welcome back!");
+        toast.success("Welcome back!")
       }}
       // ... other props
     />
-  );
+  )
 }
 ```
 
@@ -318,18 +324,19 @@ The component handles loading states internally for all auth methods.
 ### Redirects
 
 ```tsx
-import { SignInPage } from "@/components/sign-in-page";
-import { redirect } from "next/navigation";
+import { redirect } from "next/navigation"
+
+import { SignInPage } from "@/components/sign-in-page"
 
 export default function SignIn() {
   async function handlePasswordSignIn(credentials) {
-    "use server";
-    const result = await auth.signIn(credentials);
+    "use server"
+    const result = await auth.signIn(credentials)
 
     if (result.success) {
       // Get callback URL from searchParams if needed
-      const callbackUrl = searchParams.get("callbackUrl") ?? "/dashboard";
-      redirect(callbackUrl);
+      const callbackUrl = searchParams.get("callbackUrl") ?? "/dashboard"
+      redirect(callbackUrl)
     }
   }
 
@@ -338,7 +345,7 @@ export default function SignIn() {
       onPasswordSignIn={handlePasswordSignIn}
       // ... other props
     />
-  );
+  )
 }
 ```
 

@@ -1,6 +1,7 @@
 import { Metadata } from "next"
 import Link from "next/link"
 
+import { Button } from "@/components/ui/button"
 import { CardsDemo } from "@/components/cards"
 import { ExamplesNav } from "@/components/examples-nav"
 import {
@@ -11,7 +12,6 @@ import {
 } from "@/components/page-header"
 import { PageNav } from "@/components/page-nav"
 import { ThemeSelector } from "@/components/theme-selector"
-import { Button } from "@/components/ui/button"
 
 const title = "Now.ts UI"
 const description =

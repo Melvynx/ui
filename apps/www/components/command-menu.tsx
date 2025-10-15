@@ -11,7 +11,6 @@ import { cn } from "@/lib/utils"
 import { useConfig } from "@/hooks/use-config"
 import { useIsMac } from "@/hooks/use-is-mac"
 import { useMutationObserver } from "@/hooks/use-mutation-observer"
-import { copyToClipboardWithMeta } from "@/components/copy-button"
 import { Button } from "@/components/ui/button"
 import {
   Command,
@@ -30,6 +29,7 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog"
 import { Separator } from "@/components/ui/separator"
+import { copyToClipboardWithMeta } from "@/components/copy-button"
 
 export function CommandMenu({
   tree,

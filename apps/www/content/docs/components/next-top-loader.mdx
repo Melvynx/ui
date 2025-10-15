@@ -3,7 +3,10 @@ title: Next Top Loader
 description: A Next.js compatible top loading bar component with automatic navigation detection and customizable progress indicators.
 ---
 
-<ComponentPreview name="next-top-loader-demo" description="A loading bar that appears at the top during navigation" />
+<ComponentPreview
+  name="next-top-loader-demo"
+  description="A loading bar that appears at the top during navigation"
+/>
 
 ## Installation
 
@@ -34,7 +37,10 @@ npm install zustand
 
 ### Add the component
 
-<ComponentSource name="next-top-loader" title="components/ui/next-top-loader.tsx" />
+<ComponentSource
+  name="next-top-loader"
+  title="components/ui/next-top-loader.tsx"
+/>
 
 </Steps>
 
@@ -73,11 +79,7 @@ The component will automatically show a loading bar at the top of the page durin
 Customize the appearance by passing props:
 
 ```tsx
-<NextTopLoader
-  color="#3b82f6"
-  height={3}
-  showSpinner={false}
-/>
+<NextTopLoader color="#3b82f6" height={3} showSpinner={false} />
 ```
 
 ## Manual Control
@@ -102,8 +104,8 @@ export function MyComponent() {
 
 ## Props
 
-| Prop | Type | Default | Description |
-| --- | --- | --- | --- |
-| color | string | "hsl(var(--primary))" | Loading bar color |
-| height | number | 2 | Loading bar height in pixels |
-| showSpinner | boolean | false | Show spinner on the right |
+| Prop        | Type    | Default               | Description                  |
+| ----------- | ------- | --------------------- | ---------------------------- |
+| color       | string  | "hsl(var(--primary))" | Loading bar color            |
+| height      | number  | 2                     | Loading bar height in pixels |
+| showSpinner | boolean | false                 | Show spinner on the right    |

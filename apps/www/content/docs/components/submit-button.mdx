@@ -4,7 +4,10 @@ description: Enhanced submit button with loading state that automatically detect
 featured: true
 ---
 
-<ComponentPreview name="submit-button-demo" description="An interactive form with a submit button that shows loading state" />
+<ComponentPreview
+  name="submit-button-demo"
+  description="An interactive form with a submit button that shows loading state"
+/>
 
 ## Installation
 
@@ -65,9 +68,10 @@ export function MyForm() {
 The button works seamlessly with `ExtendedForm` for client-side validation:
 
 ```tsx
+import { z } from "zod"
+
 import { ExtendedForm, useZodForm } from "@/components/ui/extended-form"
 import { SubmitButton } from "@/components/ui/submit-button"
-import { z } from "zod"
 
 const schema = z.object({
   email: z.string().email(),
@@ -77,9 +81,12 @@ export function MyForm() {
   const form = useZodForm({ schema })
 
   return (
-    <ExtendedForm form={form} onSubmit={async (data) => {
-      // Form submission
-    }}>
+    <ExtendedForm
+      form={form}
+      onSubmit={async (data) => {
+        // Form submission
+      }}
+    >
       <input {...form.register("email")} />
       <SubmitButton>Submit</SubmitButton>
     </ExtendedForm>
@@ -113,7 +120,7 @@ Accepts all props from `Button` component from shadcn/ui.
 
 ### LoadingButton
 
-| Prop | Type | Default | Description |
-| --- | --- | --- | --- |
-| loading | boolean | false | Controls the loading state |
-| ...buttonProps | ButtonProps | - | All button props are forwarded |
+| Prop           | Type        | Default | Description                    |
+| -------------- | ----------- | ------- | ------------------------------ |
+| loading        | boolean     | false   | Controls the loading state     |
+| ...buttonProps | ButtonProps | -       | All button props are forwarded |

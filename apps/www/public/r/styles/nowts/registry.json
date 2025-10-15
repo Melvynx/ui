@@ -114,7 +114,8 @@
         "zod"
       ],
       "registryDependencies": [
-        "label"
+        "label",
+        "field"
       ],
       "files": [
         {

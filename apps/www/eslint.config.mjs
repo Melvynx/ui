@@ -16,6 +16,9 @@ const eslintConfig = [
       "@next/next/no-duplicate-head": "off",
     },
   }),
+  {
+    ignores: ["components/ui/bar-visualizer.tsx", "components/ui/waveform.tsx"],
+  },
 ]
 
 export default eslintConfig

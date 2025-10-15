@@ -21,7 +21,10 @@ The **Form Management** system provides a comprehensive solution for handling fo
 
 ## Preview
 
-<ComponentPreview name="form-management-demo" description="Comprehensive form management with auto-save, unsaved changes warning, and sticky action bar" />
+<ComponentPreview
+  name="form-management-demo"
+  description="Comprehensive form management with auto-save, unsaved changes warning, and sticky action bar"
+/>
 
 ## Installation
 
@@ -44,21 +47,22 @@ npx shadcn@latest add https://ui.nowts.app/r/use-debounce-fn.json https://ui.now
 ### Basic form with sticky bar
 
 ```tsx
+import { useForm } from "react-hook-form"
+
 import {
   FormAutoSave,
   FormAutoSaveStickyBar,
-} from "@/lib/form-management/form-management";
-import { useForm } from "react-hook-form";
-import { Input } from "@/components/ui/input";
+} from "@/lib/form-management/form-management"
+import { Input } from "@/components/ui/input"
 
 export function BasicForm() {
   const form = useForm({
     defaultValues: { name: "", email: "" },
-  });
+  })
 
   const onSubmit = async (data: any) => {
-    await saveUserData(data);
-  };
+    await saveUserData(data)
+  }
 
   return (
     <FormAutoSave form={form} onSubmit={onSubmit}>
@@ -68,7 +72,7 @@ export function BasicForm() {
       </div>
       <FormAutoSaveStickyBar />
     </FormAutoSave>
-  );
+  )
 }
 ```
 
@@ -78,14 +82,14 @@ export function BasicForm() {
 import {
   FormAutoSave,
   FormAutoSaveWatch,
-} from "@/lib/form-management/form-management";
+} from "@/lib/form-management/form-management"
 
 export function AutoSaveForm() {
-  const form = useForm();
+  const form = useForm()
 
   const onSubmit = async (data: any) => {
-    await autosaveData(data);
-  };
+    await autosaveData(data)
+  }
 
   return (
     <FormAutoSave form={form} onSubmit={onSubmit}>
@@ -100,7 +104,7 @@ export function AutoSaveForm() {
       {/* Auto-save every 3 seconds */}
       <FormAutoSaveWatch form={form} autoSaveMs={3000} />
     </FormAutoSave>
-  );
+  )
 }
 ```
 
@@ -113,23 +117,23 @@ export function AutoSaveForm() {
 ### Form with validation
 
 ```tsx
-import { zodResolver } from "@hookform/resolvers/zod";
-import * as z from "zod";
+import { zodResolver } from "@hookform/resolvers/zod"
+import * as z from "zod"
 
 const schema = z.object({
   name: z.string().min(1, "Name is required"),
   email: z.string().email("Invalid email address"),
-});
+})
 
 export function ValidatedForm() {
   const form = useForm({
     resolver: zodResolver(schema),
     defaultValues: { name: "", email: "" },
-  });
+  })
 
   const onSubmit = async (data: z.infer<typeof schema>) => {
-    await createUser(data);
-  };
+    await createUser(data)
+  }
 
   return (
     <FormAutoSave form={form} onSubmit={onSubmit}>
@@ -154,7 +158,7 @@ export function ValidatedForm() {
       </div>
       <FormAutoSaveStickyBar />
     </FormAutoSave>
-  );
+  )
 }
 ```
 
@@ -163,10 +167,10 @@ export function ValidatedForm() {
 You can access form actions using the context:
 
 ```tsx
-import { useFormAutoSave } from "@/lib/form-management/form-management";
+import { useFormAutoSave } from "@/lib/form-management/form-management"
 
 function CustomActions() {
-  const { isDirty, isLoading, submit, cancel } = useFormAutoSave();
+  const { isDirty, isLoading, submit, cancel } = useFormAutoSave()
 
   return (
     <div className="flex gap-2">
@@ -177,14 +181,14 @@ function CustomActions() {
         Save Now
       </Button>
     </div>
-  );
+  )
 }
 
 // Use inside FormAutoSave
-<FormAutoSave form={form} onSubmit={onSubmit}>
+;<FormAutoSave form={form} onSubmit={onSubmit}>
   {/* form fields */}
   <CustomActions />
-</FormAutoSave>;
+</FormAutoSave>
 ```
 
 ## API Reference

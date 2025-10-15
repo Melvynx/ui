@@ -4,7 +4,10 @@ description: Enhanced form component with Zod schema validation and TypeScript s
 featured: true
 ---
 
-<ComponentPreview name="extended-form-demo" description="A form with automatic validation and fieldset management" />
+<ComponentPreview
+  name="extended-form-demo"
+  description="A form with automatic validation and fieldset management"
+/>
 
 ## Installation
 
@@ -48,8 +51,9 @@ npm install react-hook-form @hookform/resolvers zod
 The `ExtendedForm` component provides type-safe forms with Zod validation:
 
 ```tsx
-import { ExtendedForm, useZodForm } from "@/components/ui/extended-form"
 import { z } from "zod"
+
+import { ExtendedForm, useZodForm } from "@/components/ui/extended-form"
 
 const schema = z.object({
   name: z.string().min(2),
@@ -84,6 +88,7 @@ export function MyForm() {
 ### Automatic Fieldset Management
 
 The form automatically wraps your inputs in a `<fieldset>` that:
+
 - Disables all inputs during form submission
 - Can be manually disabled via the `disabled` prop
 - Prevents duplicate submissions
@@ -114,8 +119,14 @@ console.log(form.formState.isDirty) // boolean
 You can combine with shadcn/ui's Form components:
 
 ```tsx
-import { Form, FormField, FormItem, FormLabel, FormControl } from "@/components/ui/form"
 import { ExtendedForm, useZodForm } from "@/components/ui/extended-form"
+import {
+  Form,
+  FormControl,
+  FormField,
+  FormItem,
+  FormLabel,
+} from "@/components/ui/form"
 import { Input } from "@/components/ui/input"
 
 export function MyForm() {
@@ -144,16 +155,16 @@ export function MyForm() {
 
 ### ExtendedForm
 
-| Prop | Type | Required | Description |
-| --- | --- | --- | --- |
-| form | UseFormReturn | Yes | Form instance from useZodForm |
-| onSubmit | SubmitHandler | Yes | Form submission handler |
-| disabled | boolean | No | Manually disable the form |
-| ...formProps | FormHTMLAttributes | No | Standard form attributes |
+| Prop         | Type               | Required | Description                   |
+| ------------ | ------------------ | -------- | ----------------------------- |
+| form         | UseFormReturn      | Yes      | Form instance from useZodForm |
+| onSubmit     | SubmitHandler      | Yes      | Form submission handler       |
+| disabled     | boolean            | No       | Manually disable the form     |
+| ...formProps | FormHTMLAttributes | No       | Standard form attributes      |
 
 ### useZodForm
 
-| Prop | Type | Required | Description |
-| --- | --- | --- | --- |
-| schema | ZodType | Yes | Zod validation schema |
-| ...formProps | UseFormProps | No | react-hook-form options |
+| Prop         | Type         | Required | Description             |
+| ------------ | ------------ | -------- | ----------------------- |
+| schema       | ZodType      | Yes      | Zod validation schema   |
+| ...formProps | UseFormProps | No       | react-hook-form options |

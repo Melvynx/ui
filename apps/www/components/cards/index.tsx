@@ -1,8 +1,8 @@
-import ServerToastDemo from "@/registry/nowts/examples/server-toast-demo"
 import DialogManagerDemo from "@/registry/nowts/examples/dialog-manager-demo"
 import FormManagementDemo from "@/registry/nowts/examples/form-management-demo"
-import TypographyDemo from "@/registry/nowts/examples/typography-demo"
+import ServerToastDemo from "@/registry/nowts/examples/server-toast-demo"
 import TanstackFormDemo from "@/registry/nowts/examples/tanstack-form-demo"
+import TypographyDemo from "@/registry/nowts/examples/typography-demo"
 
 export function CardsDemo() {
   return (

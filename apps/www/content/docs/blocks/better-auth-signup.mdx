@@ -25,7 +25,10 @@ The **Better Auth Sign Up** component is a fully-featured sign-up form designed 
 
 ## Preview
 
-<ComponentPreview name="better-auth-signup-demo" description="Complete sign-up form with email and password authentication using Better Auth" />
+<ComponentPreview
+  name="better-auth-signup-demo"
+  description="Complete sign-up form with email and password authentication using Better Auth"
+/>
 
 ## Installation
 
@@ -38,11 +41,11 @@ npx shadcn@latest add https://ui.nowts.app/r/better-auth-signup.json
 ### 2. Configure Better Auth
 
 ```tsx title="lib/auth-client.ts"
-import { createAuthClient } from "better-auth/react";
+import { createAuthClient } from "better-auth/react"
 
 export const authClient = createAuthClient({
   baseURL: process.env.NEXT_PUBLIC_APP_URL,
-});
+})
 ```
 
 ## Usage
@@ -50,32 +53,32 @@ export const authClient = createAuthClient({
 ### Basic Implementation
 
 ```tsx title="app/signup/page.tsx"
-"use client";
+"use client"
 
-import { BetterAuthSignUp } from "@/components/better-auth-signup";
-import { authClient } from "@/lib/auth-client";
+import { authClient } from "@/lib/auth-client"
+import { BetterAuthSignUp } from "@/components/better-auth-signup"
 
 export default function SignUpPage() {
   const handleSignUp = async (data: {
-    name: string;
-    email: string;
-    password: string;
+    name: string
+    email: string
+    password: string
   }) => {
-    const result = await authClient.signUp.email(data);
+    const result = await authClient.signUp.email(data)
 
     if (result.error) {
-      throw new Error(result.error.message);
+      throw new Error(result.error.message)
     }
-  };
+  }
 
   return (
     <BetterAuthSignUp
       onSignUp={handleSignUp}
       onSuccess={() => {
-        window.location.href = "/dashboard";
+        window.location.href = "/dashboard"
       }}
     />
-  );
+  )
 }
 ```
 
@@ -87,11 +90,11 @@ export default function SignUpPage() {
   title="Join our platform"
   description="Create your account in seconds"
   onSuccess={() => {
-    toast.success("Welcome aboard!");
-    window.location.href = "/onboarding";
+    toast.success("Welcome aboard!")
+    window.location.href = "/onboarding"
   }}
   onError={(error) => {
-    toast.error(`Sign up failed: ${error}`);
+    toast.error(`Sign up failed: ${error}`)
   }}
 />
 ```
@@ -99,53 +102,54 @@ export default function SignUpPage() {
 ### With Sign In Link
 
 ```tsx title="app/signup/page.tsx"
-import Link from "next/link";
+import Link from "next/link"
 
-<BetterAuthSignUp
+;<BetterAuthSignUp
   onSignUp={handleSignUp}
   signInLink={
     <>
       Already have an account?{" "}
-      <Link href="/signin" className="underline hover:text-foreground">
+      <Link href="/signin" className="hover:text-foreground underline">
         Sign in
       </Link>
     </>
   }
-/>;
+/>
 ```
 
 ### Server Action Pattern
 
 ```tsx title="app/signup/page.tsx"
-import { BetterAuthSignUp } from "@/components/better-auth-signup";
-import { signUpAction } from "./actions";
+import { BetterAuthSignUp } from "@/components/better-auth-signup"
+
+import { signUpAction } from "./actions"
 
 export default function SignUpPage() {
   return (
     <BetterAuthSignUp
       onSignUp={async (data) => {
-        const result = await signUpAction(data);
+        const result = await signUpAction(data)
         if (!result.success) {
-          throw new Error(result.error);
+          throw new Error(result.error)
         }
       }}
       onSuccess={() => {
-        window.location.href = "/dashboard";
+        window.location.href = "/dashboard"
       }}
     />
-  );
+  )
 }
 ```
 
 ```tsx title="app/signup/actions.ts"
-"use server";
+"use server"
 
-import { auth } from "@/lib/auth";
+import { auth } from "@/lib/auth"
 
 export async function signUpAction(data: {
-  name: string;
-  email: string;
-  password: string;
+  name: string
+  email: string
+  password: string
 }) {
   try {
     await auth.api.signUpEmail({
@@ -154,14 +158,14 @@ export async function signUpAction(data: {
         password: data.password,
         name: data.name,
       },
-    });
+    })
 
-    return { success: true };
+    return { success: true }
   } catch (error) {
     return {
       success: false,
       error: error instanceof Error ? error.message : "Sign up failed",
-    };
+    }
   }
 }
 ```
@@ -194,7 +198,7 @@ const signUpSchema = z
   .refine((data) => data.password === data.confirmPassword, {
     message: "Passwords don't match",
     path: ["confirmPassword"],
-  });
+  })
 ```
 
 ## Customization
@@ -204,10 +208,11 @@ const signUpSchema = z
 To use custom validation, you can create your own component based on this one:
 
 ```tsx title="components/custom-signup.tsx"
-"use client";
+"use client"
 
-import { BetterAuthSignUp } from "@/components/better-auth-signup";
-import { z } from "zod";
+import { z } from "zod"
+
+import { BetterAuthSignUp } from "@/components/better-auth-signup"
 
 const customSchema = z
   .object({
@@ -226,7 +231,7 @@ const customSchema = z
   .refine((data) => data.password === data.confirmPassword, {
     message: "Passwords don't match",
     path: ["confirmPassword"],
-  });
+  })
 ```
 
 ### Styling
@@ -251,11 +256,12 @@ The component uses Tailwind CSS and shadcn/ui styling. You can customize it by:
 ### With Better Auth
 
 ```tsx title="app/signup/page.tsx"
-"use client";
+"use client"
 
-import { BetterAuthSignUp } from "@/components/better-auth-signup";
-import { authClient } from "@/lib/auth-client";
-import { toast } from "sonner";
+import { toast } from "sonner"
+
+import { authClient } from "@/lib/auth-client"
+import { BetterAuthSignUp } from "@/components/better-auth-signup"
 
 export default function SignUpPage() {
   return (
@@ -266,29 +272,29 @@ export default function SignUpPage() {
             email: data.email,
             password: data.password,
             name: data.name,
-          });
+          })
 
           if (result.error) {
-            throw new Error(result.error.message);
+            throw new Error(result.error.message)
           }
         }}
         onSuccess={() => {
-          toast.success("Account created! Redirecting...");
+          toast.success("Account created! Redirecting...")
           setTimeout(() => {
-            window.location.href = "/dashboard";
-          }, 1000);
+            window.location.href = "/dashboard"
+          }, 1000)
         }}
         signInLink={
           <>
             Already have an account?{" "}
-            <a href="/signin" className="underline hover:text-foreground">
+            <a href="/signin" className="hover:text-foreground underline">
               Sign in
             </a>
           </>
         }
       />
     </div>
-  );
+  )
 }
 ```
 

@@ -3,7 +3,10 @@ title: Typography
 description: A polymorphic typography component with multiple variants for consistent text styling across your application.
 ---
 
-<ComponentPreview name="typography-demo" description="Typography variants showcase" />
+<ComponentPreview
+  name="typography-demo"
+  description="Typography variants showcase"
+/>
 
 ## Installation
 
@@ -56,9 +59,7 @@ export function MyComponent() {
       <Typography variant="lead">
         An introductory paragraph with larger text
       </Typography>
-      <Typography variant="p">
-        Regular paragraph text
-      </Typography>
+      <Typography variant="p">Regular paragraph text</Typography>
     </div>
   )
 }
@@ -130,25 +131,25 @@ Add custom classes with `className`:
 
 ## Props
 
-| Prop | Type | Default | Description |
-| --- | --- | --- | --- |
-| variant | string | "p" | Typography variant (h1, h2, h3, p, lead, large, small, muted, code, quote, link) |
-| as | ElementType | - | Override the HTML element |
-| className | string | - | Additional CSS classes |
-| ...props | HTMLAttributes | - | Standard HTML attributes |
+| Prop      | Type           | Default | Description                                                                      |
+| --------- | -------------- | ------- | -------------------------------------------------------------------------------- |
+| variant   | string         | "p"     | Typography variant (h1, h2, h3, p, lead, large, small, muted, code, quote, link) |
+| as        | ElementType    | -       | Override the HTML element                                                        |
+| className | string         | -       | Additional CSS classes                                                           |
+| ...props  | HTMLAttributes | -       | Standard HTML attributes                                                         |
 
 ## Variants Reference
 
-| Variant | Default Element | Description |
-| --- | --- | --- |
-| h1 | h1 | Large page heading |
-| h2 | h2 | Section heading |
-| h3 | h3 | Subsection heading |
-| p | p | Regular paragraph |
-| lead | p | Introductory text |
-| large | p | Emphasized text |
-| small | p | Fine print |
-| muted | p | Secondary text |
-| code | code | Inline code |
-| quote | blockquote | Quotation |
-| link | a | Link text |
+| Variant | Default Element | Description        |
+| ------- | --------------- | ------------------ |
+| h1      | h1              | Large page heading |
+| h2      | h2              | Section heading    |
+| h3      | h3              | Subsection heading |
+| p       | p               | Regular paragraph  |
+| lead    | p               | Introductory text  |
+| large   | p               | Emphasized text    |
+| small   | p               | Fine print         |
+| muted   | p               | Secondary text     |
+| code    | code            | Inline code        |
+| quote   | blockquote      | Quotation          |
+| link    | a               | Link text          |
