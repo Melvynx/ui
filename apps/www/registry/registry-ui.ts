@@ -66,7 +66,7 @@ export const ui: Registry["items"] = [
     description:
       "A complete form management solution using TanStack Form with Zod validation, supporting all input types including arrays and nested objects.",
     dependencies: ["@tanstack/react-form", "zod"],
-    registryDependencies: ["label"],
+    registryDependencies: ["label", "field"],
     files: [
       {
         path: "ui/tanstack-form.tsx",
