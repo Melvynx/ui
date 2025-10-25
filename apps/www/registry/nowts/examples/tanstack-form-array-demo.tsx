@@ -6,15 +6,10 @@ import { z } from "zod"
 
 import { Button } from "@/components/ui/button"
 import { Card } from "@/components/ui/card"
-import { Input } from "@/components/ui/input"
+import { Field, FieldContent } from "@/components/ui/field"
 import {
-  Form,
-  FormControl,
-  FormField,
-  FormItem,
   FormLabel,
   FormMessage,
-  getInputFieldProps,
   useForm,
 } from "@/registry/nowts/ui/tanstack-form"
 
@@ -48,7 +43,14 @@ export default function TanstackFormArrayDemo() {
 
   return (
     <Card className="mx-auto w-full max-w-2xl p-6">
-      <Form form={form} className="space-y-6">
+      <form
+        onSubmit={(e) => {
+          e.preventDefault()
+          e.stopPropagation()
+          form.handleSubmit()
+        }}
+        className="space-y-6"
+      >
         <div className="space-y-2">
           <h3 className="text-lg font-semibold">Create Team</h3>
           <p className="text-muted-foreground text-sm">
@@ -56,22 +58,19 @@ export default function TanstackFormArrayDemo() {
           </p>
         </div>
 
-        <FormField form={form} name="teamName">
+        <form.AppField name="teamName">
           {(field) => (
-            <FormItem field={field} form={form}>
+            <Field>
               <FormLabel>Team Name</FormLabel>
-              <FormControl>
-                <Input
-                  {...getInputFieldProps(field)}
-                  placeholder="Engineering Team"
-                />
-              </FormControl>
-              <FormMessage />
-            </FormItem>
+              <FieldContent>
+                <field.Input placeholder="Engineering Team" />
+                <FormMessage />
+              </FieldContent>
+            </Field>
           )}
-        </FormField>
+        </form.AppField>
 
-        <FormField form={form} name="users" mode="array">
+        <form.AppField name="users" mode="array">
           {(usersField) => (
             <div className="space-y-4">
               <div className="flex items-center justify-between">
@@ -95,16 +94,11 @@ export default function TanstackFormArrayDemo() {
 
               <div className="space-y-2">
                 {usersField.state.value.map((_, index) => (
-                  <FormField
-                    key={index}
-                    form={form}
-                    name={`users[${index}].email`}
-                  >
+                  <form.AppField key={index} name={`users[${index}].email`}>
                     {(field) => (
                       <div className="flex items-start gap-2">
                         <div className="flex-1">
-                          <Input
-                            {...getInputFieldProps(field)}
+                          <field.Input
                             type="email"
                             placeholder="user@example.com"
                           />
@@ -129,7 +123,7 @@ export default function TanstackFormArrayDemo() {
                         </Button>
                       </div>
                     )}
-                  </FormField>
+                  </form.AppField>
                 ))}
               </div>
 
@@ -144,16 +138,14 @@ export default function TanstackFormArrayDemo() {
                 )}
             </div>
           )}
-        </FormField>
+        </form.AppField>
 
-        <Button
-          type="submit"
-          disabled={form.state.isSubmitting}
-          className="w-full"
-        >
-          {form.state.isSubmitting ? "Creating..." : "Create Team"}
-        </Button>
-      </Form>
+        <form.AppForm>
+          <form.SubmitButton className="w-full">
+            {form.state.isSubmitting ? "Creating..." : "Create Team"}
+          </form.SubmitButton>
+        </form.AppForm>
+      </form>
     </Card>
   )
 }

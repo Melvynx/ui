@@ -3,7 +3,6 @@
 import { toast } from "sonner"
 import { z } from "zod"
 
-import { Button } from "@/components/ui/button"
 import {
   Card,
   CardContent,
@@ -11,15 +10,10 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card"
-import { Input } from "@/components/ui/input"
+import { Field, FieldContent } from "@/components/ui/field"
 import {
-  Form,
-  FormControl,
-  FormField,
-  FormItem,
   FormLabel,
   FormMessage,
-  getInputFieldProps,
   useForm,
 } from "@/registry/nowts/ui/tanstack-form"
 
@@ -50,43 +44,44 @@ export default function TanstackFormDemo() {
       </CardHeader>
 
       <CardContent>
-        <Form form={form} className="space-y-4">
-          <FormField form={form} name="email">
+        <form
+          onSubmit={(e) => {
+            e.preventDefault()
+            e.stopPropagation()
+            form.handleSubmit()
+          }}
+          className="space-y-4"
+        >
+          <form.AppField name="email">
             {(field) => (
-              <FormItem field={field} form={form}>
+              <Field>
                 <FormLabel>Email</FormLabel>
-                <FormControl>
-                  <Input
-                    {...getInputFieldProps(field)}
-                    type="email"
-                    placeholder="you@example.com"
-                  />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
+                <FieldContent>
+                  <field.Input type="email" placeholder="you@example.com" />
+                  <FormMessage />
+                </FieldContent>
+              </Field>
             )}
-          </FormField>
+          </form.AppField>
 
-          <FormField form={form} name="password">
+          <form.AppField name="password">
             {(field) => (
-              <FormItem field={field} form={form}>
+              <Field>
                 <FormLabel>Password</FormLabel>
-                <FormControl>
-                  <Input
-                    {...getInputFieldProps(field)}
-                    type="password"
-                    placeholder="••••••••"
-                  />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
+                <FieldContent>
+                  <field.Input type="password" placeholder="••••••••" />
+                  <FormMessage />
+                </FieldContent>
+              </Field>
             )}
-          </FormField>
+          </form.AppField>
 
-          <Button type="submit" className="w-full">
-            Create Account
-          </Button>
-        </Form>
+          <form.AppForm>
+            <form.SubmitButton className="w-full">
+              Create Account
+            </form.SubmitButton>
+          </form.AppForm>
+        </form>
       </CardContent>
     </Card>
   )

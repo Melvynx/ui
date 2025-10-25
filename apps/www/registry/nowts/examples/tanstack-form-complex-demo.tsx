@@ -3,10 +3,8 @@
 import { toast } from "sonner"
 import { z } from "zod"
 
-import { Button } from "@/components/ui/button"
 import { Card } from "@/components/ui/card"
-import { Checkbox } from "@/components/ui/checkbox"
-import { Input } from "@/components/ui/input"
+import { Field, FieldContent } from "@/components/ui/field"
 import {
   Select,
   SelectContent,
@@ -15,20 +13,10 @@ import {
   SelectValue,
 } from "@/components/ui/select"
 import { Switch } from "@/components/ui/switch"
-import { Textarea } from "@/components/ui/textarea"
 import {
-  Form,
-  FormControl,
   FormDescription,
-  FormField,
-  FormItem,
   FormLabel,
   FormMessage,
-  getCheckboxFieldProps,
-  getInputFieldProps,
-  getSelectFieldProps,
-  getSwitchFieldProps,
-  getTextareaFieldProps,
   useForm,
 } from "@/registry/nowts/ui/tanstack-form"
 
@@ -72,7 +60,14 @@ export default function TanstackFormComplexDemo() {
 
   return (
     <Card className="mx-auto w-full max-w-2xl p-6">
-      <Form form={form} className="space-y-6">
+      <form
+        onSubmit={(e) => {
+          e.preventDefault()
+          e.stopPropagation()
+          form.handleSubmit()
+        }}
+        className="space-y-6"
+      >
         <div className="space-y-2">
           <h3 className="text-lg font-semibold">Create Account</h3>
           <p className="text-muted-foreground text-sm">
@@ -80,40 +75,36 @@ export default function TanstackFormComplexDemo() {
           </p>
         </div>
 
-        <FormField form={form} name="name">
+        <form.AppField name="name">
           {(field) => (
-            <FormItem field={field} form={form}>
+            <Field>
               <FormLabel>Full Name</FormLabel>
-              <FormControl>
-                <Input {...getInputFieldProps(field)} placeholder="John Doe" />
-              </FormControl>
-              <FormMessage />
-            </FormItem>
+              <FieldContent>
+                <field.Input placeholder="John Doe" />
+                <FormMessage />
+              </FieldContent>
+            </Field>
           )}
-        </FormField>
+        </form.AppField>
 
-        <FormField form={form} name="email">
+        <form.AppField name="email">
           {(field) => (
-            <FormItem field={field} form={form}>
+            <Field>
               <FormLabel>Email Address</FormLabel>
-              <FormControl>
-                <Input
-                  {...getInputFieldProps(field)}
-                  type="email"
-                  placeholder="john@example.com"
-                />
-              </FormControl>
-              <FormMessage />
-            </FormItem>
+              <FieldContent>
+                <field.Input type="email" placeholder="john@example.com" />
+                <FormMessage />
+              </FieldContent>
+            </Field>
           )}
-        </FormField>
+        </form.AppField>
 
-        <FormField form={form} name="role">
+        <form.AppField name="role">
           {(field) => (
-            <FormItem field={field} form={form}>
+            <Field>
               <FormLabel>Role</FormLabel>
-              <FormControl>
-                <Select {...getSelectFieldProps(field)}>
+              <FieldContent>
+                <field.Select>
                   <SelectTrigger>
                     <SelectValue placeholder="Select your role" />
                   </SelectTrigger>
@@ -122,103 +113,93 @@ export default function TanstackFormComplexDemo() {
                     <SelectItem value="designer">Designer</SelectItem>
                     <SelectItem value="manager">Manager</SelectItem>
                   </SelectContent>
-                </Select>
-              </FormControl>
-              <FormDescription>
-                Choose the role that best describes you
-              </FormDescription>
-              <FormMessage />
-            </FormItem>
+                </field.Select>
+                <FormDescription>
+                  Choose the role that best describes you
+                </FormDescription>
+                <FormMessage />
+              </FieldContent>
+            </Field>
           )}
-        </FormField>
+        </form.AppField>
 
-        <FormField form={form} name="bio">
+        <form.AppField name="bio">
           {(field) => (
-            <FormItem field={field} form={form}>
+            <Field>
               <FormLabel>Bio</FormLabel>
-              <FormControl>
-                <Textarea
-                  {...getTextareaFieldProps(field)}
+              <FieldContent>
+                <field.Textarea
                   placeholder="Tell us about yourself..."
                   rows={4}
                 />
-              </FormControl>
-              <FormDescription>
-                Write a short bio (10-200 characters)
-              </FormDescription>
-              <FormMessage />
-            </FormItem>
+                <FormDescription>
+                  Write a short bio (10-200 characters)
+                </FormDescription>
+                <FormMessage />
+              </FieldContent>
+            </Field>
           )}
-        </FormField>
+        </form.AppField>
 
-        <FormField form={form} name="newsletter">
+        <form.AppField name="newsletter">
           {(field) => (
-            <FormItem field={field} form={form}>
-              <div className="flex items-start gap-3">
-                <FormControl>
-                  <Checkbox {...getCheckboxFieldProps(field)} id="newsletter" />
-                </FormControl>
-                <div className="space-y-1 leading-none">
-                  <FormLabel htmlFor="newsletter" className="font-normal">
-                    Subscribe to newsletter
-                  </FormLabel>
-                  <FormDescription>
-                    Receive weekly updates about new features
-                  </FormDescription>
-                </div>
+            <div className="flex items-start gap-3">
+              <field.Checkbox id="newsletter" />
+              <div className="space-y-1 leading-none">
+                <FormLabel htmlFor="newsletter" className="font-normal">
+                  Subscribe to newsletter
+                </FormLabel>
+                <FormDescription>
+                  Receive weekly updates about new features
+                </FormDescription>
+                <FormMessage />
               </div>
-              <FormMessage />
-            </FormItem>
+            </div>
           )}
-        </FormField>
+        </form.AppField>
 
-        <FormField form={form} name="notifications">
+        <form.AppField name="notifications">
           {(field) => (
-            <FormItem field={field} form={form}>
-              <div className="flex items-center justify-between rounded-lg border p-4">
-                <div className="space-y-0.5">
-                  <FormLabel>Push Notifications</FormLabel>
-                  <FormDescription>
-                    Receive push notifications about account activity
-                  </FormDescription>
-                </div>
-                <FormControl>
-                  <Switch {...getSwitchFieldProps(field)} />
-                </FormControl>
+            <div className="flex items-center justify-between rounded-lg border p-4">
+              <div className="space-y-0.5">
+                <FormLabel>Push Notifications</FormLabel>
+                <FormDescription>
+                  Receive push notifications about account activity
+                </FormDescription>
               </div>
-            </FormItem>
+              <Switch
+                checked={Boolean(field.state.value)}
+                onCheckedChange={(checked) =>
+                  field.handleChange(Boolean(checked))
+                }
+              />
+            </div>
           )}
-        </FormField>
+        </form.AppField>
 
-        <FormField form={form} name="terms">
+        <form.AppField name="terms">
           {(field) => (
-            <FormItem field={field} form={form}>
-              <div className="flex items-start gap-3">
-                <FormControl>
-                  <Checkbox {...getCheckboxFieldProps(field)} id="terms" />
-                </FormControl>
-                <div className="space-y-1 leading-none">
-                  <FormLabel htmlFor="terms" className="font-normal">
-                    I accept the terms and conditions
-                  </FormLabel>
-                  <FormDescription>
-                    You agree to our Terms of Service and Privacy Policy
-                  </FormDescription>
-                  <FormMessage />
-                </div>
+            <div className="flex items-start gap-3">
+              <field.Checkbox id="terms" />
+              <div className="space-y-1 leading-none">
+                <FormLabel htmlFor="terms" className="font-normal">
+                  I accept the terms and conditions
+                </FormLabel>
+                <FormDescription>
+                  You agree to our Terms of Service and Privacy Policy
+                </FormDescription>
+                <FormMessage />
               </div>
-            </FormItem>
+            </div>
           )}
-        </FormField>
+        </form.AppField>
 
-        <Button
-          type="submit"
-          disabled={form.state.isSubmitting}
-          className="w-full"
-        >
-          {form.state.isSubmitting ? "Creating account..." : "Create Account"}
-        </Button>
-      </Form>
+        <form.AppForm>
+          <form.SubmitButton className="w-full">
+            {form.state.isSubmitting ? "Creating account..." : "Create Account"}
+          </form.SubmitButton>
+        </form.AppForm>
+      </form>
     </Card>
   )
 }
