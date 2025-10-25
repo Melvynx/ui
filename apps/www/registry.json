@@ -424,12 +424,9 @@
       "dependencies": ["zod"],
       "registryDependencies": [
         "https://ui.nowts.app/r/tanstack-form.json",
+        "field",
         "card",
-        "input",
-        "label",
-        "button",
-        "sonner",
-        "select"
+        "sonner"
       ],
       "files": [
         {
@@ -444,14 +441,10 @@
       "dependencies": ["zod", "lucide-react"],
       "registryDependencies": [
         "https://ui.nowts.app/r/tanstack-form.json",
+        "field",
         "card",
-        "input",
-        "label",
-        "button",
         "select",
-        "checkbox",
         "switch",
-        "textarea",
         "sonner"
       ],
       "files": [
@@ -467,8 +460,8 @@
       "dependencies": ["zod", "lucide-react"],
       "registryDependencies": [
         "https://ui.nowts.app/r/tanstack-form.json",
+        "field",
         "card",
-        "input",
         "button",
         "sonner"
       ],

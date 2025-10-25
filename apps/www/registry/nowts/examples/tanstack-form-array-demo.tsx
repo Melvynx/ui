@@ -102,15 +102,7 @@ export default function TanstackFormArrayDemo() {
                             type="email"
                             placeholder="user@example.com"
                           />
-                          {field.state.meta.isTouched &&
-                            form.state.submissionAttempts > 0 &&
-                            field.state.meta.errors.length > 0 && (
-                              <p className="text-destructive mt-1 text-sm">
-                                {typeof field.state.meta.errors[0] === "string"
-                                  ? field.state.meta.errors[0]
-                                  : field.state.meta.errors[0]?.message}
-                              </p>
-                            )}
+                          <FormMessage />
                         </div>
                         <Button
                           type="button"
@@ -127,15 +119,7 @@ export default function TanstackFormArrayDemo() {
                 ))}
               </div>
 
-              {usersField.state.meta.isTouched &&
-                form.state.submissionAttempts > 0 &&
-                usersField.state.meta.errors.length > 0 && (
-                  <p className="text-destructive text-sm">
-                    {typeof usersField.state.meta.errors[0] === "string"
-                      ? usersField.state.meta.errors[0]
-                      : usersField.state.meta.errors[0]?.message}
-                  </p>
-                )}
+              <FormMessage />
             </div>
           )}
         </form.AppField>

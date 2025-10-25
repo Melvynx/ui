@@ -464,7 +464,7 @@ export const Index: Record<string, any> = {
     name: "tanstack-form-demo",
     description: "",
     type: "registry:example",
-    registryDependencies: ["https://ui.nowts.app/r/tanstack-form.json","card","input","label","button","sonner","select"],
+    registryDependencies: ["https://ui.nowts.app/r/tanstack-form.json","field","card","sonner"],
     files: [{
       path: "registry/nowts/examples/tanstack-form-demo.tsx",
       type: "registry:example",
@@ -482,7 +482,7 @@ export const Index: Record<string, any> = {
     name: "tanstack-form-complex-demo",
     description: "",
     type: "registry:example",
-    registryDependencies: ["https://ui.nowts.app/r/tanstack-form.json","card","input","label","button","select","checkbox","switch","textarea","sonner"],
+    registryDependencies: ["https://ui.nowts.app/r/tanstack-form.json","field","card","select","switch","sonner"],
     files: [{
       path: "registry/nowts/examples/tanstack-form-complex-demo.tsx",
       type: "registry:example",
@@ -500,7 +500,7 @@ export const Index: Record<string, any> = {
     name: "tanstack-form-array-demo",
     description: "",
     type: "registry:example",
-    registryDependencies: ["https://ui.nowts.app/r/tanstack-form.json","card","input","button","sonner"],
+    registryDependencies: ["https://ui.nowts.app/r/tanstack-form.json","field","card","button","sonner"],
     files: [{
       path: "registry/nowts/examples/tanstack-form-array-demo.tsx",
       type: "registry:example",

@@ -7,12 +7,9 @@
   ],
   "registryDependencies": [
     "https://ui.nowts.app/r/tanstack-form.json",
+    "field",
     "card",
-    "input",
-    "label",
-    "button",
-    "sonner",
-    "select"
+    "sonner"
   ],
   "files": [
     {
