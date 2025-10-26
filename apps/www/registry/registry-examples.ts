@@ -179,6 +179,23 @@ export const examples: Registry["items"] = [
     ],
   },
   {
+    name: "form-management-tanstack-demo",
+    type: "registry:example",
+    registryDependencies: [
+      "https://ui.nowts.app/r/form-management-tanstack.json",
+      "https://ui.nowts.app/r/tanstack-form.json",
+      "card",
+      "sonner",
+    ],
+    dependencies: ["zod"],
+    files: [
+      {
+        path: "examples/form-management-tanstack-demo.tsx",
+        type: "registry:example",
+      },
+    ],
+  },
+  {
     name: "better-auth-signin-demo",
     type: "registry:example",
     registryDependencies: [

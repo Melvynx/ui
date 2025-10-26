@@ -28,5 +28,10 @@
     "name": "form-management",
     "description": "A comprehensive form management system with auto-save, unsaved changes warning, and sticky action bar for enhanced UX.",
     "categories": ["forms"]
+  },
+  {
+    "name": "form-management-tanstack",
+    "description": "A comprehensive form management system built with TanStack Form, featuring auto-save, unsaved changes warnings, and sticky action bar for enhanced UX.",
+    "categories": ["forms"]
   }
 ]

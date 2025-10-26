@@ -200,4 +200,34 @@ export const blocks: Registry["items"] = [
     ],
     categories: ["forms"],
   },
+  {
+    name: "form-management-tanstack",
+    type: "registry:block",
+    title: "Form Management TanStack",
+    description:
+      "A comprehensive form management system built with TanStack Form, featuring auto-save, unsaved changes warnings, and sticky action bar for enhanced UX.",
+    registryDependencies: [
+      "button",
+      "tooltip",
+      "https://ui.nowts.app/r/submit-button.json",
+      "https://ui.nowts.app/r/tanstack-form.json",
+      "https://ui.nowts.app/r/use-debounce-fn.json",
+      "https://ui.nowts.app/r/use-warn-if-unsaved-changes.json",
+      "https://ui.nowts.app/r/use-is-client.json",
+    ],
+    dependencies: ["motion", "react-hotkeys-hook", "lucide-react"],
+    files: [
+      {
+        path: "blocks/form-management-tanstack/form-management.tsx",
+        type: "registry:lib",
+        target: "lib/form-management-tanstack/form-management.tsx",
+      },
+      {
+        path: "blocks/form-management-tanstack/form-management-sticky-bar.tsx",
+        type: "registry:lib",
+        target: "lib/form-management-tanstack/form-management-sticky-bar.tsx",
+      },
+    ],
+    categories: ["forms"],
+  },
 ]

@@ -1,0 +1,300 @@
+---
+title: "Form Management TanStack"
+description: "A comprehensive form management system built with TanStack Form, featuring auto-save, unsaved changes warnings, and sticky action bar for enhanced UX."
+slug: "form-management-tanstack"
+type: "block"
+---
+
+## About
+
+The **Form Management TanStack** system provides a comprehensive solution for handling forms with auto-save functionality, unsaved changes warnings, and a sticky action bar that appears when there are pending changes. Built on top of TanStack Form for powerful type-safe form state management.
+
+### Features
+
+- ✅ **Auto-save**: Automatically save form changes with configurable debounce
+- ✅ **Sticky Action Bar**: Beautiful floating action bar for unsaved changes
+- ✅ **Unsaved Changes Warning**: Warns users before leaving with unsaved changes
+- ✅ **Keyboard Shortcuts**: CMD/Ctrl+S to save changes
+- ✅ **Loading States**: Built-in loading indicators during submission
+- ✅ **TanStack Form**: Full integration with @tanstack/react-form
+- ✅ **TypeScript**: Fully typed for better developer experience
+- ✅ **Zod Validation**: Schema-based validation with Zod
+
+## Preview
+
+<ComponentPreview
+  name="form-management-tanstack-demo"
+  description="Comprehensive form management with TanStack Form, auto-save, unsaved changes warning, and sticky action bar"
+/>
+
+## Installation
+
+### 1. Install the component
+
+```bash
+npx shadcn@latest add https://ui.nowts.app/r/form-management-tanstack.json
+```
+
+### 2. Install additional dependencies
+
+The form management system requires some additional components:
+
+```bash
+npx shadcn@latest add https://ui.nowts.app/r/use-debounce-fn.json https://ui.nowts.app/r/use-warn-if-unsaved-changes.json https://ui.nowts.app/r/use-is-client.json https://ui.nowts.app/r/submit-button.json https://ui.nowts.app/r/tanstack-form.json
+```
+
+## Usage
+
+### Basic form with sticky bar
+
+```tsx
+import { z } from "zod"
+
+import { FormManagement } from "@/lib/form-management-tanstack/form-management"
+import { FormManagementStickyBar } from "@/lib/form-management-tanstack/form-management-sticky-bar"
+import {
+  FormLabel,
+  FormMessage,
+  useForm,
+} from "@/components/ui/tanstack-form"
+
+const schema = z.object({
+  name: z.string().min(1, "Name is required"),
+  email: z.string().email("Invalid email"),
+})
+
+export function BasicForm() {
+  const form = useForm({
+    schema,
+    defaultValues: { name: "", email: "" },
+    onSubmit: async (values) => {
+      await saveUserData(values)
+    },
+  })
+
+  return (
+    <FormManagement form={form}>
+      <div className="space-y-4">
+        <form.Field name="name">
+          {(field) => (
+            <div className="space-y-2">
+              <FormLabel>Name</FormLabel>
+              <form.FieldComponents.Input placeholder="Your name" />
+              <FormMessage />
+            </div>
+          )}
+        </form.Field>
+
+        <form.Field name="email">
+          {(field) => (
+            <div className="space-y-2">
+              <FormLabel>Email</FormLabel>
+              <form.FieldComponents.Input
+                type="email"
+                placeholder="your@email.com"
+              />
+              <FormMessage />
+            </div>
+          )}
+        </form.Field>
+      </div>
+      <FormManagementStickyBar />
+    </FormManagement>
+  )
+}
+```
+
+### Form with auto-save
+
+```tsx
+import { FormManagement, FormManagementAutoSave } from "@/lib/form-management-tanstack/form-management"
+
+export function AutoSaveForm() {
+  const form = useForm({
+    schema: profileSchema,
+    defaultValues: { title: "", content: "" },
+    onSubmit: async (values) => {
+      await autosaveData(values)
+    },
+  })
+
+  return (
+    <FormManagement form={form}>
+      <div className="space-y-4">
+        <form.Field name="title">
+          {(field) => (
+            <div className="space-y-2">
+              <FormLabel>Title</FormLabel>
+              <form.FieldComponents.Input placeholder="Document title" />
+              <FormMessage />
+            </div>
+          )}
+        </form.Field>
+
+        <form.Field name="content">
+          {(field) => (
+            <div className="space-y-2">
+              <FormLabel>Content</FormLabel>
+              <form.FieldComponents.Textarea placeholder="Document content" />
+              <FormMessage />
+            </div>
+          )}
+        </form.Field>
+      </div>
+
+      {/* Auto-save every 3 seconds */}
+      <FormManagementAutoSave form={form} autoSaveMs={3000} />
+    </FormManagement>
+  )
+}
+```
+
+### Custom sticky bar labels
+
+```tsx
+<FormManagementStickyBar
+  actionLabel="Publish Changes"
+  cancelLabel="Discard"
+/>
+```
+
+### Form with complex validation
+
+```tsx
+import { z } from "zod"
+
+const profileSchema = z.object({
+  name: z.string().min(2, "Name must be at least 2 characters"),
+  email: z.string().email("Invalid email address"),
+  bio: z.string().max(200, "Bio must be less than 200 characters"),
+  age: z.number().min(18, "Must be at least 18 years old"),
+})
+
+export function ValidatedForm() {
+  const form = useForm({
+    schema: profileSchema,
+    defaultValues: { name: "", email: "", bio: "", age: 18 },
+    onSubmit: async (values) => {
+      await createUser(values)
+    },
+  })
+
+  return (
+    <FormManagement form={form}>
+      <div className="space-y-4">
+        <form.Field name="name">
+          {(field) => (
+            <div className="space-y-2">
+              <FormLabel>Name</FormLabel>
+              <form.FieldComponents.Input placeholder="Enter your name" />
+              <FormMessage />
+            </div>
+          )}
+        </form.Field>
+
+        <form.Field name="email">
+          {(field) => (
+            <div className="space-y-2">
+              <FormLabel>Email</FormLabel>
+              <form.FieldComponents.Input
+                type="email"
+                placeholder="your@email.com"
+              />
+              <FormMessage />
+            </div>
+          )}
+        </form.Field>
+
+        <form.Field name="bio">
+          {(field) => (
+            <div className="space-y-2">
+              <FormLabel>Bio</FormLabel>
+              <form.FieldComponents.Textarea placeholder="Tell us about yourself" />
+              <FormMessage />
+            </div>
+          )}
+        </form.Field>
+      </div>
+      <FormManagementStickyBar />
+    </FormManagement>
+  )
+}
+```
+
+### Manual form actions
+
+You can access form actions using the context:
+
+```tsx
+import { useFormManagement } from "@/lib/form-management-tanstack/form-management"
+import { Button } from "@/components/ui/button"
+
+function CustomActions() {
+  const { isDirty, isLoading, submit, cancel } = useFormManagement()
+
+  return (
+    <div className="flex gap-2">
+      <Button onClick={cancel} variant="outline" disabled={!isDirty}>
+        Reset
+      </Button>
+      <Button onClick={submit} disabled={!isDirty} loading={isLoading}>
+        Save Now
+      </Button>
+    </div>
+  )
+}
+
+// Use inside FormManagement
+;<FormManagement form={form}>
+  {/* form fields */}
+  <CustomActions />
+</FormManagement>
+```
+
+## API Reference
+
+### FormManagement
+
+| Prop       | Type                                      | Description                |
+| ---------- | ----------------------------------------- | -------------------------- |
+| `form`     | `ReturnType<typeof useForm>`              | TanStack Form instance     |
+| `children` | `React.ReactNode`                         | Form fields and components |
+
+### FormManagementStickyBar
+
+| Prop          | Type     | Default   | Description         |
+| ------------- | -------- | --------- | ------------------- |
+| `actionLabel` | `string` | `"Save"`  | Save button label   |
+| `cancelLabel` | `string` | `"Reset"` | Cancel button label |
+
+### FormManagementAutoSave
+
+| Prop         | Type                             | Description                        |
+| ------------ | -------------------------------- | ---------------------------------- |
+| `form`       | `ReturnType<typeof useForm>`     | TanStack Form instance             |
+| `autoSaveMs` | `number`                         | Auto-save debounce in milliseconds |
+
+### useFormManagement
+
+Returns form management context:
+
+```tsx
+{
+  isDirty: boolean;     // Form has unsaved changes
+  isLoading: boolean;   // Form is submitting
+  submit: () => void;   // Trigger form submission
+  cancel: () => void;   // Reset form to initial state
+}
+```
+
+## Differences from Form Management (React Hook Form)
+
+The TanStack Form version provides several advantages:
+
+1. **Better Type Safety**: TanStack Form provides superior TypeScript support with automatic type inference
+2. **Field Components**: Uses field components from the TanStack Form integration for cleaner code
+3. **Validation Modes**: More flexible validation options with `onChange`, `onBlur`, and `onSubmit`
+4. **Performance**: TanStack Form is optimized for performance with fine-grained reactivity
+5. **Array & Nested Fields**: Better support for complex form structures with arrays and nested objects
+
+Choose this version if you're already using TanStack Form in your project or prefer its API over React Hook Form.
