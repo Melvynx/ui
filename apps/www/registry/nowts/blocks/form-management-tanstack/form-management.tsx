@@ -62,7 +62,7 @@ export const FormManagement = ({
       }}
     >
       <Fragment>
-        <Form>
+        <Form form={form}>
           {children}
           <button type="submit" className="hidden" ref={buttonRef} />
         </Form>
