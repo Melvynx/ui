@@ -52,7 +52,7 @@ import { z } from "zod"
 
 import { FormManagement } from "@/lib/form-management-tanstack/form-management"
 import { FormManagementStickyBar } from "@/lib/form-management-tanstack/form-management-sticky-bar"
-import { Field, FieldContent, FormLabel, FormMessage, useForm } from "@/components/ui/tanstack-form"
+import { useForm } from "@/components/ui/tanstack-form"
 
 const schema = z.object({
   name: z.string().min(1, "Name is required"),
@@ -73,25 +73,25 @@ export function BasicForm() {
       <div className="space-y-4">
         <form.AppField name="name">
           {(field) => (
-            <Field>
-              <FormLabel>Name</FormLabel>
-              <FieldContent>
+            <field.Field>
+              <field.Label>Name</field.Label>
+              <field.Content>
                 <field.Input placeholder="Your name" />
-                <FormMessage />
-              </FieldContent>
-            </Field>
+                <field.Message />
+              </field.Content>
+            </field.Field>
           )}
         </form.AppField>
 
         <form.AppField name="email">
           {(field) => (
-            <Field>
-              <FormLabel>Email</FormLabel>
-              <FieldContent>
+            <field.Field>
+              <field.Label>Email</field.Label>
+              <field.Content>
                 <field.Input type="email" placeholder="your@email.com" />
-                <FormMessage />
-              </FieldContent>
-            </Field>
+                <field.Message />
+              </field.Content>
+            </field.Field>
           )}
         </form.AppField>
       </div>
@@ -123,25 +123,25 @@ export function AutoSaveForm() {
       <div className="space-y-4">
         <form.AppField name="title">
           {(field) => (
-            <Field>
-              <FormLabel>Title</FormLabel>
-              <FieldContent>
+            <field.Field>
+              <field.Label>Title</field.Label>
+              <field.Content>
                 <field.Input placeholder="Document title" />
-                <FormMessage />
-              </FieldContent>
-            </Field>
+                <field.Message />
+              </field.Content>
+            </field.Field>
           )}
         </form.AppField>
 
         <form.AppField name="content">
           {(field) => (
-            <Field>
-              <FormLabel>Content</FormLabel>
-              <FieldContent>
+            <field.Field>
+              <field.Label>Content</field.Label>
+              <field.Content>
                 <field.Textarea placeholder="Document content" />
-                <FormMessage />
-              </FieldContent>
-            </Field>
+                <field.Message />
+              </field.Content>
+            </field.Field>
           )}
         </form.AppField>
       </div>
@@ -185,37 +185,37 @@ export function ValidatedForm() {
       <div className="space-y-4">
         <form.AppField name="name">
           {(field) => (
-            <Field>
-              <FormLabel>Name</FormLabel>
-              <FieldContent>
+            <field.Field>
+              <field.Label>Name</field.Label>
+              <field.Content>
                 <field.Input placeholder="Enter your name" />
-                <FormMessage />
-              </FieldContent>
-            </Field>
+                <field.Message />
+              </field.Content>
+            </field.Field>
           )}
         </form.AppField>
 
         <form.AppField name="email">
           {(field) => (
-            <Field>
-              <FormLabel>Email</FormLabel>
-              <FieldContent>
+            <field.Field>
+              <field.Label>Email</field.Label>
+              <field.Content>
                 <field.Input type="email" placeholder="your@email.com" />
-                <FormMessage />
-              </FieldContent>
-            </Field>
+                <field.Message />
+              </field.Content>
+            </field.Field>
           )}
         </form.AppField>
 
         <form.AppField name="bio">
           {(field) => (
-            <Field>
-              <FormLabel>Bio</FormLabel>
-              <FieldContent>
+            <field.Field>
+              <field.Label>Bio</field.Label>
+              <field.Content>
                 <field.Textarea placeholder="Tell us about yourself" />
-                <FormMessage />
-              </FieldContent>
-            </Field>
+                <field.Message />
+              </field.Content>
+            </field.Field>
           )}
         </form.AppField>
       </div>

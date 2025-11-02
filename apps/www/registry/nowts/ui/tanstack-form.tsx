@@ -2,11 +2,7 @@
 "use client"
 
 import type * as React from "react"
-import {
-  createFormHook,
-  createFormHookContexts,
-  useStore,
-} from "@tanstack/react-form"
+import { createFormHook, createFormHookContexts } from "@tanstack/react-form"
 import type { z } from "zod"
 
 import { Button } from "@/components/ui/button"
@@ -14,14 +10,9 @@ import { Checkbox } from "@/components/ui/checkbox"
 import {
   Field,
   FieldContent,
-  FieldDescription,
+  FieldDescription as FieldDescriptionComponent,
   FieldError,
-  FieldGroup,
-  FieldLabel,
-  FieldLegend,
-  FieldSeparator,
-  FieldSet,
-  FieldTitle,
+  FieldLabel as FieldLabelComponent,
 } from "@/components/ui/field"
 import { Input } from "@/components/ui/input"
 import { Select } from "@/components/ui/select"
@@ -33,6 +24,7 @@ export const { fieldContext, useFieldContext, formContext, useFormContext } =
 
 export function SubmitButton(props: React.ComponentProps<typeof Button>) {
   const form = useFormContext()
+
   return (
     <form.Subscribe selector={(state) => state.isSubmitting}>
       {(isSubmitting) => (
@@ -111,6 +103,12 @@ function FormSwitch(props: React.ComponentProps<typeof Switch>) {
   )
 }
 
+function FieldField(props: React.ComponentProps<typeof Field>) {
+  const field = useFieldContext<string>()
+  const isInvalid = field.state.meta.isTouched && !field.state.meta.isValid
+  return <Field {...props} data-invalid={isInvalid} />
+}
+
 export const { useAppForm } = createFormHook({
   fieldComponents: {
     Input: FormInput,
@@ -118,6 +116,11 @@ export const { useAppForm } = createFormHook({
     Textarea: FormTextarea,
     Checkbox: FormCheckbox,
     Switch: FormSwitch,
+    Label: FieldLabel,
+    Description: FieldDescription,
+    Message: FieldMessage,
+    Field: FieldField,
+    Content: FieldContent,
   },
   formComponents: {
     SubmitButton: SubmitButton,
@@ -196,36 +199,38 @@ export function Form({
   form: ReturnType<typeof useForm<any>>
 } & Omit<React.ComponentProps<"form">, "onSubmit">) {
   return (
-    <form
-      onSubmit={(e) => {
-        e.preventDefault()
-        e.stopPropagation()
-        void form.handleSubmit()
-      }}
-      {...props}
-    >
-      {children}
-    </form>
+    <form.AppForm>
+      <form
+        onSubmit={(e) => {
+          e.preventDefault()
+          e.stopPropagation()
+          void form.handleSubmit()
+        }}
+        {...props}
+      >
+        {children}
+      </form>
+    </form.AppForm>
   )
 }
 
-export function FormLabel(props: React.ComponentProps<typeof FieldLabel>) {
+function FieldLabel(props: React.ComponentProps<typeof FieldLabelComponent>) {
   const field = useFieldContext<string>()
 
-  return <FieldLabel htmlFor={field.name} {...props} />
+  return <FieldLabelComponent htmlFor={field.name} {...props} />
 }
 
 /**
  * Description text for form field - uses FieldDescription with TanStack Form integration
  */
-export function FormDescription({
+function FieldDescription({
   className,
   ...props
-}: React.ComponentProps<typeof FieldDescription>) {
+}: React.ComponentProps<typeof FieldDescriptionComponent>) {
   const field = useFieldContext<string>()
 
   return (
-    <FieldDescription
+    <FieldDescriptionComponent
       id={`${field.name}-form-item-description`}
       className={className}
       {...props}
@@ -233,76 +238,15 @@ export function FormDescription({
   )
 }
 
-/**
- * Error message for form field - uses FieldError with TanStack Form integration
- */
-export function FormMessage({
-  className,
-  children,
-  ...props
-}: React.ComponentProps<typeof FieldError>) {
-  const field = useFieldContext()
-  const errors = useStore(field.store, (state) => state.meta.errors)
-  const hasSubmitted = field.form.state.submissionAttempts > 0
-  const shouldShowError =
-    hasSubmitted &&
-    field.state.meta.isTouched &&
-    field.state.meta.errors.length > 0
-
-  if (!shouldShowError && !children) {
-    return null
-  }
+function FieldMessage(props: React.ComponentProps<typeof FieldError>) {
+  const field = useFieldContext<string>()
+  const isInvalid = field.state.meta.isTouched && !field.state.meta.isValid
 
   return (
-    <FieldError
-      id={`${field.name}-form-item-message`}
-      errors={errors}
-      className={className}
-      {...props}
-    >
-      {errors.map((error) => (
-        <div
-          key={typeof error === "string" ? error : error.message}
-          className="mt-1 font-bold text-red-500"
-        >
-          {typeof error === "string" ? error : error.message}
-        </div>
-      ))}
-    </FieldError>
+    <>
+      {isInvalid ? (
+        <FieldError {...props} errors={field.state.meta.errors} />
+      ) : null}
+    </>
   )
-}
-
-/**
- * Re-export Field components for direct use in custom layouts
- * These can be used when you need more control over the form layout
- * and don't need the TanStack Form context integration
- *
- * @example
- * const form = useForm({
- *   schema: z.object({ email: z.string().email() }),
- *   defaultValues: { email: '' },
- *   onSubmit: async (values) => console.log(values),
- * })
- *
- * <form.AppField name="email">
- *   {(field) => (
- *     <Field orientation="horizontal">
- *       <FormLabel>Email</FormLabel>
- *       <FieldContent>
- *         <field.Input type="email" placeholder="you@example.com" />
- *         <FieldDescription>Enter your email address</FieldDescription>
- *         <FormMessage />
- *       </FieldContent>
- *     </Field>
- *   )}
- * </form.AppField>
- */
-export {
-  Field,
-  FieldContent,
-  FieldGroup,
-  FieldLegend,
-  FieldSeparator,
-  FieldSet,
-  FieldTitle,
 }

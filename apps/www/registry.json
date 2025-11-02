@@ -297,6 +297,35 @@
       "categories": ["forms"]
     },
     {
+      "name": "form-management-tanstack",
+      "type": "registry:block",
+      "title": "Form Management TanStack",
+      "description": "A comprehensive form management system built with TanStack Form, featuring auto-save, unsaved changes warnings, and sticky action bar for enhanced UX.",
+      "dependencies": ["motion", "react-hotkeys-hook", "lucide-react"],
+      "registryDependencies": [
+        "button",
+        "tooltip",
+        "https://ui.nowts.app/r/submit-button.json",
+        "https://ui.nowts.app/r/tanstack-form.json",
+        "https://ui.nowts.app/r/use-debounce-fn.json",
+        "https://ui.nowts.app/r/use-warn-if-unsaved-changes.json",
+        "https://ui.nowts.app/r/use-is-client.json"
+      ],
+      "files": [
+        {
+          "path": "registry/nowts/blocks/form-management-tanstack/form-management.tsx",
+          "type": "registry:lib",
+          "target": "lib/form-management-tanstack/form-management.tsx"
+        },
+        {
+          "path": "registry/nowts/blocks/form-management-tanstack/form-management-sticky-bar.tsx",
+          "type": "registry:lib",
+          "target": "lib/form-management-tanstack/form-management-sticky-bar.tsx"
+        }
+      ],
+      "categories": ["forms"]
+    },
+    {
       "name": "use-mobile",
       "type": "registry:hook",
       "files": [
@@ -530,6 +559,23 @@
       "files": [
         {
           "path": "registry/nowts/examples/form-management-demo.tsx",
+          "type": "registry:example"
+        }
+      ]
+    },
+    {
+      "name": "form-management-tanstack-demo",
+      "type": "registry:example",
+      "dependencies": ["zod"],
+      "registryDependencies": [
+        "https://ui.nowts.app/r/form-management-tanstack.json",
+        "https://ui.nowts.app/r/tanstack-form.json",
+        "card",
+        "sonner"
+      ],
+      "files": [
+        {
+          "path": "registry/nowts/examples/form-management-tanstack-demo.tsx",
           "type": "registry:example"
         }
       ]

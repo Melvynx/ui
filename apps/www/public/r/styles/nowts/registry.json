@@ -5,18 +5,32 @@
     {
       "name": "index",
       "type": "registry:style",
-      "dependencies": ["class-variance-authority", "lucide-react"],
-      "devDependencies": ["tw-animate-css"],
-      "registryDependencies": ["utils"],
+      "dependencies": [
+        "class-variance-authority",
+        "lucide-react"
+      ],
+      "devDependencies": [
+        "tw-animate-css"
+      ],
+      "registryDependencies": [
+        "utils"
+      ],
       "files": [],
       "cssVars": {}
     },
     {
       "name": "style",
       "type": "registry:style",
-      "dependencies": ["class-variance-authority", "lucide-react"],
-      "devDependencies": ["tw-animate-css"],
-      "registryDependencies": ["utils"],
+      "dependencies": [
+        "class-variance-authority",
+        "lucide-react"
+      ],
+      "devDependencies": [
+        "tw-animate-css"
+      ],
+      "registryDependencies": [
+        "utils"
+      ],
       "files": [],
       "cssVars": {}
     },
@@ -25,8 +39,14 @@
       "type": "registry:ui",
       "title": "Submit Button",
       "description": "Enhanced submit button with loading state that automatically detects form submission state using React's useFormStatus hook.",
-      "dependencies": ["motion", "lucide-react"],
-      "registryDependencies": ["button", "https://ui.nowts.app/r/spinner.json"],
+      "dependencies": [
+        "motion",
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "button",
+        "https://ui.nowts.app/r/spinner.json"
+      ],
       "files": [
         {
           "path": "registry/nowts/ui/submit-button.tsx",
@@ -39,7 +59,9 @@
       "type": "registry:ui",
       "title": "Spinner",
       "description": "A simple loading spinner component using Lucide's Loader2 icon with spin animation.",
-      "dependencies": ["lucide-react"],
+      "dependencies": [
+        "lucide-react"
+      ],
       "files": [
         {
           "path": "registry/nowts/ui/spinner.tsx",
@@ -52,7 +74,9 @@
       "type": "registry:ui",
       "title": "Next Top Loader",
       "description": "A Next.js compatible top loading bar component with automatic navigation detection and customizable progress indicators.",
-      "dependencies": ["zustand"],
+      "dependencies": [
+        "zustand"
+      ],
       "files": [
         {
           "path": "registry/nowts/ui/next-top-loader.tsx",
@@ -65,8 +89,14 @@
       "type": "registry:ui",
       "title": "Extended Form",
       "description": "Enhanced form component with Zod schema validation and TypeScript support using react-hook-form.",
-      "dependencies": ["react-hook-form", "@hookform/resolvers", "zod"],
-      "registryDependencies": ["form"],
+      "dependencies": [
+        "react-hook-form",
+        "@hookform/resolvers",
+        "zod"
+      ],
+      "registryDependencies": [
+        "form"
+      ],
       "files": [
         {
           "path": "registry/nowts/ui/extended-form.tsx",
@@ -79,15 +109,13 @@
       "type": "registry:ui",
       "title": "TanStack Form",
       "description": "A complete form management solution using TanStack Form with Zod validation, supporting all input types including arrays and nested objects.",
-      "dependencies": ["@tanstack/react-form", "zod"],
+      "dependencies": [
+        "@tanstack/react-form",
+        "zod"
+      ],
       "registryDependencies": [
         "label",
-        "field",
-        "select",
-        "switch",
-        "textarea",
-        "checkbox",
-        "button"
+        "field"
       ],
       "files": [
         {
@@ -101,7 +129,9 @@
       "type": "registry:ui",
       "title": "Typography",
       "description": "A polymorphic typography component with multiple variants for consistent text styling across your application.",
-      "dependencies": ["class-variance-authority"],
+      "dependencies": [
+        "class-variance-authority"
+      ],
       "files": [
         {
           "path": "registry/nowts/ui/typography.tsx",
@@ -114,7 +144,11 @@
       "type": "registry:block",
       "title": "Better Auth OTP",
       "description": "A component for signing in with email OTP.",
-      "dependencies": ["motion", "react-use-measure", "@hookform/resolvers"],
+      "dependencies": [
+        "motion",
+        "react-use-measure",
+        "@hookform/resolvers"
+      ],
       "registryDependencies": [
         "button",
         "input",
@@ -134,7 +168,9 @@
           "type": "registry:hook"
         }
       ],
-      "categories": ["authentication"]
+      "categories": [
+        "authentication"
+      ]
     },
     {
       "name": "better-auth-signin",
@@ -173,14 +209,20 @@
           "type": "registry:component"
         }
       ],
-      "categories": ["authentication"]
+      "categories": [
+        "authentication"
+      ]
     },
     {
       "name": "better-auth-signup",
       "type": "registry:block",
       "title": "Better Auth Sign Up",
       "description": "A complete sign-up form component with email and password authentication using Better Auth.",
-      "dependencies": ["zod", "react-hook-form", "@hookform/resolvers"],
+      "dependencies": [
+        "zod",
+        "react-hook-form",
+        "@hookform/resolvers"
+      ],
       "registryDependencies": [
         "button",
         "input",
@@ -196,14 +238,18 @@
           "target": "app/sign-up/page.tsx"
         }
       ],
-      "categories": ["authentication"]
+      "categories": [
+        "authentication"
+      ]
     },
     {
       "name": "server-toast",
       "type": "registry:block",
       "title": "Server Toast",
       "description": "A library for server-side toast notifications.",
-      "registryDependencies": ["sonner"],
+      "registryDependencies": [
+        "sonner"
+      ],
       "files": [
         {
           "path": "registry/nowts/blocks/server-toast/server-toast.type.ts",
@@ -226,14 +272,18 @@
           "target": "lib/server-toast/server-toast.client.tsx"
         }
       ],
-      "categories": ["notifications"]
+      "categories": [
+        "notifications"
+      ]
     },
     {
       "name": "dialog-manager",
       "type": "registry:block",
       "title": "Dialog Manager",
       "description": "A powerful dialog manager for handling confirm, input, and custom dialogs with global state management.",
-      "dependencies": ["zustand"],
+      "dependencies": [
+        "zustand"
+      ],
       "registryDependencies": [
         "alert-dialog",
         "button",
@@ -273,14 +323,20 @@
           "target": "lib/dialog-manager/dialog-manager-renderer.tsx"
         }
       ],
-      "categories": ["dialogs"]
+      "categories": [
+        "dialogs"
+      ]
     },
     {
       "name": "form-management",
       "type": "registry:block",
       "title": "Form Management",
       "description": "A comprehensive form management system with auto-save, unsaved changes warning, and sticky action bar for enhanced UX.",
-      "dependencies": ["motion", "react-hotkeys-hook", "lucide-react"],
+      "dependencies": [
+        "motion",
+        "react-hotkeys-hook",
+        "lucide-react"
+      ],
       "registryDependencies": [
         "button",
         "tooltip",
@@ -302,7 +358,44 @@
           "target": "lib/form-management/form-management-sticky-bar.tsx"
         }
       ],
-      "categories": ["forms"]
+      "categories": [
+        "forms"
+      ]
+    },
+    {
+      "name": "form-management-tanstack",
+      "type": "registry:block",
+      "title": "Form Management TanStack",
+      "description": "A comprehensive form management system built with TanStack Form, featuring auto-save, unsaved changes warnings, and sticky action bar for enhanced UX.",
+      "dependencies": [
+        "motion",
+        "react-hotkeys-hook",
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "button",
+        "tooltip",
+        "https://ui.nowts.app/r/submit-button.json",
+        "https://ui.nowts.app/r/tanstack-form.json",
+        "https://ui.nowts.app/r/use-debounce-fn.json",
+        "https://ui.nowts.app/r/use-warn-if-unsaved-changes.json",
+        "https://ui.nowts.app/r/use-is-client.json"
+      ],
+      "files": [
+        {
+          "path": "registry/nowts/blocks/form-management-tanstack/form-management.tsx",
+          "type": "registry:lib",
+          "target": "lib/form-management-tanstack/form-management.tsx"
+        },
+        {
+          "path": "registry/nowts/blocks/form-management-tanstack/form-management-sticky-bar.tsx",
+          "type": "registry:lib",
+          "target": "lib/form-management-tanstack/form-management-sticky-bar.tsx"
+        }
+      ],
+      "categories": [
+        "forms"
+      ]
     },
     {
       "name": "use-mobile",
@@ -365,7 +458,10 @@
     {
       "name": "spinner-demo",
       "type": "registry:example",
-      "registryDependencies": ["https://ui.nowts.app/r/spinner.json", "card"],
+      "registryDependencies": [
+        "https://ui.nowts.app/r/spinner.json",
+        "card"
+      ],
       "files": [
         {
           "path": "registry/nowts/examples/spinner-demo.tsx",
@@ -376,7 +472,9 @@
     {
       "name": "submit-button-demo",
       "type": "registry:example",
-      "dependencies": ["zod"],
+      "dependencies": [
+        "zod"
+      ],
       "registryDependencies": [
         "https://ui.nowts.app/r/submit-button.json",
         "https://ui.nowts.app/r/extended-form.json",
@@ -395,7 +493,9 @@
     {
       "name": "extended-form-demo",
       "type": "registry:example",
-      "dependencies": ["zod"],
+      "dependencies": [
+        "zod"
+      ],
       "registryDependencies": [
         "https://ui.nowts.app/r/extended-form.json",
         "card",
@@ -429,7 +529,9 @@
     {
       "name": "tanstack-form-demo",
       "type": "registry:example",
-      "dependencies": ["zod"],
+      "dependencies": [
+        "zod"
+      ],
       "registryDependencies": [
         "https://ui.nowts.app/r/tanstack-form.json",
         "field",
@@ -446,7 +548,10 @@
     {
       "name": "tanstack-form-complex-demo",
       "type": "registry:example",
-      "dependencies": ["zod", "lucide-react"],
+      "dependencies": [
+        "zod",
+        "lucide-react"
+      ],
       "registryDependencies": [
         "https://ui.nowts.app/r/tanstack-form.json",
         "field",
@@ -465,7 +570,10 @@
     {
       "name": "tanstack-form-array-demo",
       "type": "registry:example",
-      "dependencies": ["zod", "lucide-react"],
+      "dependencies": [
+        "zod",
+        "lucide-react"
+      ],
       "registryDependencies": [
         "https://ui.nowts.app/r/tanstack-form.json",
         "field",
@@ -497,7 +605,11 @@
     {
       "name": "server-toast-demo",
       "type": "registry:example",
-      "registryDependencies": ["card", "button", "sonner"],
+      "registryDependencies": [
+        "card",
+        "button",
+        "sonner"
+      ],
       "files": [
         {
           "path": "registry/nowts/examples/server-toast-demo.tsx",
@@ -508,7 +620,9 @@
     {
       "name": "dialog-manager-demo",
       "type": "registry:example",
-      "dependencies": ["lucide-react"],
+      "dependencies": [
+        "lucide-react"
+      ],
       "registryDependencies": [
         "https://ui.nowts.app/r/dialog-manager.json",
         "card",
@@ -525,7 +639,9 @@
     {
       "name": "form-management-demo",
       "type": "registry:example",
-      "dependencies": ["zod"],
+      "dependencies": [
+        "zod"
+      ],
       "registryDependencies": [
         "https://ui.nowts.app/r/form-management.json",
         "https://ui.nowts.app/r/extended-form.json",
@@ -543,9 +659,30 @@
       ]
     },
     {
+      "name": "form-management-tanstack-demo",
+      "type": "registry:example",
+      "dependencies": [
+        "zod"
+      ],
+      "registryDependencies": [
+        "https://ui.nowts.app/r/form-management-tanstack.json",
+        "https://ui.nowts.app/r/tanstack-form.json",
+        "card",
+        "sonner"
+      ],
+      "files": [
+        {
+          "path": "registry/nowts/examples/form-management-tanstack-demo.tsx",
+          "type": "registry:example"
+        }
+      ]
+    },
+    {
       "name": "better-auth-signin-demo",
       "type": "registry:example",
-      "dependencies": ["lucide-react"],
+      "dependencies": [
+        "lucide-react"
+      ],
       "registryDependencies": [
         "https://ui.nowts.app/r/better-auth-signin.json",
         "sonner"
@@ -560,7 +697,9 @@
     {
       "name": "better-auth-signup-demo",
       "type": "registry:example",
-      "dependencies": ["lucide-react"],
+      "dependencies": [
+        "lucide-react"
+      ],
       "registryDependencies": [
         "https://ui.nowts.app/r/better-auth-signup.json",
         "sonner"
@@ -637,7 +776,9 @@
     {
       "name": "use-copy-to-clipboard-demo",
       "type": "registry:example",
-      "dependencies": ["lucide-react"],
+      "dependencies": [
+        "lucide-react"
+      ],
       "registryDependencies": [
         "https://ui.nowts.app/r/use-copy-to-clipboard.json",
         "card",

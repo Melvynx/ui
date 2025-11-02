@@ -10,12 +10,7 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card"
-import { Field, FieldContent } from "@/components/ui/field"
-import {
-  FormLabel,
-  FormMessage,
-  useForm,
-} from "@/registry/nowts/ui/tanstack-form"
+import { Form, useForm } from "@/registry/nowts/ui/tanstack-form"
 
 const accountSchema = z.object({
   email: z.string().email("Invalid email"),
@@ -44,44 +39,35 @@ export default function TanstackFormDemo() {
       </CardHeader>
 
       <CardContent>
-        <form
-          onSubmit={(e) => {
-            e.preventDefault()
-            e.stopPropagation()
-            form.handleSubmit()
-          }}
-          className="space-y-4"
-        >
+        <Form form={form} className="space-y-4">
           <form.AppField name="email">
             {(field) => (
-              <Field>
-                <FormLabel>Email</FormLabel>
-                <FieldContent>
+              <field.Field>
+                <field.Label>Email</field.Label>
+                <field.Content>
                   <field.Input type="email" placeholder="you@example.com" />
-                  <FormMessage />
-                </FieldContent>
-              </Field>
+                  <field.Message />
+                </field.Content>
+              </field.Field>
             )}
           </form.AppField>
 
           <form.AppField name="password">
             {(field) => (
-              <Field>
-                <FormLabel>Password</FormLabel>
-                <FieldContent>
+              <field.Field>
+                <field.Label>Password</field.Label>
+                <field.Content>
                   <field.Input type="password" placeholder="••••••••" />
-                  <FormMessage />
-                </FieldContent>
-              </Field>
+                  <field.Message />
+                </field.Content>
+              </field.Field>
             )}
           </form.AppField>
 
-          <form.AppForm>
-            <form.SubmitButton className="w-full">
-              Create Account
-            </form.SubmitButton>
-          </form.AppForm>
-        </form>
+          <form.SubmitButton className="w-full">
+            Create Account
+          </form.SubmitButton>
+        </Form>
       </CardContent>
     </Card>
   )

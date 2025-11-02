@@ -298,6 +298,28 @@ export const Index: Record<string, any> = {
     categories: ["forms"],
     meta: undefined,
   },
+  "form-management-tanstack": {
+    name: "form-management-tanstack",
+    description: "A comprehensive form management system built with TanStack Form, featuring auto-save, unsaved changes warnings, and sticky action bar for enhanced UX.",
+    type: "registry:block",
+    registryDependencies: ["button","tooltip","https://ui.nowts.app/r/submit-button.json","https://ui.nowts.app/r/tanstack-form.json","https://ui.nowts.app/r/use-debounce-fn.json","https://ui.nowts.app/r/use-warn-if-unsaved-changes.json","https://ui.nowts.app/r/use-is-client.json"],
+    files: [{
+      path: "registry/nowts/blocks/form-management-tanstack/form-management.tsx",
+      type: "registry:lib",
+      target: "lib/form-management-tanstack/form-management.tsx"
+    },{
+      path: "registry/nowts/blocks/form-management-tanstack/form-management-sticky-bar.tsx",
+      type: "registry:lib",
+      target: "lib/form-management-tanstack/form-management-sticky-bar.tsx"
+    }],
+    component: React.lazy(async () => {
+      const mod = await import("@/registry/nowts/blocks/form-management-tanstack/form-management.tsx")
+      const exportName = Object.keys(mod).find(key => typeof mod[key] === 'function' || typeof mod[key] === 'object') || item.name
+      return { default: mod.default || mod[exportName] }
+    }),
+    categories: ["forms"],
+    meta: undefined,
+  },
   "use-mobile": {
     name: "use-mobile",
     description: "",
@@ -580,6 +602,24 @@ export const Index: Record<string, any> = {
     }],
     component: React.lazy(async () => {
       const mod = await import("@/registry/nowts/examples/form-management-demo.tsx")
+      const exportName = Object.keys(mod).find(key => typeof mod[key] === 'function' || typeof mod[key] === 'object') || item.name
+      return { default: mod.default || mod[exportName] }
+    }),
+    categories: undefined,
+    meta: undefined,
+  },
+  "form-management-tanstack-demo": {
+    name: "form-management-tanstack-demo",
+    description: "",
+    type: "registry:example",
+    registryDependencies: ["https://ui.nowts.app/r/form-management-tanstack.json","https://ui.nowts.app/r/tanstack-form.json","card","sonner"],
+    files: [{
+      path: "registry/nowts/examples/form-management-tanstack-demo.tsx",
+      type: "registry:example",
+      target: ""
+    }],
+    component: React.lazy(async () => {
+      const mod = await import("@/registry/nowts/examples/form-management-tanstack-demo.tsx")
       const exportName = Object.keys(mod).find(key => typeof mod[key] === 'function' || typeof mod[key] === 'object') || item.name
       return { default: mod.default || mod[exportName] }
     }),

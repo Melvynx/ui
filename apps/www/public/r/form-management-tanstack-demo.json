@@ -1,0 +1,21 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "form-management-tanstack-demo",
+  "type": "registry:example",
+  "dependencies": [
+    "zod"
+  ],
+  "registryDependencies": [
+    "https://ui.nowts.app/r/form-management-tanstack.json",
+    "https://ui.nowts.app/r/tanstack-form.json",
+    "card",
+    "sonner"
+  ],
+  "files": [
+    {
+      "path": "examples/form-management-tanstack-demo.tsx",
+      "content": "\"use client\"\n\nimport { toast } from \"sonner\"\nimport { z } from \"zod\"\n\nimport { Card } from \"@/components/ui/card\"\nimport { FormManagement } from \"@/registry/nowts/blocks/form-management-tanstack/form-management\"\nimport { FormManagementStickyBar } from \"@/registry/nowts/blocks/form-management-tanstack/form-management-sticky-bar\"\nimport {\n  FormDescription,\n  FormLabel,\n  FormMessage,\n  useForm,\n} from \"@/components/ui/tanstack-form\"\n\nconst profileSchema = z.object({\n  name: z.string().min(2, \"Name must be at least 2 characters\"),\n  email: z.string().email(\"Invalid email address\"),\n  bio: z.string().max(200, \"Bio must be less than 200 characters\"),\n})\n\nexport default function FormManagementTanstackDemo() {\n  const form = useForm({\n    schema: profileSchema,\n    defaultValues: {\n      name: \"John Doe\",\n      email: \"john@example.com\",\n      bio: \"Full-stack developer passionate about building great products\",\n    },\n    onSubmit: async (values) => {\n      await new Promise((resolve) => setTimeout(resolve, 1500))\n      toast.success(\"Profile saved successfully!\")\n      form.reset()\n    },\n  })\n\n  return (\n    <Card className=\"p-6\">\n      <div className=\"mb-6\">\n        <h3 className=\"text-lg font-semibold\">\n          Form Management with TanStack Form\n        </h3>\n        <p className=\"text-muted-foreground text-sm\">\n          Edit and see the sticky save bar appear (CMD+S to save)\n        </p>\n      </div>\n\n      <FormManagement form={form}>\n        <div className=\"space-y-4\">\n          <form.Field name=\"name\">\n            {(field) => (\n              <div className=\"space-y-2\">\n                <FormLabel>Name</FormLabel>\n                <form.FieldComponents.Input placeholder=\"Enter your name\" />\n                <FormMessage />\n              </div>\n            )}\n          </form.Field>\n\n          <form.Field name=\"email\">\n            {(field) => (\n              <div className=\"space-y-2\">\n                <FormLabel>Email</FormLabel>\n                <form.FieldComponents.Input\n                  type=\"email\"\n                  placeholder=\"Enter your email\"\n                />\n                <FormMessage />\n              </div>\n            )}\n          </form.Field>\n\n          <form.Field name=\"bio\">\n            {(field) => (\n              <div className=\"space-y-2\">\n                <FormLabel>Bio</FormLabel>\n                <form.FieldComponents.Textarea\n                  placeholder=\"Tell us about yourself\"\n                  rows={3}\n                />\n                <FormDescription>\n                  Maximum 200 characters ({field.state.value?.length || 0}/200)\n                </FormDescription>\n                <FormMessage />\n              </div>\n            )}\n          </form.Field>\n        </div>\n\n        <FormManagementStickyBar />\n      </FormManagement>\n    </Card>\n  )\n}\n",
+      "type": "registry:example"
+    }
+  ]
+}

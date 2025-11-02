@@ -1,0 +1,38 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "form-management-tanstack",
+  "type": "registry:block",
+  "title": "Form Management TanStack",
+  "description": "A comprehensive form management system built with TanStack Form, featuring auto-save, unsaved changes warnings, and sticky action bar for enhanced UX.",
+  "dependencies": [
+    "motion",
+    "react-hotkeys-hook",
+    "lucide-react"
+  ],
+  "registryDependencies": [
+    "button",
+    "tooltip",
+    "https://ui.nowts.app/r/submit-button.json",
+    "https://ui.nowts.app/r/tanstack-form.json",
+    "https://ui.nowts.app/r/use-debounce-fn.json",
+    "https://ui.nowts.app/r/use-warn-if-unsaved-changes.json",
+    "https://ui.nowts.app/r/use-is-client.json"
+  ],
+  "files": [
+    {
+      "path": "blocks/form-management-tanstack/form-management.tsx",
+      "content": "/* eslint-disable @typescript-eslint/no-explicit-any */\n\"use client\"\n\nimport { createContext, Fragment, use, useEffect, useRef } from \"react\"\nimport { useHotkeys } from \"react-hotkeys-hook\"\n\nimport { useDebounceFn } from \"../../hooks/use-debounce-fn\"\nimport { useWarnIfUnsavedChanges } from \"../../hooks/use-warn-if-unsaved-changes\"\nimport { Form, useForm } from \"../../ui/tanstack-form\"\n\nconst FormManagementContext = createContext<{\n  isDirty: boolean\n  isLoading: boolean\n  cancel: () => void\n  submit: () => void\n} | null>(null)\n\nexport const useFormManagement = () => {\n  const ctx = use(FormManagementContext)\n\n  if (!ctx) {\n    throw new Error(\"FormUnsavedBarContext is not provided\")\n  }\n\n  return ctx\n}\n\nexport const FormManagement = ({\n  children,\n  form,\n}: {\n  children: React.ReactNode\n  form: ReturnType<typeof useForm<any>>\n}) => {\n  const buttonRef = useRef<HTMLButtonElement>(null)\n\n  const submit = () => {\n    buttonRef.current?.click()\n  }\n  const cancel = () => form.reset()\n  const isDirty = form.state.isDirty\n\n  useHotkeys(\"mod+s\", submit, {\n    enabled: isDirty,\n    enableOnContentEditable: true,\n    preventDefault: true,\n    enableOnFormTags: true,\n  })\n\n  useWarnIfUnsavedChanges(\n    isDirty,\n    \"You have unsaved changes. Are you sure you want to leave?\"\n  )\n\n  return (\n    <FormManagementContext.Provider\n      value={{\n        isDirty,\n        isLoading: form.state.isSubmitting,\n        cancel,\n        submit,\n      }}\n    >\n      <Fragment>\n        <Form>\n          {children}\n          <button type=\"submit\" className=\"hidden\" ref={buttonRef} />\n        </Form>\n      </Fragment>\n    </FormManagementContext.Provider>\n  )\n}\n\nexport const FormManagementAutoSave = (props: {\n  autoSaveMs?: number\n  form: ReturnType<typeof useForm<any>>\n}) => {\n  const lastFormStateRef = useRef<string | null>(null)\n\n  const ctx = useFormManagement()\n\n  const debounce = useDebounceFn(() => {\n    const json = JSON.stringify(props.form.store.state.values)\n    if (json === lastFormStateRef.current) return\n    lastFormStateRef.current = json\n\n    ctx.submit()\n  }, props.autoSaveMs ?? 300)\n\n  useEffect(() => {\n    return props.form.store.subscribe(() => {\n      debounce()\n    })\n  }, [props.form.store, debounce])\n\n  return null\n}\n",
+      "type": "registry:lib",
+      "target": "lib/form-management-tanstack/form-management.tsx"
+    },
+    {
+      "path": "blocks/form-management-tanstack/form-management-sticky-bar.tsx",
+      "content": "import type { ReactNode } from \"react\"\nimport { TriangleAlert } from \"lucide-react\"\nimport { AnimatePresence, motion } from \"motion/react\"\nimport { createPortal } from \"react-dom\"\n\nimport { Button } from \"@/components/ui/button\"\nimport {\n  Tooltip,\n  TooltipContent,\n  TooltipTrigger,\n} from \"@/components/ui/tooltip\"\nimport { LoadingButton } from \"@/components/ui/submit-button\"\n\nimport { useIsClient } from \"../../hooks/use-is-client\"\nimport { useFormManagement } from \"./form-management\"\n\ntype FormAutoSaveStickyBarProps = {\n  actionLabel?: string\n  cancelLabel?: string\n}\n\nexport const FormManagementStickyBar = (props: FormAutoSaveStickyBarProps) => {\n  const ctx = useFormManagement()\n  const onSubmit = ctx.submit\n  const onCancel = ctx.cancel\n  const isLoading = ctx.isLoading\n  const isDirty = ctx.isDirty\n  const isClient = useIsClient()\n\n  const isShow = isDirty\n\n  if (!isClient) {\n    return null\n  }\n\n  return createPortal(\n    <div\n      className=\"pointer-events-none fixed inset-x-0 bottom-0 flex items-center justify-center overflow-hidden py-4\"\n      style={{\n        zIndex: 999,\n      }}\n    >\n      <AnimatePresence>\n        {isShow ? (\n          <motion.div\n            key=\"save-bar\"\n            initial={{\n              opacity: 0,\n              y: 20,\n            }}\n            animate={{\n              opacity: 1,\n              y: 0,\n            }}\n            exit={{\n              opacity: [1, 1, 0],\n              y: [0, -10, 20],\n              transition: {\n                duration: 0.5,\n              },\n            }}\n            className=\"bg-card shadow-background pointer-events-auto flex w-full max-w-sm items-center gap-2 rounded-full border py-1 pr-2 pl-4 shadow-2xl lg:py-2\"\n          >\n            <TriangleAlert className=\"text-muted-foreground size-4\" />\n            <p className=\"text-muted-foreground text-sm\">Unsaved Changes</p>\n            <div className=\"flex-1\" />\n            <Button\n              variant=\"outline\"\n              size=\"sm\"\n              onClick={onCancel}\n              className=\"rounded-full\"\n            >\n              {props.cancelLabel ?? \"Reset\"}\n            </Button>\n            <Tooltip>\n              <TooltipTrigger asChild>\n                <LoadingButton\n                  size=\"sm\"\n                  loading={isLoading}\n                  variant=\"default\"\n                  onClick={onSubmit}\n                  className=\"rounded-full\"\n                >\n                  {props.actionLabel ?? \"Save\"}\n                </LoadingButton>\n              </TooltipTrigger>\n              <TooltipContent>CMD+S</TooltipContent>\n            </Tooltip>\n          </motion.div>\n        ) : null}\n      </AnimatePresence>\n    </div>,\n    document.body\n  ) as ReactNode\n}\n",
+      "type": "registry:lib",
+      "target": "lib/form-management-tanstack/form-management-sticky-bar.tsx"
+    }
+  ],
+  "categories": [
+    "forms"
+  ]
+}
