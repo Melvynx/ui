@@ -1,6 +1,7 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 "use client"
 
-import * as React from "react"
+import type * as React from "react"
 import {
   createFormHook,
   createFormHookContexts,
@@ -24,24 +25,11 @@ import {
 } from "@/components/ui/field"
 import { Input } from "@/components/ui/input"
 import { Select } from "@/components/ui/select"
+import { Switch } from "@/components/ui/switch"
 import { Textarea } from "@/components/ui/textarea"
 
 export const { fieldContext, useFieldContext, formContext, useFormContext } =
   createFormHookContexts()
-
-export const { useAppForm } = createFormHook({
-  fieldComponents: {
-    Input: FormInput,
-    Select: FormSelect,
-    Textarea: FormTextarea,
-    Checkbox: FormCheckbox,
-  },
-  formComponents: {
-    SubmitButton: SubmitButton,
-  },
-  fieldContext,
-  formContext,
-})
 
 export function SubmitButton(props: React.ComponentProps<typeof Button>) {
   const form = useFormContext()
@@ -59,6 +47,7 @@ function FormInput(props: React.ComponentProps<typeof Input>) {
 
   return (
     <Input
+      id={field.name}
       name={field.name}
       value={field.state.value}
       placeholder={props.placeholder}
@@ -85,6 +74,7 @@ function FormTextarea(props: React.ComponentProps<typeof Textarea>) {
   const field = useFieldContext<string>()
   return (
     <Textarea
+      id={field.name}
       name={field.name}
       value={field.state.value}
       placeholder={props.placeholder}
@@ -99,6 +89,7 @@ function FormCheckbox(props: React.ComponentProps<typeof Checkbox>) {
   const field = useFieldContext<boolean>()
   return (
     <Checkbox
+      id={field.name}
       name={field.name}
       checked={Boolean(field.state.value)}
       onCheckedChange={(checked) => field.handleChange(Boolean(checked))}
@@ -106,6 +97,34 @@ function FormCheckbox(props: React.ComponentProps<typeof Checkbox>) {
     />
   )
 }
+
+function FormSwitch(props: React.ComponentProps<typeof Switch>) {
+  const field = useFieldContext<boolean>()
+  return (
+    <Switch
+      id={field.name}
+      name={field.name}
+      checked={Boolean(field.state.value)}
+      onCheckedChange={(checked) => field.handleChange(Boolean(checked))}
+      {...props}
+    />
+  )
+}
+
+export const { useAppForm } = createFormHook({
+  fieldComponents: {
+    Input: FormInput,
+    Select: FormSelect,
+    Textarea: FormTextarea,
+    Checkbox: FormCheckbox,
+    Switch: FormSwitch,
+  },
+  formComponents: {
+    SubmitButton: SubmitButton,
+  },
+  fieldContext,
+  formContext,
+})
 
 /**
  * Hook to create a TanStack form with Zod validation
@@ -165,18 +184,18 @@ export function useForm<TSchema extends z.ZodType>({
  */
 export function Form({
   children,
+  form,
   ...props
 }: {
   children: React.ReactNode
-  className?: string
+  form: ReturnType<typeof useForm<any>>
 } & Omit<React.ComponentProps<"form">, "onSubmit">) {
-  const formContext = useFormContext()
   return (
     <form
       onSubmit={(e) => {
         e.preventDefault()
         e.stopPropagation()
-        formContext.handleSubmit()
+        void form.handleSubmit()
       }}
       {...props}
     >
@@ -187,6 +206,7 @@ export function Form({
 
 export function FormLabel(props: React.ComponentProps<typeof FieldLabel>) {
   const field = useFieldContext<string>()
+
   return <FieldLabel htmlFor={field.name} {...props} />
 }
 

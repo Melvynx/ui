@@ -52,11 +52,7 @@ import { z } from "zod"
 
 import { FormManagement } from "@/lib/form-management-tanstack/form-management"
 import { FormManagementStickyBar } from "@/lib/form-management-tanstack/form-management-sticky-bar"
-import {
-  FormLabel,
-  FormMessage,
-  useForm,
-} from "@/components/ui/tanstack-form"
+import { FormLabel, FormMessage, useForm } from "@/components/ui/tanstack-form"
 
 const schema = z.object({
   name: z.string().min(1, "Name is required"),
@@ -107,7 +103,10 @@ export function BasicForm() {
 ### Form with auto-save
 
 ```tsx
-import { FormManagement, FormManagementAutoSave } from "@/lib/form-management-tanstack/form-management"
+import {
+  FormManagement,
+  FormManagementAutoSave,
+} from "@/lib/form-management-tanstack/form-management"
 
 export function AutoSaveForm() {
   const form = useForm({
@@ -152,10 +151,7 @@ export function AutoSaveForm() {
 ### Custom sticky bar labels
 
 ```tsx
-<FormManagementStickyBar
-  actionLabel="Publish Changes"
-  cancelLabel="Discard"
-/>
+<FormManagementStickyBar actionLabel="Publish Changes" cancelLabel="Discard" />
 ```
 
 ### Form with complex validation
@@ -255,10 +251,10 @@ function CustomActions() {
 
 ### FormManagement
 
-| Prop       | Type                                      | Description                |
-| ---------- | ----------------------------------------- | -------------------------- |
-| `form`     | `ReturnType<typeof useForm>`              | TanStack Form instance     |
-| `children` | `React.ReactNode`                         | Form fields and components |
+| Prop       | Type                         | Description                |
+| ---------- | ---------------------------- | -------------------------- |
+| `form`     | `ReturnType<typeof useForm>` | TanStack Form instance     |
+| `children` | `React.ReactNode`            | Form fields and components |
 
 ### FormManagementStickyBar
 
@@ -269,10 +265,10 @@ function CustomActions() {
 
 ### FormManagementAutoSave
 
-| Prop         | Type                             | Description                        |
-| ------------ | -------------------------------- | ---------------------------------- |
-| `form`       | `ReturnType<typeof useForm>`     | TanStack Form instance             |
-| `autoSaveMs` | `number`                         | Auto-save debounce in milliseconds |
+| Prop         | Type                         | Description                        |
+| ------------ | ---------------------------- | ---------------------------------- |
+| `form`       | `ReturnType<typeof useForm>` | TanStack Form instance             |
+| `autoSaveMs` | `number`                     | Auto-save debounce in milliseconds |
 
 ### useFormManagement
 

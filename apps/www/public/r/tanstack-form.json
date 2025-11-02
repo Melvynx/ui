@@ -4,13 +4,15 @@
   "type": "registry:ui",
   "title": "TanStack Form",
   "description": "A complete form management solution using TanStack Form with Zod validation, supporting all input types including arrays and nested objects.",
-  "dependencies": [
-    "@tanstack/react-form",
-    "zod"
-  ],
+  "dependencies": ["@tanstack/react-form", "zod"],
   "registryDependencies": [
     "label",
-    "field"
+    "field",
+    "select",
+    "switch",
+    "textarea",
+    "checkbox",
+    "button"
   ],
   "files": [
     {
