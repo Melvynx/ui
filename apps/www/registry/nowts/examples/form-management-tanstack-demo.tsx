@@ -6,12 +6,7 @@ import { z } from "zod"
 import { Card } from "@/components/ui/card"
 import { FormManagement } from "@/registry/nowts/blocks/form-management-tanstack/form-management"
 import { FormManagementStickyBar } from "@/registry/nowts/blocks/form-management-tanstack/form-management-sticky-bar"
-import {
-  FormDescription,
-  FormLabel,
-  FormMessage,
-  useForm,
-} from "@/registry/nowts/ui/tanstack-form"
+import { useForm } from "@/registry/nowts/ui/tanstack-form"
 
 const profileSchema = z.object({
   name: z.string().min(2, "Name must be at least 2 characters"),
@@ -47,44 +42,48 @@ export default function FormManagementTanstackDemo() {
 
       <FormManagement form={form}>
         <div className="space-y-4">
-          <form.Field name="name">
+          <form.AppField name="name">
             {(field) => (
-              <div className="space-y-2">
-                <FormLabel>Name</FormLabel>
-                <form.FieldComponents.Input placeholder="Enter your name" />
-                <FormMessage />
-              </div>
+              <field.Field>
+                <field.Label>Name</field.Label>
+                <field.Content>
+                  <field.Input placeholder="Enter your name" />
+                  <field.Message />
+                </field.Content>
+              </field.Field>
             )}
-          </form.Field>
+          </form.AppField>
 
-          <form.Field name="email">
+          <form.AppField name="email">
             {(field) => (
-              <div className="space-y-2">
-                <FormLabel>Email</FormLabel>
-                <form.FieldComponents.Input
-                  type="email"
-                  placeholder="Enter your email"
-                />
-                <FormMessage />
-              </div>
+              <field.Field>
+                <field.Label>Email</field.Label>
+                <field.Content>
+                  <field.Input type="email" placeholder="Enter your email" />
+                  <field.Message />
+                </field.Content>
+              </field.Field>
             )}
-          </form.Field>
+          </form.AppField>
 
-          <form.Field name="bio">
+          <form.AppField name="bio">
             {(field) => (
-              <div className="space-y-2">
-                <FormLabel>Bio</FormLabel>
-                <form.FieldComponents.Textarea
-                  placeholder="Tell us about yourself"
-                  rows={3}
-                />
-                <FormDescription>
-                  Maximum 200 characters ({field.state.value?.length || 0}/200)
-                </FormDescription>
-                <FormMessage />
-              </div>
+              <field.Field>
+                <field.Label>Bio</field.Label>
+                <field.Content>
+                  <field.Textarea
+                    placeholder="Tell us about yourself"
+                    rows={3}
+                  />
+                  <field.Description>
+                    Maximum 200 characters ({field.state.value?.length || 0}
+                    /200)
+                  </field.Description>
+                  <field.Message />
+                </field.Content>
+              </field.Field>
             )}
-          </form.Field>
+          </form.AppField>
         </div>
 
         <FormManagementStickyBar />

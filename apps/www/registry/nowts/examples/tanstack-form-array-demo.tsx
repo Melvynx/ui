@@ -6,12 +6,7 @@ import { z } from "zod"
 
 import { Button } from "@/components/ui/button"
 import { Card } from "@/components/ui/card"
-import { Field, FieldContent } from "@/components/ui/field"
-import {
-  FormLabel,
-  FormMessage,
-  useForm,
-} from "@/registry/nowts/ui/tanstack-form"
+import { useForm } from "@/registry/nowts/ui/tanstack-form"
 
 const teamSchema = z.object({
   teamName: z.string().min(2, "Team name must be at least 2 characters"),
@@ -60,13 +55,13 @@ export default function TanstackFormArrayDemo() {
 
         <form.AppField name="teamName">
           {(field) => (
-            <Field>
-              <FormLabel>Team Name</FormLabel>
-              <FieldContent>
+            <field.Field>
+              <field.Label>Team Name</field.Label>
+              <field.Content>
                 <field.Input placeholder="Engineering Team" />
-                <FormMessage />
-              </FieldContent>
-            </Field>
+                <field.Message />
+              </field.Content>
+            </field.Field>
           )}
         </form.AppField>
 
@@ -102,7 +97,7 @@ export default function TanstackFormArrayDemo() {
                             type="email"
                             placeholder="user@example.com"
                           />
-                          <FormMessage />
+                          <field.Message />
                         </div>
                         <Button
                           type="button"
@@ -119,7 +114,7 @@ export default function TanstackFormArrayDemo() {
                 ))}
               </div>
 
-              <FormMessage />
+              <usersField.Message />
             </div>
           )}
         </form.AppField>

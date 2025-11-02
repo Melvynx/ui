@@ -4,7 +4,6 @@ import { toast } from "sonner"
 import { z } from "zod"
 
 import { Card } from "@/components/ui/card"
-import { Field, FieldContent } from "@/components/ui/field"
 import {
   SelectContent,
   SelectItem,
@@ -12,12 +11,7 @@ import {
   SelectValue,
 } from "@/components/ui/select"
 import { Switch } from "@/components/ui/switch"
-import {
-  FormDescription,
-  FormLabel,
-  FormMessage,
-  useForm,
-} from "@/registry/nowts/ui/tanstack-form"
+import { useForm } from "@/registry/nowts/ui/tanstack-form"
 
 const registrationSchema = z.object({
   name: z.string().min(2, "Name must be at least 2 characters"),
@@ -76,33 +70,33 @@ export default function TanstackFormComplexDemo() {
 
         <form.AppField name="name">
           {(field) => (
-            <Field>
-              <FormLabel>Full Name</FormLabel>
-              <FieldContent>
+            <field.Field>
+              <field.Label>Full Name</field.Label>
+              <field.Content>
                 <field.Input placeholder="John Doe" />
-                <FormMessage />
-              </FieldContent>
-            </Field>
+                <field.Message />
+              </field.Content>
+            </field.Field>
           )}
         </form.AppField>
 
         <form.AppField name="email">
           {(field) => (
-            <Field>
-              <FormLabel>Email Address</FormLabel>
-              <FieldContent>
+            <field.Field>
+              <field.Label>Email Address</field.Label>
+              <field.Content>
                 <field.Input type="email" placeholder="john@example.com" />
-                <FormMessage />
-              </FieldContent>
-            </Field>
+                <field.Message />
+              </field.Content>
+            </field.Field>
           )}
         </form.AppField>
 
         <form.AppField name="role">
           {(field) => (
-            <Field>
-              <FormLabel>Role</FormLabel>
-              <FieldContent>
+            <field.Field>
+              <field.Label>Role</field.Label>
+              <field.Content>
                 <field.Select>
                   <SelectTrigger>
                     <SelectValue placeholder="Select your role" />
@@ -113,30 +107,30 @@ export default function TanstackFormComplexDemo() {
                     <SelectItem value="manager">Manager</SelectItem>
                   </SelectContent>
                 </field.Select>
-                <FormDescription>
+                <field.Description>
                   Choose the role that best describes you
-                </FormDescription>
-                <FormMessage />
-              </FieldContent>
-            </Field>
+                </field.Description>
+                <field.Message />
+              </field.Content>
+            </field.Field>
           )}
         </form.AppField>
 
         <form.AppField name="bio">
           {(field) => (
-            <Field>
-              <FormLabel>Bio</FormLabel>
-              <FieldContent>
+            <field.Field>
+              <field.Label>Bio</field.Label>
+              <field.Content>
                 <field.Textarea
                   placeholder="Tell us about yourself..."
                   rows={4}
                 />
-                <FormDescription>
+                <field.Description>
                   Write a short bio (10-200 characters)
-                </FormDescription>
-                <FormMessage />
-              </FieldContent>
-            </Field>
+                </field.Description>
+                <field.Message />
+              </field.Content>
+            </field.Field>
           )}
         </form.AppField>
 
@@ -145,13 +139,13 @@ export default function TanstackFormComplexDemo() {
             <div className="flex items-start gap-3">
               <field.Checkbox id="newsletter" />
               <div className="space-y-1 leading-none">
-                <FormLabel htmlFor="newsletter" className="font-normal">
+                <field.Label htmlFor="newsletter" className="font-normal">
                   Subscribe to newsletter
-                </FormLabel>
-                <FormDescription>
+                </field.Label>
+                <field.Description>
                   Receive weekly updates about new features
-                </FormDescription>
-                <FormMessage />
+                </field.Description>
+                <field.Message />
               </div>
             </div>
           )}
@@ -161,10 +155,10 @@ export default function TanstackFormComplexDemo() {
           {(field) => (
             <div className="flex items-center justify-between rounded-lg border p-4">
               <div className="space-y-0.5">
-                <FormLabel>Push Notifications</FormLabel>
-                <FormDescription>
+                <field.Label>Push Notifications</field.Label>
+                <field.Description>
                   Receive push notifications about account activity
-                </FormDescription>
+                </field.Description>
               </div>
               <Switch
                 checked={Boolean(field.state.value)}
@@ -181,13 +175,13 @@ export default function TanstackFormComplexDemo() {
             <div className="flex items-start gap-3">
               <field.Checkbox id="terms" />
               <div className="space-y-1 leading-none">
-                <FormLabel htmlFor="terms" className="font-normal">
+                <field.Label htmlFor="terms" className="font-normal">
                   I accept the terms and conditions
-                </FormLabel>
-                <FormDescription>
+                </field.Label>
+                <field.Description>
                   You agree to our Terms of Service and Privacy Policy
-                </FormDescription>
-                <FormMessage />
+                </field.Description>
+                <field.Message />
               </div>
             </div>
           )}
