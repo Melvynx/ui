@@ -52,7 +52,7 @@ import { z } from "zod"
 
 import { FormManagement } from "@/lib/form-management-tanstack/form-management"
 import { FormManagementStickyBar } from "@/lib/form-management-tanstack/form-management-sticky-bar"
-import { FormLabel, FormMessage, useForm } from "@/components/ui/tanstack-form"
+import { Field, FieldContent, FormLabel, FormMessage, useForm } from "@/components/ui/tanstack-form"
 
 const schema = z.object({
   name: z.string().min(1, "Name is required"),
@@ -71,28 +71,29 @@ export function BasicForm() {
   return (
     <FormManagement form={form}>
       <div className="space-y-4">
-        <form.Field name="name">
+        <form.AppField name="name">
           {(field) => (
-            <div className="space-y-2">
+            <Field>
               <FormLabel>Name</FormLabel>
-              <form.FieldComponents.Input placeholder="Your name" />
-              <FormMessage />
-            </div>
+              <FieldContent>
+                <field.Input placeholder="Your name" />
+                <FormMessage />
+              </FieldContent>
+            </Field>
           )}
-        </form.Field>
+        </form.AppField>
 
-        <form.Field name="email">
+        <form.AppField name="email">
           {(field) => (
-            <div className="space-y-2">
+            <Field>
               <FormLabel>Email</FormLabel>
-              <form.FieldComponents.Input
-                type="email"
-                placeholder="your@email.com"
-              />
-              <FormMessage />
-            </div>
+              <FieldContent>
+                <field.Input type="email" placeholder="your@email.com" />
+                <FormMessage />
+              </FieldContent>
+            </Field>
           )}
-        </form.Field>
+        </form.AppField>
       </div>
       <FormManagementStickyBar />
     </FormManagement>
@@ -120,25 +121,29 @@ export function AutoSaveForm() {
   return (
     <FormManagement form={form}>
       <div className="space-y-4">
-        <form.Field name="title">
+        <form.AppField name="title">
           {(field) => (
-            <div className="space-y-2">
+            <Field>
               <FormLabel>Title</FormLabel>
-              <form.FieldComponents.Input placeholder="Document title" />
-              <FormMessage />
-            </div>
+              <FieldContent>
+                <field.Input placeholder="Document title" />
+                <FormMessage />
+              </FieldContent>
+            </Field>
           )}
-        </form.Field>
+        </form.AppField>
 
-        <form.Field name="content">
+        <form.AppField name="content">
           {(field) => (
-            <div className="space-y-2">
+            <Field>
               <FormLabel>Content</FormLabel>
-              <form.FieldComponents.Textarea placeholder="Document content" />
-              <FormMessage />
-            </div>
+              <FieldContent>
+                <field.Textarea placeholder="Document content" />
+                <FormMessage />
+              </FieldContent>
+            </Field>
           )}
-        </form.Field>
+        </form.AppField>
       </div>
 
       {/* Auto-save every 3 seconds */}
@@ -178,38 +183,41 @@ export function ValidatedForm() {
   return (
     <FormManagement form={form}>
       <div className="space-y-4">
-        <form.Field name="name">
+        <form.AppField name="name">
           {(field) => (
-            <div className="space-y-2">
+            <Field>
               <FormLabel>Name</FormLabel>
-              <form.FieldComponents.Input placeholder="Enter your name" />
-              <FormMessage />
-            </div>
+              <FieldContent>
+                <field.Input placeholder="Enter your name" />
+                <FormMessage />
+              </FieldContent>
+            </Field>
           )}
-        </form.Field>
+        </form.AppField>
 
-        <form.Field name="email">
+        <form.AppField name="email">
           {(field) => (
-            <div className="space-y-2">
+            <Field>
               <FormLabel>Email</FormLabel>
-              <form.FieldComponents.Input
-                type="email"
-                placeholder="your@email.com"
-              />
-              <FormMessage />
-            </div>
+              <FieldContent>
+                <field.Input type="email" placeholder="your@email.com" />
+                <FormMessage />
+              </FieldContent>
+            </Field>
           )}
-        </form.Field>
+        </form.AppField>
 
-        <form.Field name="bio">
+        <form.AppField name="bio">
           {(field) => (
-            <div className="space-y-2">
+            <Field>
               <FormLabel>Bio</FormLabel>
-              <form.FieldComponents.Textarea placeholder="Tell us about yourself" />
-              <FormMessage />
-            </div>
+              <FieldContent>
+                <field.Textarea placeholder="Tell us about yourself" />
+                <FormMessage />
+              </FieldContent>
+            </Field>
           )}
-        </form.Field>
+        </form.AppField>
       </div>
       <FormManagementStickyBar />
     </FormManagement>

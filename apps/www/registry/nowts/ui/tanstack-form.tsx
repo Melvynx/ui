@@ -164,23 +164,28 @@ export function useForm<TSchema extends z.ZodType>({
  * Form wrapper component that provides form context and handles submission
  *
  * @example
- * <Form form={form}>
- *   <FormField form={form} name="email">
+ * const form = useForm({
+ *   schema: z.object({ email: z.string().email() }),
+ *   defaultValues: { email: '' },
+ *   onSubmit: async (values) => console.log(values),
+ * })
+ *
+ * <form onSubmit={(e) => { e.preventDefault(); form.handleSubmit() }}>
+ *   <form.AppField name="email">
  *     {(field) => (
- *       <FormItem field={field}>
+ *       <Field>
  *         <FormLabel>Email</FormLabel>
- *         <FormControl>
- *           <Input
- *             value={field.state.value}
- *             onChange={(e) => field.handleChange(e.target.value)}
- *             onBlur={field.handleBlur}
- *           />
- *         </FormControl>
- *         <FormMessage />
- *       </FormItem>
+ *         <FieldContent>
+ *           <field.Input type="email" placeholder="you@example.com" />
+ *           <FormMessage />
+ *         </FieldContent>
+ *       </Field>
  *     )}
- *   </FormField>
- * </Form>
+ *   </form.AppField>
+ *   <form.AppForm>
+ *     <form.SubmitButton>Submit</form.SubmitButton>
+ *   </form.AppForm>
+ * </form>
  */
 export function Form({
   children,
@@ -273,22 +278,24 @@ export function FormMessage({
  * and don't need the TanStack Form context integration
  *
  * @example
- * // Direct usage without context
- * <FormField form={form} name="email">
- *   {(field) => {
- *     const { isInvalid } = getFieldState(field, form)
- *     return (
- *       <Field data-invalid={isInvalid} orientation="horizontal">
- *         <FieldLabel htmlFor="email">Email</FieldLabel>
- *         <FieldContent>
- *           <Input {...getInputFieldProps(field)} id="email" />
- *           <FieldDescription>Enter your email address</FieldDescription>
- *           <FieldError errors={field.state.meta.errors} />
- *         </FieldContent>
- *       </Field>
- *     )
- *   }}
- * </FormField>
+ * const form = useForm({
+ *   schema: z.object({ email: z.string().email() }),
+ *   defaultValues: { email: '' },
+ *   onSubmit: async (values) => console.log(values),
+ * })
+ *
+ * <form.AppField name="email">
+ *   {(field) => (
+ *     <Field orientation="horizontal">
+ *       <FormLabel>Email</FormLabel>
+ *       <FieldContent>
+ *         <field.Input type="email" placeholder="you@example.com" />
+ *         <FieldDescription>Enter your email address</FieldDescription>
+ *         <FormMessage />
+ *       </FieldContent>
+ *     </Field>
+ *   )}
+ * </form.AppField>
  */
 export {
   Field,
