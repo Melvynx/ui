@@ -70,21 +70,10 @@ The **TanStack Form** component is a complete form management solution built on 
 
 import { z } from "zod"
 
-import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
-import {
-  Form,
-  FormControl,
-  FormField,
-  FormItem,
-  FormLabel,
-  FormMessage,
-  getInputFieldProps,
-  useForm,
-} from "@/registry/nowts/ui/tanstack-form"
+import { Form, useForm } from "@/registry/nowts/ui/tanstack-form"
 
 const schema = z.object({
-  email: z.string().email("Please enter a valid email address"),
+  email: z.string().email("Invalid email address"),
   name: z.string().min(2, "Name must be at least 2 characters"),
 })
 
@@ -102,37 +91,31 @@ export function BasicForm() {
 
   return (
     <Form form={form} className="space-y-4">
-      <FormField form={form} name="name">
+      <form.AppField name="name">
         {(field) => (
-          <FormItem field={field} form={form}>
-            <FormLabel>Name</FormLabel>
-            <FormControl>
-              <Input {...getInputFieldProps(field)} placeholder="John Doe" />
-            </FormControl>
-            <FormMessage />
-          </FormItem>
+          <field.Field>
+            <field.Label>Name</field.Label>
+            <field.Content>
+              <field.Input placeholder="John Doe" />
+              <field.Message />
+            </field.Content>
+          </field.Field>
         )}
-      </FormField>
+      </form.AppField>
 
-      <FormField form={form} name="email">
+      <form.AppField name="email">
         {(field) => (
-          <FormItem field={field} form={form}>
-            <FormLabel>Email</FormLabel>
-            <FormControl>
-              <Input
-                {...getInputFieldProps(field)}
-                type="email"
-                placeholder="john@example.com"
-              />
-            </FormControl>
-            <FormMessage />
-          </FormItem>
+          <field.Field>
+            <field.Label>Email</field.Label>
+            <field.Content>
+              <field.Input type="email" placeholder="john@example.com" />
+              <field.Message />
+            </field.Content>
+          </field.Field>
         )}
-      </FormField>
+      </form.AppField>
 
-      <Button type="submit" disabled={form.state.isSubmitting}>
-        {form.state.isSubmitting ? "Submitting..." : "Submit"}
-      </Button>
+      <form.SubmitButton>Submit</form.SubmitButton>
     </Form>
   )
 }
@@ -141,16 +124,9 @@ export function BasicForm() {
 ### Textarea field
 
 ```tsx
-import { Textarea } from "@/components/ui/textarea"
-import {
-  FormControl,
-  FormDescription,
-  FormField,
-  FormItem,
-  FormLabel,
-  FormMessage,
-  getTextareaFieldProps,
-} from "@/registry/nowts/ui/tanstack-form"
+import { z } from "zod"
+
+import { Form, useForm } from "@/registry/nowts/ui/tanstack-form"
 
 const schema = z.object({
   bio: z
@@ -160,56 +136,46 @@ const schema = z.object({
 })
 
 // Inside your form:
-<FormField form={form} name="bio">
+<form.AppField name="bio">
   {(field) => (
-    <FormItem field={field} form={form}>
-      <FormLabel>Bio</FormLabel>
-      <FormControl>
-        <Textarea
-          {...getTextareaFieldProps(field)}
-          placeholder="Tell us about yourself..."
-          rows={4}
-        />
-      </FormControl>
-      <FormDescription>
-        A brief description about yourself (10-500 characters)
-      </FormDescription>
-      <FormMessage />
-    </FormItem>
+    <field.Field>
+      <field.Label>Bio</field.Label>
+      <field.Content>
+        <field.Textarea placeholder="Tell us about yourself..." rows={4} />
+        <field.Description>
+          A brief description about yourself (10-500 characters)
+        </field.Description>
+        <field.Message />
+      </field.Content>
+    </field.Field>
   )}
-</FormField>
+</form.AppField>
 ```
 
 ### Select field
 
 ```tsx
+import { z } from "zod"
+
 import {
-  Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select"
-import {
-  FormControl,
-  FormField,
-  FormItem,
-  FormLabel,
-  FormMessage,
-  getSelectFieldProps,
-} from "@/registry/nowts/ui/tanstack-form"
+import { Form, useForm } from "@/registry/nowts/ui/tanstack-form"
 
 const schema = z.object({
   role: z.string().min(1, "Please select a role"),
 })
 
 // Inside your form:
-<FormField form={form} name="role">
+<form.AppField name="role">
   {(field) => (
-    <FormItem field={field} form={form}>
-      <FormLabel>Role</FormLabel>
-      <FormControl>
-        <Select {...getSelectFieldProps(field)}>
+    <field.Field>
+      <field.Label>Role</field.Label>
+      <field.Content>
+        <field.Select>
           <SelectTrigger>
             <SelectValue placeholder="Select your role" />
           </SelectTrigger>
@@ -218,26 +184,20 @@ const schema = z.object({
             <SelectItem value="user">User</SelectItem>
             <SelectItem value="guest">Guest</SelectItem>
           </SelectContent>
-        </Select>
-      </FormControl>
-      <FormMessage />
-    </FormItem>
+        </field.Select>
+        <field.Message />
+      </field.Content>
+    </field.Field>
   )}
-</FormField>
+</form.AppField>
 ```
 
 ### Checkbox field
 
 ```tsx
-import { Checkbox } from "@/components/ui/checkbox"
-import {
-  FormControl,
-  FormField,
-  FormItem,
-  FormLabel,
-  FormMessage,
-  getCheckboxFieldProps,
-} from "@/registry/nowts/ui/tanstack-form"
+import { z } from "zod"
+
+import { Form, useForm } from "@/registry/nowts/ui/tanstack-form"
 
 const schema = z.object({
   consent: z
@@ -246,104 +206,80 @@ const schema = z.object({
 })
 
 // Inside your form:
-<FormField form={form} name="consent">
+<form.AppField name="consent">
   {(field) => (
-    <FormItem field={field} form={form}>
-      <div className="flex items-start gap-2">
-        <FormControl>
-          <Checkbox {...getCheckboxFieldProps(field)} id="consent" />
-        </FormControl>
-        <div className="flex flex-col gap-1">
-          <FormLabel htmlFor="consent" className="font-normal">
-            I agree to receive marketing emails and accept the terms and
-            conditions
-          </FormLabel>
-          <FormMessage />
+    <field.Field>
+      <field.Content>
+        <div className="flex items-start gap-2">
+          <field.Checkbox id="consent" />
+          <div className="flex flex-col gap-1">
+            <field.Label htmlFor="consent" className="font-normal">
+              I agree to receive marketing emails and accept the terms and
+              conditions
+            </field.Label>
+            <field.Message />
+          </div>
         </div>
-      </div>
-    </FormItem>
+      </field.Content>
+    </field.Field>
   )}
-</FormField>
-```
-
-### RadioGroup field
-
-```tsx
-import { Label } from "@/components/ui/label"
-import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group"
-import {
-  FormField,
-  FormItem,
-  FormLabel,
-  FormMessage,
-  getRadioGroupFieldProps,
-} from "@/registry/nowts/ui/tanstack-form"
-
-const schema = z.object({
-  preferredContact: z.string().min(1, "Please select a contact method"),
-})
-
-// Inside your form:
-<FormField form={form} name="preferredContact">
-  {(field) => (
-    <FormItem field={field} form={form}>
-      <FormLabel>Preferred Contact Method</FormLabel>
-      <RadioGroup {...getRadioGroupFieldProps(field)}>
-        <div className="flex items-center space-x-2">
-          <RadioGroupItem value="email" id="contact-email" />
-          <Label htmlFor="contact-email" className="font-normal">
-            Email
-          </Label>
-        </div>
-        <div className="flex items-center space-x-2">
-          <RadioGroupItem value="phone" id="contact-phone" />
-          <Label htmlFor="contact-phone" className="font-normal">
-            Phone
-          </Label>
-        </div>
-        <div className="flex items-center space-x-2">
-          <RadioGroupItem value="slack" id="contact-slack" />
-          <Label htmlFor="contact-slack" className="font-normal">
-            Slack
-          </Label>
-        </div>
-      </RadioGroup>
-      <FormMessage />
-    </FormItem>
-  )}
-</FormField>
+</form.AppField>
 ```
 
 ### Switch field
 
+**Option 1: Using field.Switch (recommended)**
+
 ```tsx
-import { Switch } from "@/components/ui/switch"
-import {
-  FormDescription,
-  FormField,
-  FormItem,
-  FormLabel,
-  getSwitchFieldProps,
-} from "@/registry/nowts/ui/tanstack-form"
+import { z } from "zod"
+
+import { Form, useForm } from "@/registry/nowts/ui/tanstack-form"
 
 const schema = z.object({
   notifications: z.boolean(),
 })
 
 // Inside your form:
-<FormField form={form} name="notifications">
+<form.AppField name="notifications">
   {(field) => (
-    <FormItem field={field} form={form}>
-      <div className="flex items-center justify-between">
-        <div className="space-y-0.5">
-          <FormLabel>Notifications</FormLabel>
-          <FormDescription>Receive notifications about updates</FormDescription>
+    <field.Field>
+      <field.Content>
+        <div className="flex items-center justify-between">
+          <div className="space-y-0.5">
+            <field.Label>Notifications</field.Label>
+            <field.Description>
+              Receive notifications about updates
+            </field.Description>
+          </div>
+          <field.Switch />
         </div>
-        <Switch {...getSwitchFieldProps(field)} />
-      </div>
-    </FormItem>
+      </field.Content>
+    </field.Field>
   )}
-</FormField>
+</form.AppField>
+```
+
+**Option 2: Using Switch directly (for custom layouts)**
+
+```tsx
+import { Switch } from "@/components/ui/switch"
+
+<form.AppField name="notifications">
+  {(field) => (
+    <div className="flex items-center justify-between">
+      <div className="space-y-0.5">
+        <field.Label>Notifications</field.Label>
+        <field.Description>
+          Receive notifications about updates
+        </field.Description>
+      </div>
+      <Switch
+        checked={Boolean(field.state.value)}
+        onCheckedChange={(checked) => field.handleChange(Boolean(checked))}
+      />
+    </div>
+  )}
+</form.AppField>
 ```
 
 ## Complex Form Example
@@ -360,12 +296,50 @@ A complete registration form combining multiple field types (Input, Select, Text
 
 ### Array fields
 
-Dynamic array fields with add/remove functionality. Use `mode="array"` on FormField and access `field.pushValue` and `field.removeValue`:
+Dynamic array fields with add/remove functionality. Use `mode="array"` on `form.AppField` and access `field.pushValue` and `field.removeValue`:
 
 <ComponentPreview
   name="tanstack-form-array-demo"
   description="Dynamic array fields with user list"
 />
+
+Example with arrays:
+
+```tsx
+import { Button } from "@/components/ui/button"
+
+<form.AppField name="users" mode="array">
+  {(usersField) => (
+    <div className="space-y-4">
+      <Button
+        type="button"
+        onClick={() => usersField.pushValue?.({ email: "" })}
+      >
+        Add User
+      </Button>
+
+      {usersField.state.value.map((_, index) => (
+        <form.AppField key={index} name={`users[${index}].email`}>
+          {(field) => (
+            <div className="flex gap-2">
+              <field.Input type="email" placeholder="user@example.com" />
+              <field.Message />
+              <Button
+                type="button"
+                onClick={() => usersField.removeValue?.(index)}
+              >
+                Remove
+              </Button>
+            </div>
+          )}
+        </form.AppField>
+      ))}
+
+      <usersField.Message />
+    </div>
+  )}
+</form.AppField>
+```
 
 ### Nested objects
 
@@ -385,29 +359,29 @@ const schema = z.object({
 })
 
 // Use dot notation to access nested fields
-<FormField form={form} name="user.profile.firstName">
+<form.AppField name="user.profile.firstName">
   {(field) => (
-    <FormItem field={field} form={form}>
-      <FormLabel>First Name</FormLabel>
-      <FormControl>
-        <Input {...getInputFieldProps(field)} />
-      </FormControl>
-      <FormMessage />
-    </FormItem>
+    <field.Field>
+      <field.Label>First Name</field.Label>
+      <field.Content>
+        <field.Input />
+        <field.Message />
+      </field.Content>
+    </field.Field>
   )}
-</FormField>
+</form.AppField>
 
-<FormField form={form} name="user.contact.email">
+<form.AppField name="user.contact.email">
   {(field) => (
-    <FormItem field={field} form={form}>
-      <FormLabel>Email</FormLabel>
-      <FormControl>
-        <Input {...getInputFieldProps(field)} type="email" />
-      </FormControl>
-      <FormMessage />
-    </FormItem>
+    <field.Field>
+      <field.Label>Email</field.Label>
+      <field.Content>
+        <field.Input type="email" />
+        <field.Message />
+      </field.Content>
+    </field.Field>
   )}
-</FormField>
+</form.AppField>
 ```
 
 ## API Reference
@@ -436,114 +410,107 @@ function useForm<TSchema extends z.ZodType>({
 
 #### Form
 
-Wrapper component that handles form submission:
+Two ways to handle form submission:
+
+**Option 1: Using Form component (wraps form.AppForm)**
 
 ```tsx
 <Form form={form} className="space-y-4">
-  {/* Form fields */}
+  <form.AppField name="email">
+    {/* field content */}
+  </form.AppField>
+  <form.SubmitButton>Submit</form.SubmitButton>
 </Form>
 ```
 
-#### FormField
-
-Connects a field to the form with type-safe field names:
+**Option 2: Using form.AppForm directly (more control)**
 
 ```tsx
-<FormField form={form} name="email" mode="value">
-  {(field) => ({
-    /* Field UI */
-  })}
-</FormField>
+<form.AppForm>
+  <form
+    onSubmit={(e) => {
+      e.preventDefault()
+      e.stopPropagation()
+      form.handleSubmit()
+    }}
+    className="space-y-4"
+  >
+    <form.AppField name="email">
+      {/* field content */}
+    </form.AppField>
+    <form.SubmitButton>Submit</form.SubmitButton>
+  </form>
+</form.AppForm>
 ```
 
-| Parameter | Type                 | Description                          | Default   |
-| --------- | -------------------- | ------------------------------------ | --------- |
-| `form`    | `FormApi`            | Form instance from useForm           | -         |
-| `name`    | `string`             | Type-safe field name (e.g., "email") | -         |
-| `mode`    | `"value" \| "array"` | Field mode (use "array" for arrays)  | `"value"` |
+#### form.AppField
 
-#### FormItem
-
-Container for field components with error state:
+Connects a field to the form with type-safe field names. Returns a render prop with field components:
 
 ```tsx
-<FormItem field={field} form={form}>
-  <FormLabel>Email</FormLabel>
-  <FormControl>
-    <Input {...getInputFieldProps(field)} />
-  </FormControl>
-  <FormDescription>Your email address</FormDescription>
-  <FormMessage />
-</FormItem>
+<form.AppField name="email">
+  {(field) => (
+    <field.Field>
+      <field.Label>Email</field.Label>
+      <field.Content>
+        <field.Input type="email" />
+        <field.Message />
+      </field.Content>
+    </field.Field>
+  )}
+</form.AppField>
 ```
 
-### Field Helpers
+| Parameter | Type     | Description                          |
+| --------- | -------- | ------------------------------------ |
+| `name`    | `string` | Type-safe field name (e.g., "email") |
+| `mode`    | `"value" \| "array"` | Field mode - use "array" for array fields (optional, default: "value") |
 
-Pre-built helpers for common input types:
+#### Field Components
 
-#### getInputFieldProps
+The field render prop provides these components:
 
-For Input and Textarea components:
+- `field.Field` - Container for the field with error state
+- `field.Label` - Label for the field (automatically linked to input)
+- `field.Content` - Content wrapper for input and messages
+- `field.Input` - Input component
+- `field.Textarea` - Textarea component
+- `field.Select` - Select component wrapper (use with shadcn/ui Select components)
+- `field.Checkbox` - Checkbox component
+- `field.Switch` - Switch component
+- `field.Description` - Helper text for the field
+- `field.Message` - Error message display
+
+#### form.SubmitButton
+
+Submit button that automatically disables during submission:
 
 ```tsx
-<Input {...getInputFieldProps(field)} type="email" />
-<Textarea {...getTextareaFieldProps(field)} rows={4} />
+<form.SubmitButton>Submit</form.SubmitButton>
 ```
-
-Returns: `{ name, value, onChange, onBlur, "aria-invalid" }`
-
-#### getSelectFieldProps
-
-For Select components:
-
-```tsx
-<Select {...getSelectFieldProps(field)}>
-  <SelectTrigger>
-    <SelectValue />
-  </SelectTrigger>
-  <SelectContent>...</SelectContent>
-</Select>
-```
-
-Returns: `{ name, value, onValueChange, "aria-invalid" }`
-
-#### getCheckboxFieldProps
-
-For Checkbox and Switch components:
-
-```tsx
-<Checkbox {...getCheckboxFieldProps(field)} />
-<Switch {...getSwitchFieldProps(field)} />
-```
-
-Returns: `{ name, checked, onCheckedChange, "aria-invalid" }`
-
-#### getRadioGroupFieldProps
-
-For RadioGroup components:
-
-```tsx
-<RadioGroup {...getRadioGroupFieldProps(field)}>
-  <RadioGroupItem value="option1" />
-  <RadioGroupItem value="option2" />
-</RadioGroup>
-```
-
-Returns: `{ name, value, onValueChange, "aria-invalid" }`
 
 ### Form State
 
-Access form state through `form.state`:
+Access form state using `form.Subscribe`:
 
 ```tsx
-form.state.isSubmitting // Boolean: Is form currently submitting?
-form.state.canSubmit // Boolean: Can form be submitted?
-form.state.isValid // Boolean: Are all fields valid?
-form.state.isDirty // Boolean: Has form been modified?
-form.state.submissionAttempts // Number: How many times has submit been attempted?
-form.state.values // Object: Current form values
-form.state.errors // Array: Form-level validation errors
+<form.Subscribe selector={(state) => state.isSubmitting}>
+  {(isSubmitting) => (
+    <Button type="submit" disabled={isSubmitting}>
+      {isSubmitting ? "Submitting..." : "Submit"}
+    </Button>
+  )}
+</form.Subscribe>
 ```
+
+Available state properties:
+- `isSubmitting` - Boolean: Is form currently submitting?
+- `canSubmit` - Boolean: Can form be submitted?
+- `isValid` - Boolean: Are all fields valid?
+- `isDirty` - Boolean: Has form been modified?
+- `submissionAttempts` - Number: How many times has submit been attempted?
+- `values` - Object: Current form values
+- `errors` - Array: Form-level validation errors
 
 ### Validation Modes
 
@@ -573,25 +540,25 @@ const schema = z.object({
 const form = useForm({ schema, ... })
 
 // ✅ Valid - autocomplete works
-<FormField form={form} name="email">
+<form.AppField name="email">
 
 // ✅ Valid - autocomplete works
-<FormField form={form} name="age">
+<form.AppField name="age">
 
 // ❌ TypeScript error - field doesn't exist
-<FormField form={form} name="invalid">
+<form.AppField name="invalid">
 
 // ✅ Valid - nested paths work
 const nestedSchema = z.object({
   user: z.object({ email: z.string() })
 })
-<FormField form={form} name="user.email">
+<form.AppField name="user.email">
 
 // ✅ Valid - array syntax works
 const arraySchema = z.object({
   users: z.array(z.object({ email: z.string() }))
 })
-<FormField form={form} name="users[0].email">
+<form.AppField name="users[0].email">
 ```
 
 ## Best Practices
@@ -609,9 +576,16 @@ const searchForm = useForm({ validationMode: "onChange", ... })
 ### 2. Handle loading states
 
 ```tsx
-<Button type="submit" disabled={form.state.isSubmitting}>
-  {form.state.isSubmitting ? "Saving..." : "Save"}
-</Button>
+<form.SubmitButton>Save</form.SubmitButton>
+
+// Or with custom button:
+<form.Subscribe selector={(state) => state.isSubmitting}>
+  {(isSubmitting) => (
+    <Button type="submit" disabled={isSubmitting}>
+      {isSubmitting ? "Saving..." : "Save"}
+    </Button>
+  )}
+</form.Subscribe>
 ```
 
 ### 3. Provide helpful error messages
@@ -629,17 +603,23 @@ const schema = z.object({
 })
 ```
 
-### 4. Use FormDescription for hints
+### 4. Use field.Description for hints
 
 ```tsx
-<FormItem field={field} form={form}>
-  <FormLabel>Email</FormLabel>
-  <FormControl>
-    <Input {...getInputFieldProps(field)} />
-  </FormControl>
-  <FormDescription>We'll never share your email with anyone</FormDescription>
-  <FormMessage />
-</FormItem>
+<form.AppField name="email">
+  {(field) => (
+    <field.Field>
+      <field.Label>Email</field.Label>
+      <field.Content>
+        <field.Input />
+        <field.Description>
+          We'll never share your email with anyone
+        </field.Description>
+        <field.Message />
+      </field.Content>
+    </field.Field>
+  )}
+</form.AppField>
 ```
 
 ### 5. Reset forms after submission
@@ -667,6 +647,6 @@ onSubmit: async (values) => {
 
 ### Array fields not updating
 
-- Make sure to use `mode="array"` on the FormField
+- Make sure to use `mode="array"` on `form.AppField`
 - Use `field.pushValue?.()` and `field.removeValue?.()` for array operations
 - Always provide unique keys when mapping over array items
