@@ -1,8 +1,8 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 "use client"
 
 import { createContext, Fragment, use, useEffect, useRef } from "react"
 import { useHotkeys } from "react-hotkeys-hook"
+import z from "zod"
 
 import { useDebounceFn } from "../../hooks/use-debounce-fn"
 import { useWarnIfUnsavedChanges } from "../../hooks/use-warn-if-unsaved-changes"
@@ -25,13 +25,13 @@ export const useFormManagement = () => {
   return ctx
 }
 
-export const FormManagement = ({
+export function FormManagement<TSchema extends z.ZodType>({
   children,
   form,
 }: {
   children: React.ReactNode
-  form: ReturnType<typeof useForm<any>>
-}) => {
+  form: ReturnType<typeof useForm<TSchema>>
+}) {
   const buttonRef = useRef<HTMLButtonElement>(null)
 
   const submit = () => {
@@ -62,7 +62,7 @@ export const FormManagement = ({
       }}
     >
       <Fragment>
-        <Form form={form}>
+        <Form<TSchema> form={form}>
           {children}
           <button type="submit" className="hidden" ref={buttonRef} />
         </Form>
@@ -71,10 +71,10 @@ export const FormManagement = ({
   )
 }
 
-export const FormManagementAutoSave = (props: {
+export function FormManagementAutoSave<TSchema extends z.ZodType>(props: {
   autoSaveMs?: number
-  form: ReturnType<typeof useForm<any>>
-}) => {
+  form: ReturnType<typeof useForm<TSchema>>
+}) {
   const lastFormStateRef = useRef<string | null>(null)
 
   const ctx = useFormManagement()

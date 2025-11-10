@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 "use client"
 
 import type * as React from "react"
@@ -190,13 +189,13 @@ export function useForm<TSchema extends z.ZodType>({
  *   </form.AppForm>
  * </form>
  */
-export function Form({
+export function Form<TSchema extends z.ZodType>({
   children,
   form,
   ...props
 }: {
   children: React.ReactNode
-  form: ReturnType<typeof useForm<any>>
+  form: ReturnType<typeof useForm<TSchema>>
 } & Omit<React.ComponentProps<"form">, "onSubmit">) {
   return (
     <form.AppForm>
