@@ -264,7 +264,7 @@ const schema = z.object({
 ```tsx
 import { Switch } from "@/components/ui/switch"
 
-<form.AppField name="notifications">
+;<form.AppField name="notifications">
   {(field) => (
     <div className="flex items-center justify-between">
       <div className="space-y-0.5">
@@ -308,7 +308,7 @@ Example with arrays:
 ```tsx
 import { Button } from "@/components/ui/button"
 
-<form.AppField name="users" mode="array">
+;<form.AppField name="users" mode="array">
   {(usersField) => (
     <div className="space-y-4">
       <Button
@@ -416,9 +416,7 @@ Two ways to handle form submission:
 
 ```tsx
 <Form form={form} className="space-y-4">
-  <form.AppField name="email">
-    {/* field content */}
-  </form.AppField>
+  <form.AppField name="email">{/* field content */}</form.AppField>
   <form.SubmitButton>Submit</form.SubmitButton>
 </Form>
 ```
@@ -435,9 +433,7 @@ Two ways to handle form submission:
     }}
     className="space-y-4"
   >
-    <form.AppField name="email">
-      {/* field content */}
-    </form.AppField>
+    <form.AppField name="email">{/* field content */}</form.AppField>
     <form.SubmitButton>Submit</form.SubmitButton>
   </form>
 </form.AppForm>
@@ -461,9 +457,9 @@ Connects a field to the form with type-safe field names. Returns a render prop w
 </form.AppField>
 ```
 
-| Parameter | Type     | Description                          |
-| --------- | -------- | ------------------------------------ |
-| `name`    | `string` | Type-safe field name (e.g., "email") |
+| Parameter | Type                 | Description                                                            |
+| --------- | -------------------- | ---------------------------------------------------------------------- |
+| `name`    | `string`             | Type-safe field name (e.g., "email")                                   |
 | `mode`    | `"value" \| "array"` | Field mode - use "array" for array fields (optional, default: "value") |
 
 #### Field Components
@@ -504,6 +500,7 @@ Access form state using `form.Subscribe`:
 ```
 
 Available state properties:
+
 - `isSubmitting` - Boolean: Is form currently submitting?
 - `canSubmit` - Boolean: Can form be submitted?
 - `isValid` - Boolean: Are all fields valid?
